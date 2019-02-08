@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-08 Fri 22:31:13>
- * Updated: <2019-02-08 Fri 22:44:14>
+ * Updated: <2019-02-08 Fri 23:02:29>
  *
  * Copyright (C) 2019
  *
@@ -33,7 +33,7 @@ void *memchr(const void *s, int c, size_t n) {
 	buff = (t_uchar *) s;
 	while (i < n) {
 		if (buff[i] == (t_uchar) c)
-			return (void *) &s[i];
+			return (void *) &buff[i];
 		i++;
 	}
 	return (NULL);
