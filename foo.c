@@ -1,9 +1,10 @@
 /*
- * File: memchr.c
- * Author: Anas Rchid (0x0584)
+ * File: foo.c
+ * Author: Anas Rchid
+ * Description:
  *
- * Created: <2019-02-08 Fri 22:31:13>
- * Updated: <2019-02-08 Fri 22:44:14>
+ * Created: <2019-02-06 Wed 21:07:08>
+ * Updated: <2019-02-08 Fri 22:49:14>
  *
  * Copyright (C) 2019
  *
@@ -23,18 +24,6 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "libft.h"
-
-void *memchr(const void *s, int c, size_t n) {
-	t_uchar *buff;
-	size_t i;
-
-	i = 0;
-	buff = (t_uchar *) s;
-	while (i < n) {
-		if (buff[i] == (t_uchar) c)
-			return (void *) &s[i];
-		i++;
-	}
-	return (NULL);
+int foo(void) {
+	return (-1);
 }

@@ -3,7 +3,7 @@
  * Author: Anas Rchid
  *
  * Created: <2019-02-06 Wed 22:47:44>
- * Updated: <2019-02-06 Wed 22:49:03>
+ * Updated: <2019-02-08 Fri 22:38:39>
  *
  * Copyright (C) 2019
  *
@@ -26,17 +26,18 @@
 #include "libft.h"
 
 void *memccpy(void *dest, const void *src, int c, size_t n) {
-	char *sbuff;
-	char *dbuff;
+	t_uchar *sbuff;
+	t_uchar *dbuff;
 	size_t i;
 
-	i = -1;
-	sbuff = (char *) src;
-	dbuff = (char *) dest;
-	while (++i < n)
-		if (sbuff[i] == (char) c)
+	i = 0;
+	sbuff = (t_uchar *) src;
+	dbuff = (t_uchar *) dest;
+	while (i < n) {
+		if (sbuff[i] == (t_uchar) c)
 			break;
-		else
-			dbuff[i] = sbuff[i];
+		dbuff[i] = sbuff[i];
+		i++;
+	}
 	return (dest);
 }

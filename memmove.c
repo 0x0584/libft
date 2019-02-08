@@ -3,7 +3,7 @@
  * Author: Anas Rchid
  *
  * Created: <2019-02-06 Wed 22:52:13>
- * Updated: <2019-02-06 Wed 23:01:49>
+ * Updated: <2019-02-08 Fri 22:39:56>
  *
  * Copyright (C) 2019
  *
@@ -26,15 +26,17 @@
 #include "libft.h"
 
 void *memmove(void *dest, const void *src, size_t n) {
-	char *sbuff;
-	char *dbuff;
+	t_uchar *sbuff;
+	t_uchar *dbuff;
 	size_t i;
 
-	i = -1;
-	dbuff = (char *) dest;
-	sbuff = (char *) malloc(n * sizeof(char));
+	i = 0;
+	dbuff = (t_uchar *) dest;
+	sbuff = (t_uchar *) malloc(n * sizeof(t_uchar));
 	memcpy(sbuff, src, n);
-	while (++i < n)
+	while (i < n) {
 		dbuff[i] = sbuff[i];
+		i++;
+	}
 	return (dest);
 }

@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-06 Wed 21:25:04>
+ * Updated: <2019-02-08 Fri 22:36:08>
  *
  * Copyright (C) 2019
  *
@@ -27,6 +27,8 @@
 #ifndef LIBFT_H
 #  define LIBFT_H
 #  include <stdlib.h>
+
+typedef unsigned char t_uchar;
 
 void *memset(void *s, int c, size_t n);
 void *memcpy(void *dest, const void *src, size_t n);
