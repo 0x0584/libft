@@ -1,10 +1,10 @@
 /*
- * File: foo.c
+ * File: libft.h
  * Author: Anas Rchid
  * Description:
  *
- * Created: <2019-02-06 Wed 21:07:08>
- * Updated: <2019-02-08 Fri 22:49:14>
+ * Created: <2019-02-06 Wed 21:18:44>
+ * Updated: <2019-02-09 Sat 00:09:23>
  *
  * Copyright (C) 2019
  *
@@ -24,6 +24,18 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-int foo(void) {
-	return (-1);
-}
+#ifndef LIBFT_H
+#  define LIBFT_H
+#  include <stdlib.h>
+
+typedef unsigned char t_uchar;
+
+void *memset(void *s, int c, size_t n);
+void *memcpy(void *dest, const void *src, size_t n);
+void *memccpy(void *dest, const void *src, int c, size_t n);
+void *memmove(void *dest, const void *src, size_t n);
+void *memchr(const void *s, int c, size_t n);
+int memcmp(const void *s1, const void *s2, size_t n);
+
+void bzero(void *s, size_t n);
+#endif				/* LIBFT_H */

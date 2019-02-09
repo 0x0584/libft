@@ -1,9 +1,9 @@
 /*
- * File: memset.c
- * Author: Anas Rchid
+ * File: tst_memset.c
+ * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-06 Wed 21:25:36>
- * Updated: <2019-02-08 Fri 22:40:29>
+ * Created: <2019-02-08 Fri 23:20:41>
+ * Updated: <2019-02-09 Sat 00:07:03>
  *
  * Copyright (C) 2019
  *
@@ -25,13 +25,9 @@
 
 #include "libft.h"
 
-void *memset(void *s, int c, size_t n) {
-	t_uchar *buff;
-	size_t i;
+int main(int argc, char *argv[]) {
 
-	i = 0;
-	buff = s;
-	while (i < n)
-		buff[i++] = (t_uchar) c;
-	return (s);
+
+	memset();
+	return 0;
 }

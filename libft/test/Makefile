@@ -1,8 +1,8 @@
 # File: Makefile
 # Author: Anas Rchid (0x0584)
 #
-# Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-08 Fri 23:05:32>
+# Created: <2019-02-08 Fri 23:09:11>
+# Updated: <2019-02-08 Fri 23:20:15>
 #
 # Copyright (C) 2019
 #
@@ -21,41 +21,26 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
-NAME = libft.a
-
-SRCS_DIR = src
-DEPS_DIR = include
-OBJS_DIR = bin
-
-SRCS := $(shell find $(SRCS_DIR) -name '*.c')
-DEPS := $(shell find $(DEPS_DIR) -name '*.h')
-OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 
 CC = gcc
 CFLAGS += -Wall -Werror -Wextra
-LDFLAGS += -I $(DEPS_DIR)
-
 RM = rm -f
 
-all: $(NAME)
+LIBFT = libft.a
+OBJS := $(patsubst %.c, %.o, $(wildcard *.c))
+
+all: build-dir $(OBJS)
 	@echo "done."
 
-$(NAME): build-dir $(OBJS)
-	ar rc -o $(NAME) $(OBJS)
-
 build-dir:
-	@echo "building objects.."
+	@echo "building test units.."
 	@mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DEPS)
-	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@ $(LIBFT)
 
 clean:
-	@echo "cleaning.."
+	@echo "cleaning test units"
 	$(RM) $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
-
-re: fclean $(NAME)
+re: clean all

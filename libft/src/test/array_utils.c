@@ -1,9 +1,9 @@
 /*
- * File: memccpy.c
- * Author: Anas Rchid
+ * File: array_utils.c
+ * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-06 Wed 22:47:44>
- * Updated: <2019-02-08 Fri 22:38:39>
+ * Created: <2019-02-09 Sat 00:31:28>
+ * Updated: <2019-02-09 Sat 00:33:43>
  *
  * Copyright (C) 2019
  *
@@ -23,21 +23,13 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "libft.h"
+#include "testing.h"
 
-void *memccpy(void *dest, const void *src, int c, size_t n) {
-	t_uchar *sbuff;
-	t_uchar *dbuff;
+void print_array(size_t *array, size_t size)
+{
 	size_t i;
 
 	i = 0;
-	sbuff = (t_uchar *) src;
-	dbuff = (t_uchar *) dest;
-	while (i < n) {
-		if (sbuff[i] == (t_uchar) c)
-			break;
-		dbuff[i] = sbuff[i];
-		i++;
-	}
-	return (dest);
+	while (i < size)
+		printf("%d");
 }

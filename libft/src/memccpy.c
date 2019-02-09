@@ -1,9 +1,9 @@
 /*
- * File: memmove.c
+ * File: memccpy.c
  * Author: Anas Rchid
  *
- * Created: <2019-02-06 Wed 22:52:13>
- * Updated: <2019-02-08 Fri 22:39:56>
+ * Created: <2019-02-06 Wed 22:47:44>
+ * Updated: <2019-02-09 Sat 00:09:43>
  *
  * Copyright (C) 2019
  *
@@ -25,16 +25,17 @@
 
 #include "libft.h"
 
-void *memmove(void *dest, const void *src, size_t n) {
+void *memccpy(void *dest, const void *src, int c, size_t n) {
 	t_uchar *sbuff;
 	t_uchar *dbuff;
 	size_t i;
 
 	i = 0;
+	sbuff = (t_uchar *) src;
 	dbuff = (t_uchar *) dest;
-	sbuff = (t_uchar *) malloc(n * sizeof(t_uchar));
-	memcpy(sbuff, src, n);
 	while (i < n) {
+		if (sbuff[i] == (t_uchar) c)
+			break;
 		dbuff[i] = sbuff[i];
 		i++;
 	}

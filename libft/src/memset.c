@@ -1,9 +1,9 @@
 /*
- * File: memchr.c
- * Author: Anas Rchid (0x0584)
+ * File: memset.c
+ * Author: Anas Rchid
  *
- * Created: <2019-02-08 Fri 22:31:13>
- * Updated: <2019-02-08 Fri 23:02:29>
+ * Created: <2019-02-06 Wed 21:25:36>
+ * Updated: <2019-02-09 Sat 00:10:20>
  *
  * Copyright (C) 2019
  *
@@ -25,16 +25,13 @@
 
 #include "libft.h"
 
-void *memchr(const void *s, int c, size_t n) {
+void *memset(void *s, int c, size_t n) {
 	t_uchar *buff;
 	size_t i;
 
 	i = 0;
-	buff = (t_uchar *) s;
-	while (i < n) {
-		if (buff[i] == (t_uchar) c)
-			return (void *) &buff[i];
-		i++;
-	}
-	return (NULL);
+	buff = s;
+	while (i < n)
+		buff[i++] = (t_uchar) c;
+	return (s);
 }
