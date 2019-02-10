@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-10 Sun 20:22:01>
+ * Updated: <2019-02-11 Mon 00:18:36>
  *
  * Copyright (C) 2019
  *
@@ -59,6 +59,13 @@ char *ft_strnstr(const char *str, const char *to_find, size_t n);
 int ft_strcmp(const char *s1, const char *s2);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
 
+/* character related functions */
 int ft_isdigit(int c);
+int ft_isalnum(int c);
+int ft_isalpha(int c);
+int ft_isascii(int c);
+int ft_isupper(int c);
+int ft_islower(int c);
+int ft_isprint(int c);
 
 #endif				/* LIBFT_H */
