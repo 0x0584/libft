@@ -1,9 +1,10 @@
 /*
- * File: memccpy.c
+ * File: libft.h
  * Author: Anas Rchid
+ * Description:
  *
- * Created: <2019-02-06 Wed 22:47:44>
- * Updated: <2019-02-09 Sat 00:09:43>
+ * Created: <2019-02-06 Wed 21:18:44>
+ * Updated: <2019-02-10 Sun 00:41:25>
  *
  * Copyright (C) 2019
  *
@@ -23,21 +24,22 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "libft.h"
+#ifndef LIBFT_H
+#  define LIBFT_H
+#  include <stdlib.h>
 
-void *memccpy(void *dest, const void *src, int c, size_t n) {
-	t_uchar *sbuff;
-	t_uchar *dbuff;
-	size_t i;
+/* types */
+typedef unsigned char t_uchar;
 
-	i = 0;
-	sbuff = (t_uchar *) src;
-	dbuff = (t_uchar *) dest;
-	while (i < n) {
-		if (sbuff[i] == (t_uchar) c)
-			break;
-		dbuff[i] = sbuff[i];
-		i++;
-	}
-	return (dest);
-}
+/* memory functions */
+void *ft_memset(void *s, int c, size_t n);
+void *ft_memcpy(void *dest, const void *src, size_t n);
+void *ft_memccpy(void *dest, const void *src, int c, size_t n);
+void *ft_memmove(void *dest, const void *src, size_t n);
+void *ft_memchr(const void *s, int c, size_t n);
+int ft_memcmp(const void *s1, const void *s2, size_t n);
+
+/* string functions */
+void ft_bzero(void *s, size_t n);
+
+#endif				/* LIBFT_H */

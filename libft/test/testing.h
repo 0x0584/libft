@@ -1,9 +1,9 @@
 /*
- * File: memchr.c
+ * File: testing.h
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-08 Fri 22:31:13>
- * Updated: <2019-02-09 Sat 00:09:53>
+ * Created: <2019-02-09 Sat 00:07:30>
+ * Updated: <2019-02-10 Sun 00:59:31>
  *
  * Copyright (C) 2019
  *
@@ -23,18 +23,21 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "libft.h"
+#ifndef TESTING_H
+#  define TESTING_H
 
-void *memchr(const void *s, int c, size_t n) {
-	t_uchar *buff;
+#  include <stdlib.h>
+#  include <stdio.h>
+
+void print_array(size_t *array, size_t size);
+
+
+void print_array(size_t * array, size_t size) {
 	size_t i;
 
 	i = 0;
-	buff = (t_uchar *) s;
-	while (i < n) {
-		if (buff[i] == (t_uchar) c)
-			return (void *) &buff[i];
-		i++;
-	}
-	return (NULL);
+	while (i < size)
+		printf("%ld ", array[i++]);
+	putchar('\n');
 }
+#endif				/* TESTING_H */

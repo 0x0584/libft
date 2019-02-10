@@ -1,9 +1,9 @@
 /*
- * File: memcpy.c
+ * File: ft_memset.c
  * Author: Anas Rchid
  *
- * Created: <2019-02-06 Wed 21:33:07>
- * Updated: <2019-02-09 Sat 00:10:09>
+ * Created: <2019-02-06 Wed 21:25:36>
+ * Updated: <2019-02-10 Sun 00:43:15>
  *
  * Copyright (C) 2019
  *
@@ -25,17 +25,13 @@
 
 #include "libft.h"
 
-void *memcpy(void *dest, const void *src, size_t n) {
-	t_uchar *sbuff;
-	t_uchar *dbuff;
+void *ft_memset(void *s, int c, size_t n) {
+	t_uchar *buff;
 	size_t i;
 
 	i = 0;
-	sbuff = (t_uchar *) src;
-	dbuff = (t_uchar *) dest;
-	while (i < n) {
-		dbuff[i] = sbuff[i];
-		i++;
-	}
-	return (dest);
+	buff = s;
+	while (i < n)
+		buff[i++] = (t_uchar) c;
+	return (s);
 }

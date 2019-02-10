@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 01:59:29>
- * Updated: <2019-02-09 Sat 04:50:17>
+ * Updated: <2019-02-10 Sun 00:26:37>
  *
  * Copyright (C) 2019
  *
@@ -23,54 +23,4 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-/*
- * idea:
- * =====
- *
- * create a function that would serve as looper function
- * and then keep testing if we have reached the end or not.
- * if so, print the array at the current state.
- */
-
-#include <unistd.h>
-
-#define MAX_N		(10)
-
-void ft_putchar(char c) {
-	write(1, &c, 1);
-}
-
-void ft_putstr(char *str) {
-	while (*str)
-		ft_putchar(*str++);
-}
-
-void print_array(int *array, int size) {
-	int i;
-
-	i = 0;
-	while (i < size)
-		ft_putchar(array[i++] + '0');
-	if (array[0] != size - 1)
-		ft_putstr(", ");
-}
-
-void looper(int *array, int start, int end, int current) {
-	int i;
-
-	i = start;
-	if (current == end)
-		print_array(array, end);
-	else
-		while (i <= end && (end - i + 1) >= end - current)
-			looper(array, ++i, end, current + 1);
-}
-
-void ft_print_combn(int n) {
-	int arr[MAX_N] = {
-		0, 1, 2, 3, 4,
-		5, 6, 7, 8, 9
-	};
-
-	looper(arr, 0, n, 0);
-}
+/* nothing in here, sorry! */

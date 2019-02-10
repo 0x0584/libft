@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-08 Fri 23:20:15>
+# Updated: <2019-02-10 Sun 01:24:06>
 #
 # Copyright (C) 2019
 #
@@ -24,20 +24,17 @@
 
 CC = gcc
 CFLAGS += -Wall -Werror -Wextra
+LDFLAGS = -I.
 RM = rm -f
 
 LIBFT = libft.a
 OBJS := $(patsubst %.c, %.o, $(wildcard *.c))
 
-all: build-dir $(OBJS)
+all: $(OBJS)
 	@echo "done."
 
-build-dir:
-	@echo "building test units.."
-	@mkdir -p $(OBJS_DIR)
-
 %.o: %.c
-	$(CC) $(CFLAGS) $< -o $@ $(LIBFT)
+	$(CC) $(CFLAGS) -o $(basename $@) $< $(LIBFT) $(LDFLAGS)
 
 clean:
 	@echo "cleaning test units"

@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-09 Sat 00:09:23>
+ * Updated: <2019-02-10 Sun 00:41:25>
  *
  * Copyright (C) 2019
  *
@@ -28,14 +28,18 @@
 #  define LIBFT_H
 #  include <stdlib.h>
 
+/* types */
 typedef unsigned char t_uchar;
 
-void *memset(void *s, int c, size_t n);
-void *memcpy(void *dest, const void *src, size_t n);
-void *memccpy(void *dest, const void *src, int c, size_t n);
-void *memmove(void *dest, const void *src, size_t n);
-void *memchr(const void *s, int c, size_t n);
-int memcmp(const void *s1, const void *s2, size_t n);
+/* memory functions */
+void *ft_memset(void *s, int c, size_t n);
+void *ft_memcpy(void *dest, const void *src, size_t n);
+void *ft_memccpy(void *dest, const void *src, int c, size_t n);
+void *ft_memmove(void *dest, const void *src, size_t n);
+void *ft_memchr(const void *s, int c, size_t n);
+int ft_memcmp(const void *s1, const void *s2, size_t n);
 
-void bzero(void *s, size_t n);
+/* string functions */
+void ft_bzero(void *s, size_t n);
+
 #endif				/* LIBFT_H */

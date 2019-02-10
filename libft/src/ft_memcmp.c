@@ -1,9 +1,9 @@
 /*
- * File: testing.h
+ * File: ft_memcmp.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-09 Sat 00:34:17>
+ * Created: <2019-02-08 Fri 22:44:57>
+ * Updated: <2019-02-10 Sun 00:42:49>
  *
  * Copyright (C) 2019
  *
@@ -23,11 +23,20 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef TESTING_H
-#  define TESTING_H
-#  include <stdlib.h>
-#  include <stdio.h>
+#include "libft.h"
 
-#  define SIZE		(10)
+int ft_memcmp(const void *s1, const void *s2, size_t n) {
+	t_uchar *foo;
+	t_uchar *bar;
+	size_t i;
 
-#endif				/* TESTING_H */
+	i = 0;
+	foo = (t_uchar *) s1;
+	bar = (t_uchar *) s2;
+	while (i < n) {
+		if (foo[i] != bar[i])
+			break;
+		i++;
+	}
+	return (foo[i] - bar[i]);
+}

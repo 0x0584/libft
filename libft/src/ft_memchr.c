@@ -1,9 +1,9 @@
 /*
- * File: memcmp.c
+ * File: ft_memchr.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-08 Fri 22:44:57>
- * Updated: <2019-02-09 Sat 00:10:03>
+ * Created: <2019-02-08 Fri 22:31:13>
+ * Updated: <2019-02-10 Sun 00:42:38>
  *
  * Copyright (C) 2019
  *
@@ -25,18 +25,16 @@
 
 #include "libft.h"
 
-int memcmp(const void *s1, const void *s2, size_t n) {
-	t_uchar *foo;
-	t_uchar *bar;
+void *ft_memchr(const void *s, int c, size_t n) {
+	t_uchar *buff;
 	size_t i;
 
 	i = 0;
-	foo = (t_uchar *) s1;
-	bar = (t_uchar *) s2;
+	buff = (t_uchar *) s;
 	while (i < n) {
-		if (foo[i] != bar[i])
-			break;
+		if (buff[i] == (t_uchar) c)
+			return (void *) &buff[i];
 		i++;
 	}
-	return (foo[i] - bar[i]);
+	return (NULL);
 }

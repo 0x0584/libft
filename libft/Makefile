@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-08 Fri 23:10:42>
+# Updated: <2019-02-10 Sun 01:31:02>
 #
 # Copyright (C) 2019
 #
@@ -57,9 +57,10 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(LIBFT)
+	$(RM) $(LIBFT) $(TEST_DIR)/$(LIBFT)
 
-re: fclean $(LIBFT)
+re: fclean all
 
-test: all
-	@make $(TEST_DIR)/Makefile
+test: re
+	@cp $(LIBFT) test/$(LIBFT)
+	@make -C $(TEST_DIR)

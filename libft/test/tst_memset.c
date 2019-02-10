@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-09 Sat 00:07:03>
+ * Updated: <2019-02-10 Sun 01:40:38>
  *
  * Copyright (C) 2019
  *
@@ -24,10 +24,22 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
 int main(int argc, char *argv[]) {
+	size_t *array, size, i = 0;
+	int value;
 
-
-	memset();
+	size = (argc != 3) ? 0xff : atol(argv[1]);
+	value = (argc != 3) ? 0x00 : atoi(argv[2]);
+	array = malloc(size * sizeof *array);
+	while (i < size) {
+		array[i] = i;
+		i++;
+	}
+	print_array(array, size);
+	ft_memset(array, value, size * sizeof *array);
+	print_array(array, size);
+	free(array);
 	return 0;
 }
