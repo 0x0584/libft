@@ -1,8 +1,8 @@
-# File: Makefile
+# File: test.pl
 # Author: Anas Rchid (0x0584)
 #
-# Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-10 Sun 02:06:24>
+# Created: <2019-02-10 Sun 02:05:06>
+# Updated: <2019-02-10 Sun 02:07:30>
 #
 # Copyright (C) 2019
 #
@@ -20,23 +20,3 @@
 # along with this program; see the file COPYING.	If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
-
-CC = gcc
-CFLAGS += -Wall -Werror -Wextra
-LDFLAGS = -I.
-RM = rm -f
-
-LIBFT = libft.a
-OBJS := $(patsubst %.c, %.o, $(wildcard *.c))
-
-all: $(OBJS)
-	@echo "done."
-
-%.o: %.c
-	$(CC) $(CFLAGS) -o $(basename $@) $< $(LIBFT) $(LDFLAGS)
-
-clean:
-	@echo "cleaning test units"
-	$(RM) $(OBJS)
-
-re: clean all

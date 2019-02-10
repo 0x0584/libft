@@ -1,9 +1,9 @@
 /*
- * File: tst_memset.c
+ * File: ft_strlen.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-10 Sun 02:03:35>
+ * Created: <2019-02-10 Sun 02:55:38>
+ * Updated: <2019-02-10 Sun 03:01:29>
  *
  * Copyright (C) 2019
  *
@@ -24,22 +24,12 @@
  */
 
 #include "libft.h"
-#include "testing.h"
 
-int main(int argc, char *argv[]) {
-	size_t *array, size, i = 0;
-	int value;
+size_t ft_strlen(const char *str) {
+	size_t len;
 
-	size = (argc != 3) ? 0xff : atol(argv[1]);
-	value = (argc != 3) ? 0x00 : atoi(argv[2]);
-	array = malloc(size * sizeof *array);
-	while (i < size) {
-		array[i] = i;
-		i++;
-	}
-	print_array(array, size);
-	ft_memset(array, value, size * sizeof *array);
-	print_array(array, size);
-	free(array);
-	return 0;
+	len = 0;
+	while (*str)
+		str++;
+	return (len);
 }

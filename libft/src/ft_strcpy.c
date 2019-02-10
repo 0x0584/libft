@@ -1,9 +1,9 @@
 /*
- * File: tst_memset.c
+ * File: ft_strcpy.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-10 Sun 02:03:35>
+ * Created: <2019-02-10 Sun 03:03:56>
+ * Updated: <2019-02-10 Sun 03:05:40>
  *
  * Copyright (C) 2019
  *
@@ -23,23 +23,8 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "libft.h"
-#include "testing.h"
-
-int main(int argc, char *argv[]) {
-	size_t *array, size, i = 0;
-	int value;
-
-	size = (argc != 3) ? 0xff : atol(argv[1]);
-	value = (argc != 3) ? 0x00 : atoi(argv[2]);
-	array = malloc(size * sizeof *array);
-	while (i < size) {
-		array[i] = i;
-		i++;
-	}
-	print_array(array, size);
-	ft_memset(array, value, size * sizeof *array);
-	print_array(array, size);
-	free(array);
-	return 0;
+char *ft_strcpy(char *dest, char *src) {
+	while ((*dest++ = *src++) != '\0')
+		/* -*- 0x0584 -*- */;
+	return (dest);
 }

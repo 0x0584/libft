@@ -1,8 +1,9 @@
-# File: Makefile
+#!/usr/bin/perl
+# File: tst_memset.pl
 # Author: Anas Rchid (0x0584)
 #
-# Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-10 Sun 02:06:24>
+# Created: <2019-02-10 Sun 02:05:06>
+# Updated: <2019-02-10 Sun 02:47:16>
 #
 # Copyright (C) 2019
 #
@@ -21,22 +22,27 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
-CC = gcc
-CFLAGS += -Wall -Werror -Wextra
-LDFLAGS = -I.
-RM = rm -f
+# IDEA:
+# =====
+#
+# 1.1. set a list of inputs
+# 1.2. set a list of expected outputs for each input
+# 1.3. set a list of program's outputs for each input
+# 2. compare expected outputs with real outputs
+# 3. print results
 
-LIBFT = libft.a
-OBJS := $(patsubst %.c, %.o, $(wildcard *.c))
+use strict;
+use warnings;
 
-all: $(OBJS)
-	@echo "done."
+my %test = {
+	("0 0", "\n\n"),
+	("11 0", "0 1 2 3 4 5 6 7 8 9 10\n0 0 0 0 0 0 0 0 0 0 0\n")
+};
 
-%.o: %.c
-	$(CC) $(CFLAGS) -o $(basename $@) $< $(LIBFT) $(LDFLAGS)
+my $program = "./tst_memset";
 
-clean:
-	@echo "cleaning test units"
-	$(RM) $(OBJS)
-
-re: clean all
+while (my ($args, $output) = each %test) {
+	print "$args $output";
+#	print $test{0};
+	# system(@tmp);
+}

@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-10 Sun 00:59:31>
+ * Updated: <2019-02-10 Sun 02:20:12>
  *
  * Copyright (C) 2019
  *
@@ -35,9 +35,11 @@ void print_array(size_t *array, size_t size);
 void print_array(size_t * array, size_t size) {
 	size_t i;
 
+
 	i = 0;
+	printf("%ld", array[i++]);
 	while (i < size)
-		printf("%ld ", array[i++]);
+		printf(" %ld", array[i++]);
 	putchar('\n');
 }
 #endif				/* TESTING_H */

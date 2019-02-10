@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-10 Sun 00:41:25>
+ * Updated: <2019-02-10 Sun 03:19:49>
  *
  * Copyright (C) 2019
  *
@@ -38,8 +38,11 @@ void *ft_memccpy(void *dest, const void *src, int c, size_t n);
 void *ft_memmove(void *dest, const void *src, size_t n);
 void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
-
-/* string functions */
 void ft_bzero(void *s, size_t n);
+
+size_t ft_strlen(const char *str);
+char *ft_strdup(char *str);
+char *ft_strcpy(char *dest, char *src);
+char *ft_strncpy(char *dest, char *src, size_t n);
 
 #endif				/* LIBFT_H */
