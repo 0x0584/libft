@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-10 Sun 16:52:32>
+ * Updated: <2019-02-10 Sun 20:22:01>
  *
  * Copyright (C) 2019
  *
@@ -30,6 +30,10 @@
 
 /* types */
 typedef unsigned char t_uchar;
+typedef enum e_bool {
+	false = (1 == 0),
+	true = !false
+} t_bool;
 
 /* memory related functions */
 void *ft_memset(void *s, int c, size_t n);
@@ -48,5 +52,13 @@ char *ft_strncpy(char *dest, char *src, size_t n);
 char *ft_strcat(char *dest, const char *src);
 char *ft_strncat(char *dest, const char *src, size_t n);
 char *ft_strlcat(char *dest, const char *src, size_t n);
+char *ft_strchr(const char *str, int c);
+char *ft_strrchr(const char *str, int c);
+char *ft_strstr(const char *str, const char *to_find);
+char *ft_strnstr(const char *str, const char *to_find, size_t n);
+int ft_strcmp(const char *s1, const char *s2);
+int ft_strncmp(const char *s1, const char *s2, size_t n);
+
+int ft_isdigit(int c);
 
 #endif				/* LIBFT_H */
