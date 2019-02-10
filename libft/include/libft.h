@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-10 Sun 03:19:49>
+ * Updated: <2019-02-10 Sun 16:52:32>
  *
  * Copyright (C) 2019
  *
@@ -31,7 +31,7 @@
 /* types */
 typedef unsigned char t_uchar;
 
-/* memory functions */
+/* memory related functions */
 void *ft_memset(void *s, int c, size_t n);
 void *ft_memcpy(void *dest, const void *src, size_t n);
 void *ft_memccpy(void *dest, const void *src, int c, size_t n);
@@ -40,9 +40,13 @@ void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
 void ft_bzero(void *s, size_t n);
 
+/* string related functions */
 size_t ft_strlen(const char *str);
 char *ft_strdup(char *str);
 char *ft_strcpy(char *dest, char *src);
 char *ft_strncpy(char *dest, char *src, size_t n);
+char *ft_strcat(char *dest, const char *src);
+char *ft_strncat(char *dest, const char *src, size_t n);
+char *ft_strlcat(char *dest, const char *src, size_t n);
 
 #endif				/* LIBFT_H */
