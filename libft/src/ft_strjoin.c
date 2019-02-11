@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 01:43:13>
- * Updated: <2019-02-11 Mon 01:50:23>
+ * Updated: <2019-02-11 Mon 22:59:20>
  *
  * Copyright (C) 2019
  *
@@ -28,12 +28,16 @@
 char *ft_strjoin(char const *s1, char const *s2) {
 	char *buff;
 	size_t s1_len;
+	size_t s2_len;
 
+	if (s1 == NULL || s2 == NULL)
+		return NULL;
 	s1_len = ft_strlen(s1);
-	buff = ft_memalloc(s1_len + ft_strlen(s2) + 1);
+	s2_len = ft_strlen(s2);
+	buff = (char *) ft_memalloc(s1_len + s2_len + 1);
 	if (buff == NULL)
-		return (NULL);
+		return NULL;
 	ft_strncpy(buff, (char *) s1, s1_len);
-	ft_strcat(buff, s2);
-	return (buff);
+	ft_strncat(buff, s2, s2_len);
+	return buff;
 }

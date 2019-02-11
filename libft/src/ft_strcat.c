@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 16:12:32>
- * Updated: <2019-02-10 Sun 16:23:49>
+ * Updated: <2019-02-11 Mon 22:49:23>
  *
  * Copyright (C) 2019
  *
@@ -30,5 +30,5 @@ char *ft_strcat(char *dest, const char *src) {
 		dest++;
 	while ((*dest++ = *src++) != '\0')
 		/* -*- 0x0584 -*- */ ;
-	return (dest);
+	return dest;
 }

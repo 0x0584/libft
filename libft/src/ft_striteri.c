@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 00:59:06>
- * Updated: <2019-02-11 Mon 01:10:26>
+ * Updated: <2019-02-11 Mon 22:59:25>
  *
  * Copyright (C) 2019
  *
@@ -29,6 +29,6 @@ void ft_striteri(char *s, void (*f) (unsigned int, char *)) {
 	t_uint index;
 
 	index = 0;
-	while (s[index])
+	while (s && f && s[index])
 		f(index++, s);
 }

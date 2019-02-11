@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 16:23:33>
- * Updated: <2019-02-10 Sun 16:51:03>
+ * Updated: <2019-02-11 Mon 23:03:36>
  *
  * Copyright (C) 2019
  *
@@ -35,6 +35,7 @@ char *ft_strncat(char *dest, const char *src, size_t n) {
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	if (n > 0)
+		dest[i] = '\0';
+	return dest;
 }

@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 00:51:47>
- * Updated: <2019-02-11 Mon 00:52:50>
+ * Updated: <2019-02-11 Mon 22:59:28>
  *
  * Copyright (C) 2019
  *
@@ -25,7 +25,7 @@
 
 #include "libft.h"
 
-void ft_striter(char *s, void (*f)(char *)) {
-	while (*s)
+void ft_striter(char *s, void (*f) (char *)) {
+	while (s && f && *s)
 		f(s++);
 }

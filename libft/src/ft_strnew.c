@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 00:31:49>
- * Updated: <2019-02-11 Mon 00:36:36>
+ * Updated: <2019-02-12 Tue 00:09:27>
  *
  * Copyright (C) 2019
  *
@@ -30,9 +30,9 @@ char *ft_strnew(size_t size) {
 	size_t len;
 
 	len = size + 1;
-	str = ft_memalloc(len * sizeof(char));
+	str = (char *) ft_memalloc(len);
 	if (str == NULL)
-		return (NULL);
+		return NULL;
 	ft_memset(str, '\0', len);
-	return (str);
+	return str;
 }

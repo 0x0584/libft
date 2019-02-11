@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 19:16:28>
- * Updated: <2019-02-10 Sun 19:53:38>
+ * Updated: <2019-02-12 Tue 00:01:14>
  *
  * Copyright (C) 2019
  *
@@ -44,5 +44,5 @@ char *ft_strnstr(const char *str, const char *to_find, size_t n) {
 			return &buff[i];
 		i++;
 	}
-	return (NULL);
+	return NULL;
 }

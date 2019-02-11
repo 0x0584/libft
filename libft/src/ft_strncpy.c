@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 03:09:24>
- * Updated: <2019-02-10 Sun 03:19:19>
+ * Updated: <2019-02-12 Tue 00:00:33>
  *
  * Copyright (C) 2019
  *
@@ -27,12 +27,12 @@
 
 char *ft_strncpy(char *dest, char *src, size_t n) {
 	size_t i = 0;
+
 	while (src[i] && i < n) {
 		dest[i] = src[i];
 		i++;
 	}
-
-	while (i <= n)
+	while (n && i <= n)
 		dest[i++] = '\0';
-	return (dest);
+	return dest;
 }

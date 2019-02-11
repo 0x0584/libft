@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 20:17:17>
- * Updated: <2019-02-11 Mon 17:05:08>
+ * Updated: <2019-02-11 Mon 22:34:46>
  *
  * Copyright (C) 2019
  *
@@ -28,9 +28,11 @@
 int ft_atoi(const char *nptr) {
 	int nbr;
 	int len;
-	int i;
 	int sign;
+	int i;
 
+	if (nptr == NULL)
+		return 0;
 	while (*nptr <= ' ')
 		nptr++;
 	sign = 1;

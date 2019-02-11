@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 01:52:33>
- * Updated: <2019-02-11 Mon 02:40:32>
+ * Updated: <2019-02-12 Tue 00:07:33>
  *
  * Copyright (C) 2019
  *
@@ -31,19 +31,20 @@ char *ft_strtrim(char const *s) {
 	size_t last;
 	size_t i;
 
-	while (*s <= ' ' && *s)
-		s++;
-	last = 0;
-	len = ft_strlen(s);
-	if (len != 0)
-		while (s[len - last - 1] <= ' ')
-			last++;
-	buff = ft_memalloc(len - last + 1);
-	buff[len - last] = '\0';
 	i = 0;
+	last = 0;
+	while (s && *s && *s <= ' ')
+		s++;
+	len = ft_strlen(s);
+	while (len && s[len - last - 1] <= ' ')
+		last++;
+	buff = (char *) ft_memalloc(len - last + 1);
+	if (buff == NULL)
+		return NULL;
+	buff[len - last] = '\0';
 	while (i < len - last) {
 		buff[i] = s[i];
 		i++;
 	}
-	return (buff);
+	return buff;
 }

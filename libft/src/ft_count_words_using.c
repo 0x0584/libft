@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 18:11:08>
- * Updated: <2019-02-11 Mon 18:57:51>
+ * Updated: <2019-02-12 Tue 00:08:04>
  *
  * Copyright (C) 2019
  *
@@ -29,7 +29,7 @@ t_uint ft_count_words_using(char const *s, char c) {
 	t_uint count;
 
 	count = 0;
-	while (*s) {
+	while (s && *s) {
 		while (*s && *s == c)
 			s++;
 		if (*s == '\0')
@@ -38,5 +38,5 @@ t_uint ft_count_words_using(char const *s, char c) {
 			s++;
 		count++;
 	}
-	return (count);
+	return count;
 }

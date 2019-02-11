@@ -3,7 +3,7 @@
  * Author: Anas Rchid
  *
  * Created: <2019-02-06 Wed 22:47:44>
- * Updated: <2019-02-10 Sun 00:40:00>
+ * Updated: <2019-02-11 Mon 22:45:48>
  *
  * Copyright (C) 2019
  *
@@ -39,5 +39,5 @@ void *ft_memccpy(void *dest, const void *src, int c, size_t n) {
 		dbuff[i] = sbuff[i];
 		i++;
 	}
-	return (dest);
+	return dest;
 }

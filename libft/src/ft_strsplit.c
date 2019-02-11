@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 02:42:24>
- * Updated: <2019-02-11 Mon 20:48:03>
+ * Updated: <2019-02-12 Tue 00:03:48>
  *
  * Copyright (C) 2019
  *
@@ -27,16 +27,16 @@
 
 char **_get_ranges(char const *s, char c) {
 	char **ranges;
-	t_uint count;
+	t_uint sz;
 	t_uint i;
 
 	i = 0;
-	count = ft_count_words_using(s, c) * 2;
-	ranges = ft_memalloc((count + 1) * sizeof(char *));
+	sz = ft_count_words_using(s, c) * 2;
+	ranges = (char **) ft_memalloc((sz + 1) * sizeof(char *));
 	if (ranges == NULL)
 		return (NULL);
-	ranges[count] = NULL;
-	while (*s && count) {
+	ranges[sz] = NULL;
+	while (*s && sz) {
 		while (*s && *s == c)
 			s++;
 		if (*s == '\0')
@@ -52,14 +52,14 @@ char **_get_ranges(char const *s, char c) {
 char **ft_strsplit(char const *s, char c) {
 	char **ranges;
 	char **words;
-	t_uint count;
+	t_uint sz;
 	t_uint i;
 
 	i = 0;
 	ranges = _get_ranges(s, c);
-	count = ft_count_words_using(s, c);
-	words = ft_memalloc((count + 1) * sizeof(char *));
-	words[count] = NULL;
+	sz = ft_count_words_using(s, c);
+	words = (char **) ft_memalloc((sz + 1) * sizeof(char *));
+	words[sz] = NULL;
 	while (ranges[i]) {
 		words[i / 2] = ft_strrdup(ranges[i], ranges[i + 1]);
 		i += 2;

@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 17:04:18>
- * Updated: <2019-02-11 Mon 20:28:09>
+ * Updated: <2019-02-12 Tue 00:02:34>
  *
  * Copyright (C) 2019
  *
@@ -32,10 +32,11 @@ char *ft_strrdup(char *start, char *end) {
 	len = 0;
 	while ((start + len) <= end)
 		len++;
-	if ((buff = ft_memalloc(len + 1)) == NULL)
-		return (NULL);
+	buff = (char *) ft_memalloc(len + 1);
+	if (buff == NULL)
+		return NULL;
 	buff[len] = '\0';
 	while ((start + len--) > start)
 		buff[len] = *(start + len);
-	return (buff);
+	return buff;
 }

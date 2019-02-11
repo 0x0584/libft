@@ -3,7 +3,7 @@
  * Author: Anas Rchid
  *
  * Created: <2019-02-06 Wed 21:25:36>
- * Updated: <2019-02-10 Sun 00:43:15>
+ * Updated: <2019-02-11 Mon 22:48:52>
  *
  * Copyright (C) 2019
  *
@@ -25,13 +25,13 @@
 
 #include "libft.h"
 
-void *ft_memset(void *s, int c, size_t n) {
+void *ft_memset(void *mem, int c, size_t n) {
 	t_uchar *buff;
 	size_t i;
 
 	i = 0;
-	buff = s;
+	buff = (t_uchar *) mem;
 	while (i < n)
 		buff[i++] = (t_uchar) c;
-	return (s);
+	return mem;
 }

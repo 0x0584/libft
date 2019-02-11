@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 00:26:41>
- * Updated: <2019-02-11 Mon 00:30:01>
+ * Updated: <2019-02-11 Mon 22:32:46>
  *
  * Copyright (C) 2019
  *
@@ -30,7 +30,7 @@ void *ft_memalloc(size_t size) {
 
 	mem = malloc(size);
 	if (mem == NULL)
-		return (NULL);
+		return NULL;
 	ft_memset(mem, 0x00, size);
-	return (mem);
+	return mem;
 }

@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-08 Fri 22:31:13>
- * Updated: <2019-02-10 Sun 00:42:38>
+ * Updated: <2019-02-11 Mon 22:45:57>
  *
  * Copyright (C) 2019
  *
@@ -36,5 +36,5 @@ void *ft_memchr(const void *s, int c, size_t n) {
 			return (void *) &buff[i];
 		i++;
 	}
-	return (NULL);
+	return NULL;
 }

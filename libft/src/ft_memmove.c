@@ -3,7 +3,7 @@
  * Author: Anas Rchid
  *
  * Created: <2019-02-06 Wed 22:52:13>
- * Updated: <2019-02-10 Sun 01:11:59>
+ * Updated: <2019-02-11 Mon 22:48:36>
  *
  * Copyright (C) 2019
  *
@@ -38,5 +38,6 @@ void *ft_memmove(void *dest, const void *src, size_t n) {
 		dbuff[i] = sbuff[i];
 		i++;
 	}
-	return (dest);
+	free(sbuff);
+	return dest;
 }

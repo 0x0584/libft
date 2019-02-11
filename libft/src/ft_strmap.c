@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 01:02:15>
- * Updated: <2019-02-11 Mon 01:10:39>
+ * Updated: <2019-02-11 Mon 23:00:50>
  *
  * Copyright (C) 2019
  *
@@ -29,13 +29,15 @@ char *ft_strmap(char const *s, char (*f) (char)) {
 	char *buff;
 	size_t i;
 
+	i = 0;
+	if (s == NULL || f	== NULL)
+		return NULL;
 	buff = ft_strdup((char *) s);
 	if (buff == NULL)
-		return (NULL);
-	i = 0;
+		return NULL;
 	while (buff[i]) {
 		buff[i] = f(buff[i]);
 		i++;
 	}
-	return (buff);
+	return buff;
 }

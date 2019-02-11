@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 02:59:30>
- * Updated: <2019-02-10 Sun 03:03:18>
+ * Updated: <2019-02-12 Tue 00:10:02>
  *
  * Copyright (C) 2019
  *
@@ -28,8 +28,12 @@ char *ft_strdup(char *str) {
 	size_t len;
 	char *buff;
 
+	if (str == NULL)
+		return NULL;
 	len = ft_strlen(str) + 1;
-	buff = malloc(len * sizeof *buff);
+	buff = (char *) ft_memalloc(len);
+	if (buff == NULL)
+		return NULL;
 	ft_memcpy(buff, str, len);
-	return (buff);
+	return buff;
 }

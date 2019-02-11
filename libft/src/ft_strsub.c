@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 01:22:18>
- * Updated: <2019-02-11 Mon 01:54:32>
+ * Updated: <2019-02-12 Tue 00:04:25>
  *
  * Copyright (C) 2019
  *
@@ -29,14 +29,14 @@ char *ft_strsub(char const *s, unsigned int start, size_t len) {
 	char *buff;
 	t_uint i;
 
-	buff = ft_memalloc(len + 1);
+	buff = (char *) ft_memalloc(len + 1);
 	if (buff == NULL)
-		return (NULL);
+		return NULL;
 	i = start;
 	buff[len] = '\0';
 	while (i < start + len) {
 		buff[i - start] = s[i];
 		i++;
 	}
-	return (buff);
+	return buff;
 }

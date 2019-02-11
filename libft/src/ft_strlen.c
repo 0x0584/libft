@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 02:55:38>
- * Updated: <2019-02-10 Sun 03:01:29>
+ * Updated: <2019-02-11 Mon 22:59:13>
  *
  * Copyright (C) 2019
  *
@@ -29,7 +29,7 @@ size_t ft_strlen(const char *str) {
 	size_t len;
 
 	len = 0;
-	while (*str)
+	while (str && *str)
 		str++;
 	return (len);
 }

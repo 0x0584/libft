@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 17:05:03>
- * Updated: <2019-02-11 Mon 17:05:18>
+ * Updated: <2019-02-11 Mon 22:48:17>
  *
  * Copyright (C) 2019
  *
@@ -27,9 +27,9 @@
 
 int ft_power(int x, int y) {
 	if (y < 0)
-		return (0);
+		return 0;
 	else if (y == 0)
-		return (1);
+		return 1;
 	else
-		return (x * (ft_power(x, y - 1)));
+		return x * (ft_power(x, y - 1));
 }

@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 00:16:14>
- * Updated: <2019-02-11 Mon 00:19:24>
+ * Updated: <2019-02-11 Mon 22:32:34>
  *
  * Copyright (C) 2019
  *
@@ -26,6 +26,5 @@
 #include "libft.h"
 
 int ft_isalpha(int c) {
-	return ((c >= 'a' && c <= 'z') ||
-			(c >= 'A' && c <= 'Z'));
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
