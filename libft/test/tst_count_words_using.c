@@ -1,9 +1,9 @@
 /*
- * File: ft_atoi.c
+ * File: tst_count_words_using.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-10 Sun 20:17:17>
- * Updated: <2019-02-11 Mon 17:05:08>
+ * Created: <2019-02-11 Mon 18:13:17>
+ * Updated: <2019-02-11 Mon 18:26:21>
  *
  * Copyright (C) 2019
  *
@@ -23,28 +23,16 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
+/* TODO: handle arguments rather than words */
+
 #include "libft.h"
+#include <stdio.h>
 
-int ft_atoi(const char *nptr) {
-	int nbr;
-	int len;
-	int i;
-	int sign;
-
-	while (*nptr <= ' ')
-		nptr++;
-	sign = 1;
-	if (*nptr == '-' || *nptr == '+')
-		sign = *nptr++ == '-' ? (-1) : (1);
-	len = 0;
-	while (nptr[len] && ft_isdigit(nptr[len]))
-		len++;
-	i = -1;
-	nbr = 0;
-	while (++i < len) {
-		if (!ft_isdigit(nptr[i]))
-			return (nbr * sign * ft_power(10, len - i));
-		nbr += ft_power(10, len - i - 1) * (nptr[i] - '0');
-	}
-	return (nbr * sign);
+int main(int argc, char *argv[]) {
+	printf("%d\n", ft_count_words_using("", ' '));
+	printf("%d\n", ft_count_words_using("	", ' '));
+	printf("%d\n", ft_count_words_using("	ddd", ' '));
+	printf("%d\n", ft_count_words_using("ddd	  ", ' '));
+	printf("%d\n", ft_count_words_using("  ddd	dd	dd	dd	", ' '));
+	return 0;
 }

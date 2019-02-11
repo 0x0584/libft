@@ -1,9 +1,9 @@
 /*
- * File: ft_atoi.c
+ * File: ft_power.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-10 Sun 20:17:17>
- * Updated: <2019-02-11 Mon 17:05:08>
+ * Created: <2019-02-11 Mon 17:05:03>
+ * Updated: <2019-02-11 Mon 17:05:18>
  *
  * Copyright (C) 2019
  *
@@ -25,26 +25,11 @@
 
 #include "libft.h"
 
-int ft_atoi(const char *nptr) {
-	int nbr;
-	int len;
-	int i;
-	int sign;
-
-	while (*nptr <= ' ')
-		nptr++;
-	sign = 1;
-	if (*nptr == '-' || *nptr == '+')
-		sign = *nptr++ == '-' ? (-1) : (1);
-	len = 0;
-	while (nptr[len] && ft_isdigit(nptr[len]))
-		len++;
-	i = -1;
-	nbr = 0;
-	while (++i < len) {
-		if (!ft_isdigit(nptr[i]))
-			return (nbr * sign * ft_power(10, len - i));
-		nbr += ft_power(10, len - i - 1) * (nptr[i] - '0');
-	}
-	return (nbr * sign);
+int ft_power(int x, int y) {
+	if (y < 0)
+		return (0);
+	else if (y == 0)
+		return (1);
+	else
+		return (x * (ft_power(x, y - 1)));
 }

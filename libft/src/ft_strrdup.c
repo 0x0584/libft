@@ -1,9 +1,9 @@
 /*
- * File: ft_atoi.c
+ * File: ft_strrdup.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-10 Sun 20:17:17>
- * Updated: <2019-02-11 Mon 17:05:08>
+ * Created: <2019-02-11 Mon 17:04:18>
+ * Updated: <2019-02-11 Mon 20:28:09>
  *
  * Copyright (C) 2019
  *
@@ -25,26 +25,17 @@
 
 #include "libft.h"
 
-int ft_atoi(const char *nptr) {
-	int nbr;
-	int len;
-	int i;
-	int sign;
+char *ft_strrdup(char *start, char *end) {
+	char *buff;
+	size_t len;
 
-	while (*nptr <= ' ')
-		nptr++;
-	sign = 1;
-	if (*nptr == '-' || *nptr == '+')
-		sign = *nptr++ == '-' ? (-1) : (1);
 	len = 0;
-	while (nptr[len] && ft_isdigit(nptr[len]))
+	while ((start + len) <= end)
 		len++;
-	i = -1;
-	nbr = 0;
-	while (++i < len) {
-		if (!ft_isdigit(nptr[i]))
-			return (nbr * sign * ft_power(10, len - i));
-		nbr += ft_power(10, len - i - 1) * (nptr[i] - '0');
-	}
-	return (nbr * sign);
+	if ((buff = ft_memalloc(len + 1)) == NULL)
+		return (NULL);
+	buff[len] = '\0';
+	while ((start + len--) > start)
+		buff[len] = *(start + len);
+	return (buff);
 }

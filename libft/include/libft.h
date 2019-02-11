@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-11 Mon 01:54:02>
+ * Updated: <2019-02-11 Mon 18:51:27>
  *
  * Copyright (C) 2019
  *
@@ -51,6 +51,7 @@ void ft_memdel(void **mem);
 /* string related functions */
 size_t ft_strlen(const char *str);
 char *ft_strdup(char *str);
+char *ft_strrdup(char *start, char *end);
 char *ft_strcpy(char *dest, char *src);
 char *ft_strncpy(char *dest, char *src, size_t n);
 char *ft_strcat(char *dest, const char *src);
@@ -72,6 +73,8 @@ int ft_strnequ(char const *s1, char const *s2, size_t n);
 char *ft_strsub(char const *s, unsigned int start, size_t len);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strtrim(char const *s);
+t_uint ft_count_words_using(char const *s, char c);
+char **ft_strsplit(char const *s, char c);
 
 /* character related functions */
 int ft_isdigit(int c);
@@ -81,5 +84,8 @@ int ft_isascii(int c);
 int ft_isupper(int c);
 int ft_islower(int c);
 int ft_isprint(int c);
+
+/* math related functions */
+int ft_power(int x, int y);
 
 #endif				/* LIBFT_H */
