@@ -1,9 +1,9 @@
 /*
- * File: ft_strequ.c
+ * File: ft_strtrim.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-11 Mon 01:11:07>
- * Updated: <2019-02-11 Mon 01:54:11>
+ * Created: <2019-02-11 Mon 01:52:33>
+ * Updated: <2019-02-11 Mon 02:40:32>
  *
  * Copyright (C) 2019
  *
@@ -25,6 +25,25 @@
 
 #include "libft.h"
 
-int ft_strequ(char const *s1, char const *s2) {
-	return (ft_strcmp(s1, s2) == 0);
+char *ft_strtrim(char const *s) {
+	char *buff;
+	size_t len;
+	size_t last;
+	size_t i;
+
+	while (*s <= ' ' && *s)
+		s++;
+	last = 0;
+	len = ft_strlen(s);
+	if (len != 0)
+		while (s[len - last - 1] <= ' ')
+			last++;
+	buff = ft_memalloc(len - last + 1);
+	buff[len - last] = '\0';
+	i = 0;
+	while (i < len - last) {
+		buff[i] = s[i];
+		i++;
+	}
+	return (buff);
 }

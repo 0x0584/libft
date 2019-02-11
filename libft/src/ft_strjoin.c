@@ -1,9 +1,9 @@
 /*
- * File: ft_strequ.c
+ * File: ft_strjoin.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-11 Mon 01:11:07>
- * Updated: <2019-02-11 Mon 01:54:11>
+ * Created: <2019-02-11 Mon 01:43:13>
+ * Updated: <2019-02-11 Mon 01:50:23>
  *
  * Copyright (C) 2019
  *
@@ -25,6 +25,15 @@
 
 #include "libft.h"
 
-int ft_strequ(char const *s1, char const *s2) {
-	return (ft_strcmp(s1, s2) == 0);
+char *ft_strjoin(char const *s1, char const *s2) {
+	char *buff;
+	size_t s1_len;
+
+	s1_len = ft_strlen(s1);
+	buff = ft_memalloc(s1_len + ft_strlen(s2) + 1);
+	if (buff == NULL)
+		return (NULL);
+	ft_strncpy(buff, (char *) s1, s1_len);
+	ft_strcat(buff, s2);
+	return (buff);
 }

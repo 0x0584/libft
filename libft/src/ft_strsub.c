@@ -1,9 +1,9 @@
 /*
- * File: ft_strequ.c
+ * File: ft_strsub.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-11 Mon 01:11:07>
- * Updated: <2019-02-11 Mon 01:54:11>
+ * Created: <2019-02-11 Mon 01:22:18>
+ * Updated: <2019-02-11 Mon 01:54:32>
  *
  * Copyright (C) 2019
  *
@@ -25,6 +25,18 @@
 
 #include "libft.h"
 
-int ft_strequ(char const *s1, char const *s2) {
-	return (ft_strcmp(s1, s2) == 0);
+char *ft_strsub(char const *s, unsigned int start, size_t len) {
+	char *buff;
+	t_uint i;
+
+	buff = ft_memalloc(len + 1);
+	if (buff == NULL)
+		return (NULL);
+	i = start;
+	buff[len] = '\0';
+	while (i < start + len) {
+		buff[i - start] = s[i];
+		i++;
+	}
+	return (buff);
 }

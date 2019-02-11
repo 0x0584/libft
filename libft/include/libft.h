@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-11 Mon 01:07:53>
+ * Updated: <2019-02-11 Mon 01:54:02>
  *
  * Copyright (C) 2019
  *
@@ -64,8 +64,14 @@ int ft_strcmp(const char *s1, const char *s2);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
 char *ft_strnew(size_t size);
 void ft_strdel(char **pstr);
-void ft_striter(char *s, void (*f)(char *));
+void ft_striter(char *s, void (*f) (char *));
 char *ft_strmap(char const *s, char (*f) (char));
+char *ft_strmapi(char const *s, char (*f) (unsigned int, char));
+int ft_strequ(char const *s1, char const *s2);
+int ft_strnequ(char const *s1, char const *s2, size_t n);
+char *ft_strsub(char const *s, unsigned int start, size_t len);
+char *ft_strjoin(char const *s1, char const *s2);
+char *ft_strtrim(char const *s);
 
 /* character related functions */
 int ft_isdigit(int c);
