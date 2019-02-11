@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-11 Mon 00:18:36>
+ * Updated: <2019-02-11 Mon 01:07:53>
  *
  * Copyright (C) 2019
  *
@@ -30,6 +30,7 @@
 
 /* types */
 typedef unsigned char t_uchar;
+typedef unsigned int t_uint;
 typedef enum e_bool {
 	false = (1 == 0),
 	true = !false
@@ -43,6 +44,9 @@ void *ft_memmove(void *dest, const void *src, size_t n);
 void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
 void ft_bzero(void *s, size_t n);
+
+void *ft_memalloc(size_t size);
+void ft_memdel(void **mem);
 
 /* string related functions */
 size_t ft_strlen(const char *str);
@@ -58,6 +62,10 @@ char *ft_strstr(const char *str, const char *to_find);
 char *ft_strnstr(const char *str, const char *to_find, size_t n);
 int ft_strcmp(const char *s1, const char *s2);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
+char *ft_strnew(size_t size);
+void ft_strdel(char **pstr);
+void ft_striter(char *s, void (*f)(char *));
+char *ft_strmap(char const *s, char (*f) (char));
 
 /* character related functions */
 int ft_isdigit(int c);
