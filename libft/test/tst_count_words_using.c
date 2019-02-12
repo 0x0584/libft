@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 18:13:17>
- * Updated: <2019-02-11 Mon 18:26:21>
+ * Updated: <2019-02-12 Tue 02:07:55>
  *
  * Copyright (C) 2019
  *
@@ -26,13 +26,21 @@
 /* TODO: handle arguments rather than words */
 
 #include "libft.h"
-#include <stdio.h>
+#include "testing.h"
 
 int main(int argc, char *argv[]) {
-	printf("%d\n", ft_count_words_using("", ' '));
-	printf("%d\n", ft_count_words_using("	", ' '));
-	printf("%d\n", ft_count_words_using("	ddd", ' '));
-	printf("%d\n", ft_count_words_using("ddd	  ", ' '));
-	printf("%d\n", ft_count_words_using("  ddd	dd	dd	dd	", ' '));
+	int i;
+	t_uint exp_count;
+	t_uint count;
+
+	if (argc != 3) {
+		i = 1;
+		while (i < argc) {
+			exp_count = ft_atoi(argv[i + 2]);
+			count = ft_count_words_using(argv[i], argv[i + 1][0]);
+			printf("'%s' has `%d' vs `%d'\n", argv[i], exp_count, count);
+			i += 3;
+		}
+	}
 	return 0;
 }

@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-10 Sun 02:06:24>
+# Updated: <2019-02-12 Tue 02:19:42>
 #
 # Copyright (C) 2019
 #
@@ -22,7 +22,7 @@
 # Floor, Boston, MA 02110-1301, USA.
 
 CC = gcc
-CFLAGS += -Wall -Werror -Wextra
+CFLAGS += # -Wall -Werror -Wextra
 LDFLAGS = -I.
 RM = rm -f
 
