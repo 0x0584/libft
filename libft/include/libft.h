@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-11 Mon 18:51:27>
+ * Updated: <2019-02-12 Tue 00:35:48>
  *
  * Copyright (C) 2019
  *
@@ -27,6 +27,7 @@
 #ifndef LIBFT_H
 #  define LIBFT_H
 #  include <stdlib.h>
+#  include <unistd.h>
 
 /* types */
 typedef unsigned char t_uchar;
@@ -43,10 +44,9 @@ void *ft_memccpy(void *dest, const void *src, int c, size_t n);
 void *ft_memmove(void *dest, const void *src, size_t n);
 void *ft_memchr(const void *s, int c, size_t n);
 int ft_memcmp(const void *s1, const void *s2, size_t n);
-void ft_bzero(void *s, size_t n);
-
 void *ft_memalloc(size_t size);
 void ft_memdel(void **mem);
+void ft_bzero(void *s, size_t n);
 
 /* string related functions */
 size_t ft_strlen(const char *str);
@@ -85,7 +85,19 @@ int ft_isupper(int c);
 int ft_islower(int c);
 int ft_isprint(int c);
 
-/* math related functions */
+/* output functions */
+void ft_putchar(char c);
+void ft_putchar_fd(char c, int fd);
+void ft_putstr(char const *s);
+void ft_putstr_fd(char const *s, int fd);
+void ft_putnbr(int n);
+void ft_putnbr_fd(int n, int fd);
+void ft_putendl(char const *s);
+void ft_putendl_fd(char const *s, int fd);
+
+/* math and numbers related functions */
 int ft_power(int x, int y);
+int ft_atoi(const char *nptr);
+char *ft_itoa(int nbr);
 
 #endif				/* LIBFT_H */
