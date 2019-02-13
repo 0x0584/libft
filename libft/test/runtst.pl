@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-10 Sun 02:07:30>
+# Updated: <2019-02-13 Wed 23:16:17>
 #
 # Copyright (C) 2019
 #
@@ -20,3 +20,7 @@
 # along with this program; see the file COPYING.	If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
+
+# TODO: run all compiled programs in here
+# TODO: compare outpited result with expected results
+# TODO: print a nice log

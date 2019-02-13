@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-10 Sun 02:20:12>
+ * Updated: <2019-02-12 Tue 21:02:07>
  *
  * Copyright (C) 2019
  *
@@ -25,21 +25,27 @@
 
 #ifndef TESTING_H
 #  define TESTING_H
-
 #  include <stdlib.h>
 #  include <stdio.h>
+#  include <string.h>
 
-void print_array(size_t *array, size_t size);
+void print_array_of_ints(int *array, size_t size);
+void print_test_of_ints(int *array, int *test, size_t size);
 
+void print_array_of_ints(int *array, size_t size) {
+	size_t i = 0;
 
-void print_array(size_t * array, size_t size) {
-	size_t i;
-
-
-	i = 0;
-	printf("%ld", array[i++]);
+	printf("'%d", array[i++]);
 	while (i < size)
-		printf(" %ld", array[i++]);
-	putchar('\n');
+		printf(" %d", array[i++]);
+	putchar('\'');
+}
+
+void print_test_of_ints(int *array, int *test, size_t size) {
+	printf("%s", " (");
+	print_array_of_ints(array, size);
+	printf("%s", " vs ");
+	print_array_of_ints(test, size);
+	putchar(')');
 }
 #endif				/* TESTING_H */

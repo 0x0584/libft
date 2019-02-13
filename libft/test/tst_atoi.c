@@ -1,9 +1,9 @@
 /*
- * File: tst_count_words_using.c
+ * File: tst_atoi.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-11 Mon 18:13:17>
- * Updated: <2019-02-13 Wed 23:13:16>
+ * Created: <2019-02-12 Tue 01:54:27>
+ * Updated: <2019-02-13 Wed 23:15:38>
  *
  * Copyright (C) 2019
  *
@@ -26,24 +26,26 @@
 #include "libft.h"
 #include "testing.h"
 
-void tst_count_words_using(char *str, char c, char *pnbr) {
-	t_uint count = 0, expected = 0;
-
-	count = ft_count_words_using(str, c);
-	expected = (t_uint) atoi(pnbr);
-	printf("%s ('%u vs %u')\n", str, expected, count);
-}
-
 int main(int argc, char *argv[]) {
-	int i = 1;
+	int *array, *test;
+	size_t size, i = 0;
+	char *nbr_as_str;
 
-	if (argc > 3)
-		while ((argc - 1) % 3 == 0 &&  i < argc) {
-			tst_count_words_using(argv[i], argv[i + 1][0],
-								  argv[i + 2]);
-			i += 3;
-		} else
-		tst_count_words_using(" this is a test ", ' ', "4");
-
+	size = (argc == 1) ? 1 : argc - 1;
+	array = malloc(size * sizeof(int));
+	test = malloc(size * sizeof(int));
+	while (i < size) {
+		nbr_as_str = argc == 1 ? "-2147483648" : argv[i + 1];
+		array[i] = ft_atoi(nbr_as_str);
+		test[i] = atoi(nbr_as_str);
+		i++;
+	}
+	i = 1;
+	printf("'%s", argv[1]);
+	while (i < size)
+		printf(" %s", argv[i++]);
+	putchar('\'');
+	print_test_of_ints(array, test, size);
+	free(array); free(test);
 	return 0;
 }

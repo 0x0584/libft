@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-12 Tue 01:53:54>
+ * Updated: <2019-02-13 Wed 22:34:51>
  *
  * Copyright (C) 2019
  *
@@ -27,19 +27,23 @@
 #include "testing.h"
 
 int main(int argc, char *argv[]) {
-	size_t *array, size, i = 0;
+	int *array, *test;
+	size_t size, i = 0;
 	int value;
 
-	size = (argc != 3) ? 0xff : atol(argv[1]);
-	value = (argc != 3) ? 0x00 : atoi(argv[2]);
-	array = malloc(size * sizeof *array);
+	size = (argc <= 2) ? 0xff : (argc - 2);
+	value = (argc <= 2) ? 0xff : ft_atoi(argv[1]);
+	array = malloc(size * sizeof(int));
+	test = malloc(size * sizeof(int));
 	while (i < size) {
-		array[i] = i;
+		array[i] = (argc <= 2) ? i : ft_atoi(argv[i + 2]);
+		test[i] = (argc <= 2) ? i : ft_atoi(argv[i + 2]);
 		i++;
 	}
-	print_array(array, size);
-	ft_memset(array, value, size * sizeof *array);
-	print_array(array, size);
-	free(array);
+	print_array_of_ints(array, size);
+	ft_memset(array, value, size * sizeof(int));
+	memset(test, value, size * sizeof(int));
+	print_test_of_ints(array, test, size);
+	free(array); free(test);
 	return 0;
 }
