@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-12 Tue 02:48:44>
+ * Updated: <2019-02-14 Thu 23:17:12>
  *
  * Copyright (C) 2019
  *
@@ -32,10 +32,17 @@
 /* types */
 typedef unsigned char t_uchar;
 typedef unsigned int t_uint;
+
 typedef enum e_bool {
 	false = (1 == 0),
 	true = !false
 } t_bool;
+
+typedef struct s_list {
+	void *content;
+	size_t content_size;
+	struct s_list *next;
+} t_list;
 
 /* memory related functions */
 void *ft_memset(void *s, int c, size_t n);

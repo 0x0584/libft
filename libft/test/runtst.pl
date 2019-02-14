@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-14 Thu 05:27:52>
+# Updated: <2019-02-14 Thu 19:22:25>
 #
 # Copyright (C) 2019
 #
@@ -24,6 +24,13 @@
 # TODO: run all compiled programs in here
 # TODO: compare outpited result with expected results
 # TODO: print a nice log
+
+# IDEA:
+# =====
+#
+# find a away to include all the other tst_*.pl files in here
+# which would have an array of program names and the arguments
+# to call them with.
 
 use strict;
 use warnings;
