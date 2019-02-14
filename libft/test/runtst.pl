@@ -1,8 +1,8 @@
-# File: test.pl
+# File: runtst.pl
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-13 Wed 23:16:17>
+# Updated: <2019-02-14 Thu 05:27:52>
 #
 # Copyright (C) 2019
 #
@@ -24,3 +24,21 @@
 # TODO: run all compiled programs in here
 # TODO: compare outpited result with expected results
 # TODO: print a nice log
+
+use strict;
+use warnings;
+use Cwd;
+
+my $main_path = Cwd::realpath("main.pl");
+require $main_path;
+
+our @tst_params;
+my @tst_files = glob "tst_*.pl";
+
+foreach my $file (@tst_files) {
+	print Cwd::realpath($file), "\n";
+	system $^X, Cwd::realpath($file);
+}
+
+# print "Results: ", join " ", @tst_files, "\n";
+# print "\nResults: ", join " ", @tst_params, "\n";

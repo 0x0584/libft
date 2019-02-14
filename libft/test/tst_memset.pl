@@ -1,9 +1,8 @@
-#!/usr/bin/perl
 # File: tst_memset.pl
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-10 Sun 02:47:16>
+# Updated: <2019-02-14 Thu 05:04:01>
 #
 # Copyright (C) 2019
 #
@@ -34,15 +33,12 @@
 use strict;
 use warnings;
 
-my %test = {
+require "main.pl";
+
+our @tst_params;
+our @tst_memset = {
 	("0 0", "\n\n"),
 	("11 0", "0 1 2 3 4 5 6 7 8 9 10\n0 0 0 0 0 0 0 0 0 0 0\n")
 };
 
-my $program = "./tst_memset";
-
-while (my ($args, $output) = each %test) {
-	print "$args $output";
-#	print $test{0};
-	# system(@tmp);
-}
+push @tst_params, @tst_memset;

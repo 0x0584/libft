@@ -1,9 +1,8 @@
-#!/bin/bash
-# File: mktst.sh
+# File: main.pl
 # Author: Anas Rchid (0x0584)
 #
-# Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-14 Thu 05:04:40>
+# Created: <2019-02-14 Thu 03:40:48>
+# Updated: <2019-02-14 Thu 05:16:45>
 #
 # Copyright (C) 2019
 #
@@ -22,25 +21,9 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
-# this is a simple script to create a test file for every file
-# in src dir with a prefix tst_ and a main function
+use strict;
+use warnings;
 
-SRC_DIR=../src
-TEST_DIR=./
+our @tst_params;
 
-C_BODY="int main(int argc, char *argv[]) {\n\treturn 0;\n}\n"
-PERL_BODY="use strict;\n\nuse warnings;\n\nrequire \"main.pl\";\nour @tst_params;\n"
-
-touch_files () {
-	for file in	 $(find "$1" -name "$2"				| \
-					   rev | cut -d/ -f1 | rev		| \
-					   sed -e "$3" | tr '\n' ' ')
-	do
-		if [ ! -e $file ]; then
-			echo -e "$4" >> $file
-		fi
-	done
-}
-
-touch_files "$SRC_DIR" "ft_*.c" "s/^ft_/tst_/" "$C_BODY"
-touch_files "$TEST_DIR" "tst_*.c" "s/\.c$/.pl/" "$PERL_BODY"
+1;
