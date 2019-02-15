@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-14 Thu 23:17:12>
+ * Updated: <2019-02-15 Fri 02:20:57>
  *
  * Copyright (C) 2019
  *
@@ -57,6 +57,7 @@ void ft_bzero(void *s, size_t n);
 
 /* string related functions */
 size_t ft_strlen(const char *str);
+char *ft_strrev(char *str);
 char *ft_strdup(char *str);
 char *ft_strrdup(char *start, char *end);
 char *ft_strcpy(char *dest, char *src);
@@ -106,5 +107,6 @@ void ft_putendl_fd(char const *s, int fd);
 int ft_power(int x, int y);
 int ft_atoi(const char *nptr);
 char *ft_itoa(int nbr);
+
 
 #endif				/* LIBFT_H */
