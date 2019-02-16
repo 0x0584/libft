@@ -1,9 +1,9 @@
 /*
- * File: testing.h
+ * File: tst_isalnum.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-16 Sat 22:11:22>
+ * Created: <2019-02-16 Sat 21:53:51>
+ * Updated: <2019-02-17 Sun 01:12:20>
  *
  * Copyright (C) 2019
  *
@@ -23,30 +23,20 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef TESTING_H
-#  define TESTING_H
-#  include <stdlib.h>
-#  include <stdio.h>
-#  include <string.h>
-#  include <ctype.h>
+#include "libft.h"
+#include "testing.h"
 
-void print_array_of_ints(int *array, size_t size);
-void print_test_of_ints(int *array, int *test, size_t size);
+int main(int argc, char *argv[]) {
+	int i = 1;
+	int c;
 
-void print_array_of_ints(int *array, size_t size) {
-	size_t i = 0;
+	if (argc == 1)
+		return 0;
 
-	printf("'%d", array[i++]);
-	while (i < size)
-		printf(" %d", array[i++]);
-	putchar('\'');
+	while (i < argc) {
+		c = atoi(argv[i]);
+		printf("'%c' ('%d' vs '%d')\n", c, ft_isalnum(c), isalnum(c));
+		i++;
+	}
+	return 0;
 }
-
-void print_test_of_ints(int *array, int *test, size_t size) {
-	printf("%s", " (");
-	print_array_of_ints(array, size);
-	printf("%s", " vs ");
-	print_array_of_ints(test, size);
-	putchar(')');
-}
-#endif				/* TESTING_H */
