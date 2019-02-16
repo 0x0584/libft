@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-16 Sat 13:31:06>
+# Updated: <2019-02-16 Sat 19:53:07>
 #
 # Copyright (C) 2019
 #
@@ -39,13 +39,10 @@ LDFLAGS += -I $(DEPS_DIR)
 RM = rm -f
 
 all: $(LIBFT)
-	@echo "done."
-
 $(LIBFT): build-dir $(OBJS)
-	ar rc -o $(LIBFT) $(OBJS)
+	@ar rc -o $(LIBFT) $(OBJS)
 
 build-dir:
-	@echo "building objects.."
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DEPS)
@@ -53,7 +50,6 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DEPS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
 clean:
-	@echo "cleaning.."
 	$(RM) $(OBJS)
 
 fclean: clean
@@ -75,4 +71,3 @@ test: all $(DEPS)
 		ln -s ../$(DEPS) $(notdir $(DEPS)); \
 	fi
 	@make -C $(TEST_DIR)
-	@echo "you can run tests now.."

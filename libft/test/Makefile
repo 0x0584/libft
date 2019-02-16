@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-12 Tue 19:05:50>
+# Updated: <2019-02-16 Sat 19:51:58>
 #
 # Copyright (C) 2019
 #
@@ -27,12 +27,10 @@ LDFLAGS = -I.
 RM = rm -f
 
 LIBFT = libft.a
-OBJS := $(patsubst %.c, %.o, $(wildcard *.c))
+OBJS := $(patsubst %.c, %, $(wildcard *.c))
 
 all: $(OBJS)
-	@echo "done."
-
-%.o: %.c
+%: %.c
 	$(CC) $(CFLAGS) -o $(basename $@) $< $(LIBFT) $(LDFLAGS)
 
 clean:
