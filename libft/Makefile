@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-12 Tue 02:51:27>
+# Updated: <2019-02-16 Sat 13:31:06>
 #
 # Copyright (C) 2019
 #
@@ -62,9 +62,17 @@ fclean: clean
 re: fclean all
 
 # This would work only if there's one and only one header!
-# Otheriwse, copying/linking headers manually is required
-test: re $(DEPS)
-	ln $(LIBFT) $(TEST_DIR)/$(LIBFT)
-	ln $(DEPS) $(TEST_DIR)/$(notdir $(DEPS))
+# Otheriwse, copying/linking other headers manually is required
+#
+# Update:
+test: all $(DEPS)
+	@if [ ! -f $(TEST_DIR)/$(LIBFT) ]; then \
+		cd $(TEST_DIR); \
+		ln -s ../$(LIBFT) $(LIBFT); \
+	fi
+	@if [ ! -f $(TEST_DIR)/$(notdir $(DEPS)) ]; then \
+		cd $(TEST_DIR); \
+		ln -s ../$(DEPS) $(notdir $(DEPS)); \
+	fi
 	@make -C $(TEST_DIR)
 	@echo "you can run tests now.."
