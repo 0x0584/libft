@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-16 Sat 12:49:09>
+ * Updated: <2019-02-17 Sun 02:28:50>
  *
  * Copyright (C) 2019
  *
@@ -58,6 +58,7 @@ void ft_bzero(void *s, size_t n);
 /* string related functions */
 size_t ft_strlen(const char *str);
 char *ft_strrev(char *str);
+char *ft_strnrev(char *str, size_t start, size_t end);
 char *ft_strdup(char *str);
 char *ft_strrdup(char *start, char *end);
 char *ft_strcpy(char *dest, char *src);

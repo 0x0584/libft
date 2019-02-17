@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-16 Sat 21:43:20>
+# Updated: <2019-02-17 Sun 01:48:38>
 #
 # Copyright (C) 2019
 #
@@ -55,7 +55,7 @@ clean:
 fclean: clean
 	$(RM) $(LIBFT) $(TEST_DIR)/$(LIBFT)
 
-re: fclean all
+re: fclean all test
 
 # This would work only if there's one and only one header!
 # Otheriwse, copying/linking other headers manually is required

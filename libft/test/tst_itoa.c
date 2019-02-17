@@ -1,9 +1,9 @@
 /*
- * File: ft_strrev.c
+ * File: tst_itoa.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-15 Fri 02:18:09>
- * Updated: <2019-02-17 Sun 03:15:03>
+ * Created: <2019-02-17 Sun 01:16:06>
+ * Updated: <2019-02-17 Sun 03:26:15>
  *
  * Copyright (C) 2019
  *
@@ -24,7 +24,20 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strrev(char *str) {
-	return ft_strnrev(str, 0, ft_strlen(str));
+int main(int argc, char *argv[]) {
+	int i = 1;
+	char *s;
+
+	if (argc == 1)
+		return 0;
+
+	while (i < argc) {
+		s = ft_itoa(atoi(argv[i]));
+		printf("('%s' vs '%s')\n", argv[i], s);
+		free(s);
+		i++;
+	}
+	return 0;
 }

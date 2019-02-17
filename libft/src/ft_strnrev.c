@@ -1,9 +1,9 @@
 /*
- * File: ft_strrev.c
+ * File: ft_strnrev.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-15 Fri 02:18:09>
- * Updated: <2019-02-17 Sun 03:15:03>
+ * Created: <2019-02-17 Sun 02:23:26>
+ * Updated: <2019-02-17 Sun 02:33:21>
  *
  * Copyright (C) 2019
  *
@@ -25,6 +25,18 @@
 
 #include "libft.h"
 
-char *ft_strrev(char *str) {
-	return ft_strnrev(str, 0, ft_strlen(str));
+char *ft_strnrev(char *str, size_t start, size_t end) {
+	size_t length;
+	size_t i;
+	char tmp;
+
+	i = start;
+	length = (end > start) ? end - start : 0;
+	while (i <= length / 2) {
+		tmp = str[i];
+		str[i] = str[start + length - i - 1];
+		str[start + length - i - 1] = tmp;
+		i++;
+	}
+	return str;
 }
