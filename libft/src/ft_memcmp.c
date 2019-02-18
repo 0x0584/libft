@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-08 Fri 22:44:57>
- * Updated: <2019-02-11 Mon 22:46:02>
+ * Updated: <2019-02-18 Mon 03:29:03>
  *
  * Copyright (C) 2019
  *
@@ -30,6 +30,8 @@ int ft_memcmp(const void *s1, const void *s2, size_t n) {
 	t_uchar *bar;
 	size_t i;
 
+	if (n == 0)
+		return 0;
 	i = 0;
 	foo = (t_uchar *) s1;
 	bar = (t_uchar *) s2;

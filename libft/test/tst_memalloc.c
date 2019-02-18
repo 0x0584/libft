@@ -1,9 +1,9 @@
 /*
- * File: tst_memset.c
+ * File: tst_memalloc.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-18 Mon 00:59:46>
+ * Created: <2019-02-17 Sun 03:17:56>
+ * Updated: <2019-02-17 Sun 03:40:45>
  *
  * Copyright (C) 2019
  *
@@ -27,24 +27,16 @@
 #include "testing.h"
 
 int main(int argc, char *argv[]) {
-	int *array, *test;
-	size_t size, i = 0;
-	int value;
+	int i = 0;
+	void *tmp;
 
-	size = (argc <= 2) ? 0xff : (argc - 2);
-	value = (argc <= 2) ? 0xff : ft_atoi(argv[1]);
-	array = malloc(size * sizeof(int));
-	test = malloc(size * sizeof(int));
-	while (i < size) {
-		array[i] = (argc <= 2) ? i : ft_atoi(argv[i + 2]);
-		test[i] = (argc <= 2) ? i : ft_atoi(argv[i + 2]);
+	if (argc == 1)
+		return 0;
+
+	while (i < argc) {
+		tmp = ft_memalloc(abs(atoi(argv[i])));
+		free(tmp);
 		i++;
 	}
-	print_array_of_ints(array, size);
-	ft_memset(array, value, size * sizeof(int));
-	memset(test, value, size * sizeof(int));
-	print_test_of_ints(array, test, size);
-	free(array);
-	free(test);
 	return 0;
 }

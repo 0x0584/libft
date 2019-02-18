@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-16 Sat 22:11:22>
+ * Updated: <2019-02-18 Mon 01:10:01>
  *
  * Copyright (C) 2019
  *
@@ -29,6 +29,7 @@
 #  include <stdio.h>
 #  include <string.h>
 #  include <ctype.h>
+#  include <time.h>
 
 void print_array_of_ints(int *array, size_t size);
 void print_test_of_ints(int *array, int *test, size_t size);

@@ -1,9 +1,9 @@
 /*
- * File: tst_memset.c
+ * File: tst_memcmp.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-18 Mon 00:59:46>
+ * Created: <2019-02-18 Mon 03:24:27>
+ * Updated: <2019-02-18 Mon 03:36:55>
  *
  * Copyright (C) 2019
  *
@@ -29,21 +29,19 @@
 int main(int argc, char *argv[]) {
 	int *array, *test;
 	size_t size, i = 0;
-	int value;
 
-	size = (argc <= 2) ? 0xff : (argc - 2);
-	value = (argc <= 2) ? 0xff : ft_atoi(argv[1]);
+	srand(time(NULL));
+	size = (argc == 1) ? 0xff : (argc - 1);
 	array = malloc(size * sizeof(int));
 	test = malloc(size * sizeof(int));
 	while (i < size) {
-		array[i] = (argc <= 2) ? i : ft_atoi(argv[i + 2]);
-		test[i] = (argc <= 2) ? i : ft_atoi(argv[i + 2]);
+		array[i] = (argc == 1) ? i : ft_atoi(argv[i + 1]);
+		test[i] = rand() % 0xff;
 		i++;
 	}
-	print_array_of_ints(array, size);
-	ft_memset(array, value, size * sizeof(int));
-	memset(test, value, size * sizeof(int));
-	print_test_of_ints(array, test, size);
+	print_array_of_ints(test, size);
+	printf(" ('%d' vs '%d')", memcmp(array, test, size),
+		   ft_memcmp(array, test, size));
 	free(array);
 	free(test);
 	return 0;
