@@ -1,9 +1,9 @@
 /*
- * File: tst_lstadd.c
+ * File: tst_lstdel.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-16 Sat 04:14:01>
- * Updated: <2019-02-19 Tue 01:38:44>
+ * Created: <2019-02-16 Sat 12:48:15>
+ * Updated: <2019-02-19 Tue 01:36:58>
  *
  * Copyright (C) 2019
  *
@@ -23,7 +23,10 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
+/* FIXME: memory is not free'd or what!? */
+
 #include "libft.h"
+#include "testing.h"
 
 void del(void *v, size_t sz) {
 	/* int * mtp = v; */
@@ -35,30 +38,37 @@ void del(void *v, size_t sz) {
 	}
 }
 
-int main() {
-	int foo = 9;
-	int bar = 8;
-	int baz = 7;
-	int fuzz = 75;
-	int buzz = 88;
+int *atoi_dup(char *str) {
+	int *foo = malloc(sizeof(int));
+	*foo = atoi(str);
+	return foo;
+}
 
-	t_list *head = ft_lstnew(&foo, sizeof(int));
-	ft_lstadd(&head, ft_lstnew(&bar, sizeof(int)));
-	ft_lstadd(&head->next, ft_lstnew(&baz, sizeof(int)));
-	ft_lstadd(&head->next->next, ft_lstnew(&fuzz, sizeof(int)));
-	ft_lstadd(&head->next->next->next, ft_lstnew(&buzz, sizeof(int)));
+int main(int argc, char *argv[]) {
+	t_list *head, *tmp;
+	int i = 2, *foo;
 
-	/*
-	 * TODO: create tests and update runtest.pl
-	 *
-	 * 1) create tests for lst
-	 * 2) create tests for strings
-	 * 3) update runtest.pl run all the tests
-	 *	  with some random input in each of tst_*.pl
-	 *
-	 * This should be done by tomorrow!
-	 */
+	if (argc == 1)
+		return 0;
 
+	printf("'%d", atoi(argv[1]));
+	while (i < argc)
+		printf(" %d", atoi(argv[i++]));
+	printf("' vs '");
+	i = 2;
+	head = ft_lstnew(atoi_dup(argv[1]), sizeof(int));
+	tmp = head;
+	foo = (tmp->content);
+	printf("%d", *foo);
+	while (i < argc) {
+		tmp->next = ft_lstnew(atoi_dup(argv[i]), sizeof(int));
+		foo = (tmp->next->content);
+		printf(" %d", *foo);
+		tmp = tmp->next;
+		i++;
+	}
+	printf("'");
 	ft_lstdel(&head, del);
+
 	return 0;
 }

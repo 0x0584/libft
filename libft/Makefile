@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-17 Sun 01:48:38>
+# Updated: <2019-02-18 Mon 20:40:49>
 #
 # Copyright (C) 2019
 #
@@ -39,6 +39,16 @@ LDFLAGS += -I $(DEPS_DIR)
 RM = rm -f
 
 all: $(LIBFT)
+	@if [ ! -f $(TEST_DIR)/$(LIBFT) ]; then \
+		cd $(TEST_DIR);						\
+		ln -s ../$(LIBFT) $(LIBFT);			\
+	fi
+	@if [ ! -f $(TEST_DIR)/$(notdir $(DEPS)) ]; then \
+		cd $(TEST_DIR);								 \
+		ln -s ../$(DEPS) $(notdir $(DEPS));			 \
+	fi
+	@make -C $(TEST_DIR)
+
 $(LIBFT): build-dir $(OBJS)
 	@ar rc -o $(LIBFT) $(OBJS)
 
@@ -60,14 +70,14 @@ re: fclean all test
 # This would work only if there's one and only one header!
 # Otheriwse, copying/linking other headers manually is required
 #
-# Update:
-test: all $(DEPS)
-	@if [ ! -f $(TEST_DIR)/$(LIBFT) ]; then \
-		cd $(TEST_DIR); \
-		ln -s ../$(LIBFT) $(LIBFT); \
-	fi
-	@if [ ! -f $(TEST_DIR)/$(notdir $(DEPS)) ]; then \
-		cd $(TEST_DIR); \
-		ln -s ../$(DEPS) $(notdir $(DEPS)); \
-	fi
-	@make -C $(TEST_DIR)
+# Update: done in all instead of test
+# test: $(DEPS)
+#	@if [ ! -f $(TEST_DIR)/$(LIBFT) ]; then \
+#		cd $(TEST_DIR); \
+#		ln -s ../$(LIBFT) $(LIBFT); \
+#	fi
+#	@if [ ! -f $(TEST_DIR)/$(notdir $(DEPS)) ]; then \
+#		cd $(TEST_DIR); \
+#		ln -s ../$(DEPS) $(notdir $(DEPS)); \
+#	fi
+#	@make -C $(TEST_DIR)
