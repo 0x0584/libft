@@ -1,9 +1,9 @@
 /*
- * File: ft_strncat.c
+ * File: tst_strcmp.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-10 Sun 16:23:33>
- * Updated: <2019-02-19 Tue 03:27:51>
+ * Created: <2019-02-19 Tue 03:47:09>
+ * Updated: <2019-02-19 Tue 18:03:42>
  *
  * Copyright (C) 2019
  *
@@ -24,20 +24,14 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strncat(char *dest, const char *src, size_t n) {
-	size_t i;
-	char *foo;
+int main(int argc, char *argv[]) {
+	if (argc != 3)
+		return 0;
 
-	i = 0;
-	foo = dest;
-	while (*foo)
-		foo++;
-	while (src[i] && i < n) {
-		foo[i] = src[i];
-		i++;
-	}
-	if (n > 0)
-		foo[i] = '\0';
-	return dest;
+	printf("'%s %s' ('%d' vs '%d')\n", argv[1], argv[2],
+		   ft_strcmp(argv[1], argv[2]), strcmp(argv[1], argv[2]));
+
+	return 0;
 }

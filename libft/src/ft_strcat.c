@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 16:12:32>
- * Updated: <2019-02-11 Mon 22:49:23>
+ * Updated: <2019-02-19 Tue 03:27:26>
  *
  * Copyright (C) 2019
  *
@@ -26,9 +26,12 @@
 #include "libft.h"
 
 char *ft_strcat(char *dest, const char *src) {
-	while (*dest)
-		dest++;
-	while ((*dest++ = *src++) != '\0')
+	char *foo;
+
+	foo = dest;
+	while (*foo)
+		foo++;
+	while ((*foo++ = *src++) != '\0')
 		/* -*- 0x0584 -*- */ ;
 	return dest;
 }

@@ -1,9 +1,9 @@
 /*
- * File: ft_strncat.c
+ * File: tst_strlen.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-10 Sun 16:23:33>
- * Updated: <2019-02-19 Tue 03:27:51>
+ * Created: <2019-02-19 Tue 03:28:49>
+ * Updated: <2019-02-19 Tue 03:37:53>
  *
  * Copyright (C) 2019
  *
@@ -24,20 +24,20 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strncat(char *dest, const char *src, size_t n) {
-	size_t i;
-	char *foo;
+int main(int argc, char *argv[]) {
+	int i = 1;
+	char *s;
 
-	i = 0;
-	foo = dest;
-	while (*foo)
-		foo++;
-	while (src[i] && i < n) {
-		foo[i] = src[i];
+	if (argc == 1)
+		return 0;
+
+	while (i < argc) {
+		s = argv[i];
+		printf("'%s' ('%ld' vs '%ld')\n", s, ft_strlen(s), strlen(s));
 		i++;
 	}
-	if (n > 0)
-		foo[i] = '\0';
-	return dest;
+
+	return 0;
 }

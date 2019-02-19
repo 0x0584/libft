@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 19:59:27>
- * Updated: <2019-02-11 Mon 23:00:00>
+ * Updated: <2019-02-19 Tue 17:54:49>
  *
  * Copyright (C) 2019
  *
@@ -26,9 +26,10 @@
 #include "libft.h"
 
 int ft_strcmp(const char *s1, const char *s2) {
-	while (*s1 == *s2) {
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
+	size_t i;
+
+	i = 0;
+	while (*s1 && *s2 && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
