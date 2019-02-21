@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-16 Sat 04:30:44>
- * Updated: <2019-02-16 Sat 04:31:49>
+ * Updated: <2019-02-21 Thu 19:43:02>
  *
  * Copyright (C) 2019
  *
@@ -24,29 +24,26 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-t_list *f(t_list * elem) {
-	int *foo = malloc(sizeof *foo);
+t_list *add_one(t_list * elem) {
+	int foo;
 	int *s = elem->content;
-	*foo = *s + 1;
+	foo = *s + 1;
 
-	return ft_lstnew(foo, sizeof(int));
+	return ft_lstnew(&foo, sizeof(int));
 }
 
-int main() {
-	int foo = 1;
-	/* int bar = 8; */
-	int baz = 2;
-	int fuzz = 3;
-	int buzz = 4;
+int main(int argc, char *argv[]) {
+	t_list *head, *mapped;
 
-	t_list *gg, *head = ft_lstnew(&foo, sizeof(int));
+	head = int_lst_from_args(argc, argv);
+	ft_lstdump(head, dump_as_int);
+	mapped = ft_lstmap(head, add_one);
+	printf(" ");
 
-	head->next = ft_lstnew(&baz, sizeof(int));
-	head->next->next = ft_lstnew(&fuzz, sizeof(int));
-	head->next->next->next = ft_lstnew(&buzz, sizeof(int));
-
-	gg = ft_lstmap(head, f);
-
+	ft_lstdump(mapped, dump_as_int);
+	ft_lstdel(&head, del);
+	ft_lstdel(&mapped, del);
 	return 0;
 }

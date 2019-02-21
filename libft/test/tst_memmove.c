@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-18 Mon 03:48:00>
- * Updated: <2019-02-18 Mon 03:48:12>
+ * Updated: <2019-02-21 Thu 17:14:18>
  *
  * Copyright (C) 2019
  *
@@ -28,11 +28,9 @@
 
 int main(int argc, char *argv[]) {
 	int *array, *test;
-	size_t size, i = 0;
-	int value;
+	int size, i = 0;
 
 	size = (argc == 1) ? 0xff : (argc - 1);
-	value = (argc == 1) ? 0xff : ft_atoi(argv[1]);
 	array = malloc(size * sizeof(int));
 	test = malloc(size * sizeof(int));
 	while (i < size) {

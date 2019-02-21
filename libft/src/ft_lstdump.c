@@ -1,9 +1,9 @@
 /*
- * File: tst_lstdel.c
+ * File: ft_lstdump.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-16 Sat 12:48:15>
- * Updated: <2019-02-21 Thu 17:23:11>
+ * Created: <2019-02-21 Thu 16:30:55>
+ * Updated: <2019-02-21 Thu 17:33:21>
  *
  * Copyright (C) 2019
  *
@@ -23,22 +23,20 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-/* FIXME: memory is not free'd or what!? */
-
 #include "libft.h"
-#include "testing.h"
+#include <stdio.h>
 
-int main(int argc, char *argv[]) {
-	t_list *head;
-	int i = 2;
+void ft_lstdump(t_list * lst, void (*f) (size_t pos, t_list * elem)) {
+	t_list *tmp;
+	size_t index;
 
-	printf("'%d", atoi(argv[1]));
-	while (i < argc)
-		printf(" %d", atoi(argv[i++]));
-	printf("' ");
-	head = int_lst_from_args(argc, argv);
-	ft_lstdump(head, dump_as_int);
-	ft_lstdel(&head, del);
-
-	return 0;
+	index = 0;
+	tmp = lst;
+	while (tmp) {
+		if (f != NULL)
+			f(index++, tmp);
+		else
+			ft_putbase((long) tmp->content, HEXA_BASE);
+		tmp = tmp->next;
+	}
 }

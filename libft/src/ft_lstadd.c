@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-16 Sat 01:53:09>
- * Updated: <2019-02-16 Sat 02:20:39>
+ * Updated: <2019-02-21 Thu 16:17:37>
  *
  * Copyright (C) 2019
  *
@@ -28,6 +28,6 @@
 void ft_lstadd(t_list ** alst, t_list * new) {
 	if (alst != NULL && *alst && new) {
 		new->next = *alst;
-		(*alst)->next = new;
+		*alst = new;
 	}
 }

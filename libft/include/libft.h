@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-21 Thu 13:23:36>
+ * Updated: <2019-02-21 Thu 21:08:03>
  *
  * Copyright (C) 2019
  *
@@ -26,10 +26,17 @@
 
 #ifndef LIBFT_H
 #  define LIBFT_H
+
 #  include <stdlib.h>
 #  include <unistd.h>
 
-#  define MIN(x, y)			(((x) < y) ? (x) : (y))
+#  define MIN(x, y)			(((x) < (y)) ? (x) : (y))
+#  define MAX(x, y)			(((x) > (y)) ? (x) : (y))
+
+#  define HEXA_BASE			"0123456789abcdef"
+#  define OCTA_BASE			"01234567"
+#  define DECI_BASE			"0123456789"
+#  define BIN_BASE			"01"
 
 /* types */
 typedef unsigned char t_uchar;
@@ -112,13 +119,18 @@ void ft_putendl_fd(char const *s, int fd);
 int ft_power(int x, int y);
 int ft_atoi(const char *nptr);
 char *ft_itoa(int nbr);
+void ft_putbase(long in, char *base);
 
 /* list related functions */
 t_list *ft_lstnew(void const *content, size_t content_size);
 void ft_lstdel(t_list ** alst, void (*del) (void *, size_t));
+t_bool ft_lstdeli(t_list ** lst, void (*f) (void *, size_t),
+				  unsigned int index);
 void ft_lstdelone(t_list ** alst, void (*del) (void *, size_t));
 void ft_lstadd(t_list ** alst, t_list * new);
 t_list *ft_lstmap(t_list * lst, t_list * (*f) (t_list * elem));
 void ft_lstiter(t_list * lst, void (*f) (t_list * elem));
+void ft_lstdump(t_list * lst, void (*f) (size_t pos, t_list * elem));
+void ft_lstrev(t_list ** alst);
 
 #endif				/* LIBFT_H */

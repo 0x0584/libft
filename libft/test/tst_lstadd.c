@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-16 Sat 04:14:01>
- * Updated: <2019-02-19 Tue 01:38:44>
+ * Updated: <2019-02-21 Thu 17:24:42>
  *
  * Copyright (C) 2019
  *
@@ -24,41 +24,19 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-void del(void *v, size_t sz) {
-	/* int * mtp = v; */
+int main(int argc, char *argv[]) {
+	t_list *head;
+	int i = 2;
 
-	/* printf("\n>> %d <<\n", *mtp); */
-	free(v);
-	if (sz) {
-		/* just to avoid compilation warnings */
-	}
-}
-
-int main() {
-	int foo = 9;
-	int bar = 8;
-	int baz = 7;
-	int fuzz = 75;
-	int buzz = 88;
-
-	t_list *head = ft_lstnew(&foo, sizeof(int));
-	ft_lstadd(&head, ft_lstnew(&bar, sizeof(int)));
-	ft_lstadd(&head->next, ft_lstnew(&baz, sizeof(int)));
-	ft_lstadd(&head->next->next, ft_lstnew(&fuzz, sizeof(int)));
-	ft_lstadd(&head->next->next->next, ft_lstnew(&buzz, sizeof(int)));
-
-	/*
-	 * TODO: create tests and update runtest.pl
-	 *
-	 * 1) create tests for lst
-	 * 2) create tests for strings
-	 * 3) update runtest.pl run all the tests
-	 *	  with some random input in each of tst_*.pl
-	 *
-	 * This should be done by tomorrow!
-	 */
-
+	printf("'%d", atoi(argv[1]));
+	while (i < argc)
+		printf(" %d", atoi(argv[i++]));
+	printf("' ");
+	head = int_lst_from_args(argc, argv);
+	ft_lstdump(head, dump_as_int);
 	ft_lstdel(&head, del);
+
 	return 0;
 }

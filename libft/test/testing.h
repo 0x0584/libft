@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-21 Thu 14:09:50>
+ * Updated: <2019-02-21 Thu 17:22:20>
  *
  * Copyright (C) 2019
  *
@@ -31,10 +31,16 @@
 #  include <ctype.h>
 #  include <time.h>
 
+#  include "libft.h"
+
 void print_array_of_ints(int *array, size_t size);
 void print_test_of_ints(int *array, int *test, size_t size);
 void print_words(char **words);
 void free_words(char **words);
+void del(void *v, size_t sz);
+int *atoi_dup(char *str);
+t_list *int_lst_from_args(int argc, char **argv);
+void dump_as_int(size_t pos, t_list * elem);
 
 void print_array_of_ints(int *array, size_t size) {
 	size_t i = 0;
@@ -64,6 +70,42 @@ void free_words(char **words) {
 	while (words[i])
 		free(words[i++]);
 	free(words);
+}
+
+void del(void *v, size_t sz) {
+	if (sz || 1)
+		free(v);
+}
+
+int *atoi_dup(char *str) {
+	int *foo = malloc(sizeof(int));
+	*foo = atoi(str);
+	return foo;
+}
+
+t_list *int_lst_from_args(int argc, char **argv) {
+	t_list *head = NULL;
+	int i = 1, *bar;
+
+	if (argc == 1)
+		return head;
+
+	while (i < argc) {
+		bar = atoi_dup(argv[i]);
+		if (head == NULL)
+			head = ft_lstnew(bar, sizeof(int));
+		else
+			ft_lstadd(&head, ft_lstnew(bar, sizeof(int)));
+		free(bar);
+		i++;
+	}
+	return head;
+}
+
+void dump_as_int(size_t pos, t_list * elem) {
+	int *foo = elem->content;
+	printf("%s%d%s", (pos == 0) ? "[" : "", *foo,
+		   elem->next ? " -> " : "]");
 }
 
 #endif				/* TESTING_H */

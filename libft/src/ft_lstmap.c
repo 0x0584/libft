@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-16 Sat 02:22:19>
- * Updated: <2019-02-16 Sat 04:30:14>
+ * Updated: <2019-02-21 Thu 21:08:34>
  *
  * Copyright (C) 2019
  *
@@ -27,19 +27,19 @@
 
 t_list *ft_lstmap(t_list * lst, t_list * (*f) (t_list * elem)) {
 	t_list *head;
-	t_list *foo;
-	t_list *bar;
+	t_list *tmp;
 
+	head = NULL;
 	if (lst && f) {
-		head = f(lst);
-		foo = head->next;
-		bar = lst;
-		while (bar) {
-			foo->next = f(bar);
-			foo = foo->next;
-			bar = bar->next;
+		tmp = lst;
+		while (tmp) {
+			if (head == NULL)
+				head = f(tmp);
+			else
+				ft_lstadd(&head, f(tmp));
+			tmp = tmp->next;
 		}
-		return head;
 	}
-	return NULL;
+	ft_lstrev(&head);
+	return head;
 }

@@ -1,9 +1,9 @@
 /*
- * File: tst_lstdel.c
+ * File: ft_lstdeli.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-16 Sat 12:48:15>
- * Updated: <2019-02-21 Thu 17:23:11>
+ * Created: <2019-02-21 Thu 18:20:36>
+ * Updated: <2019-02-21 Thu 18:35:46>
  *
  * Copyright (C) 2019
  *
@@ -23,22 +23,28 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-/* FIXME: memory is not free'd or what!? */
-
 #include "libft.h"
-#include "testing.h"
 
-int main(int argc, char *argv[]) {
-	t_list *head;
-	int i = 2;
+t_bool ft_lstdeli(t_list ** lst, void (*f) (void *, size_t),
+				  unsigned int index) {
+	t_list *tmp;
+	t_list *prev;
+	unsigned int i;
 
-	printf("'%d", atoi(argv[1]));
-	while (i < argc)
-		printf(" %d", atoi(argv[i++]));
-	printf("' ");
-	head = int_lst_from_args(argc, argv);
-	ft_lstdump(head, dump_as_int);
-	ft_lstdel(&head, del);
+	i = 0;
+	tmp = *lst;
+	while (tmp && i++ < index) {
+		prev = tmp;
+		tmp = tmp->next;
+	}
 
-	return 0;
+	if (tmp == NULL && i < index)
+		return false;
+	else if (prev != NULL)
+		prev->next = tmp->next;
+	else
+		*lst = tmp->next;
+	ft_lstdelone(&tmp, f);
+
+	return true;
 }

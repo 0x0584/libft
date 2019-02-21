@@ -1,9 +1,9 @@
 /*
- * File: tst_lstdel.c
+ * File: ft_lstrev.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-16 Sat 12:48:15>
- * Updated: <2019-02-21 Thu 17:23:11>
+ * Created: <2019-02-21 Thu 21:05:10>
+ * Updated: <2019-02-21 Thu 21:08:07>
  *
  * Copyright (C) 2019
  *
@@ -23,22 +23,20 @@
  * Floor, Boston, MA 02110-1301, USA.
  */
 
-/* FIXME: memory is not free'd or what!? */
-
 #include "libft.h"
-#include "testing.h"
 
-int main(int argc, char *argv[]) {
-	t_list *head;
-	int i = 2;
+void ft_lstrev(t_list ** alst) {
+	t_list *prev;
+	t_list *current;
+	t_list *next;
 
-	printf("'%d", atoi(argv[1]));
-	while (i < argc)
-		printf(" %d", atoi(argv[i++]));
-	printf("' ");
-	head = int_lst_from_args(argc, argv);
-	ft_lstdump(head, dump_as_int);
-	ft_lstdel(&head, del);
-
-	return 0;
+	prev = NULL;
+	current = *alst;
+	while (current != NULL) {
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	*alst = prev;
 }

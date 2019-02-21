@@ -1,9 +1,9 @@
 /*
- * File: tst_lstdel.c
+ * File: tst_lstdump.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-16 Sat 12:48:15>
- * Updated: <2019-02-21 Thu 17:23:11>
+ * Created: <2019-02-21 Thu 16:50:37>
+ * Updated: <2019-02-21 Thu 17:26:03>
  *
  * Copyright (C) 2019
  *
@@ -22,8 +22,6 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
  * Floor, Boston, MA 02110-1301, USA.
  */
-
-/* FIXME: memory is not free'd or what!? */
 
 #include "libft.h"
 #include "testing.h"

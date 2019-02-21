@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-08 Fri 23:20:41>
- * Updated: <2019-02-18 Mon 00:59:46>
+ * Updated: <2019-02-21 Thu 17:11:02>
  *
  * Copyright (C) 2019
  *
@@ -28,7 +28,7 @@
 
 int main(int argc, char *argv[]) {
 	int *array, *test;
-	size_t size, i = 0;
+	int i = 0, size;
 	int value;
 
 	size = (argc <= 2) ? 0xff : (argc - 2);

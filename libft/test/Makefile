@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-17 Sun 02:38:53>
+# Updated: <2019-02-21 Thu 18:47:35>
 #
 # Copyright (C) 2019
 #
@@ -22,19 +22,24 @@
 # Floor, Boston, MA 02110-1301, USA.
 
 CC = gcc
-CFLAGS += -ggdb # -Wall -Werror -Wextra
+EXT = .out
+CFLAGS += -ggdb -Wall -Wextra #-Werror
 LDFLAGS = -I.
 RM = rm -f
 
 LIBFT = libft.a
-OBJS := $(patsubst %.c, %, $(wildcard *.c))
+OBJS := $(patsubst %.c, %$(EXT), $(wildcard *.c))
+
+define set_ext
+$(basename $(1))$(EXT)
+endef
 
 all: $(OBJS)
-%: %.c
-	$(CC) $(CFLAGS) -o $(basename $@) $< $(LIBFT) $(LDFLAGS)
+%$(EXT): %.c
+	$(CC) $(CFLAGS) -o $(call set_ext, $@) $< $(LIBFT) $(LDFLAGS)
 
 clean:
 	@echo "cleaning test units"
-	$(RM) $(basename $(OBJS))
+	$(RM) $(wildcard *.out)
 
 re: clean all
