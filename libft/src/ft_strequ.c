@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-11 Mon 01:11:07>
- * Updated: <2019-02-11 Mon 22:59:31>
+ * Updated: <2019-02-21 Thu 12:12:55>
  *
  * Copyright (C) 2019
  *
@@ -26,5 +26,5 @@
 #include "libft.h"
 
 int ft_strequ(char const *s1, char const *s2) {
-	return (ft_strcmp(s1, s2) == 0);
+	return !ft_strcmp(s1, s2);
 }

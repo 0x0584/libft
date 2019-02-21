@@ -1,9 +1,9 @@
 /*
- * File: ft_strnrev.c
+ * File: tst_strncpy.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-17 Sun 02:23:26>
- * Updated: <2019-02-21 Thu 11:22:14>
+ * Created: <2019-02-21 Thu 11:09:20>
+ * Updated: <2019-02-21 Thu 11:10:31>
  *
  * Copyright (C) 2019
  *
@@ -24,19 +24,23 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strnrev(char *str, size_t start, size_t end) {
-	size_t length;
-	size_t i;
-	char tmp;
+int main(int argc, char *argv[]) {
+	char *str, *cpy, *cpy2;
+	int n;
 
-	i = start;
-	length = (end > start) ? end - start : 0;
-	while (i < (length / 2)) {
-		tmp = str[i];
-		str[i] = str[start + length - i - 1];
-		str[start + length - i - 1] = tmp;
-		i++;
-	}
-	return str;
+	if (argc != 3)
+		return 0;
+	n = atoi(argv[2]);
+	str = argv[1];
+	cpy = malloc(strlen(str) + 1);
+	cpy2 = malloc(strlen(str) + 1);
+	ft_strncpy(cpy, str, n);
+	strncpy(cpy2, str, n);
+	printf("'%s' ('%s' vs '%s')", argv[1], cpy, cpy2);
+	free(cpy);
+	free(cpy2);
+
+	return 0;
 }

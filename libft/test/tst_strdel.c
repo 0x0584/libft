@@ -1,9 +1,9 @@
 /*
- * File: ft_strnrev.c
+ * File: tst_strdel.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-17 Sun 02:23:26>
- * Updated: <2019-02-21 Thu 11:22:14>
+ * Created: <2019-02-21 Thu 11:02:51>
+ * Updated: <2019-02-21 Thu 11:05:50>
  *
  * Copyright (C) 2019
  *
@@ -24,19 +24,18 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strnrev(char *str, size_t start, size_t end) {
-	size_t length;
-	size_t i;
-	char tmp;
+int main(int argc, char *argv[]) {
+	char *str;
 
-	i = start;
-	length = (end > start) ? end - start : 0;
-	while (i < (length / 2)) {
-		tmp = str[i];
-		str[i] = str[start + length - i - 1];
-		str[start + length - i - 1] = tmp;
-		i++;
-	}
-	return str;
+	if (argc != 2)
+		return 0;
+
+	str = strdup(argv[1]);
+	printf("'%s' '%ld'\n", str, ft_strlen(str));
+	ft_strdel(&str);
+	printf("'%s' '%ld'", str, ft_strlen(str));
+
+	return 0;
 }

@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-10 Sun 17:03:53>
- * Updated: <2019-02-11 Mon 22:51:31>
+ * Updated: <2019-02-21 Thu 10:43:58>
  *
  * Copyright (C) 2019
  *
@@ -31,7 +31,7 @@ char *ft_strchr(const char *str, int c) {
 	if (str == NULL)
 		return NULL;
 	buff = (char *) str;
-	while (*buff == (char) c)
+	while (*buff && *buff != (char) c)
 		buff++;
 	return (*buff == (char) c) ? buff : NULL;
 }

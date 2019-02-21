@@ -1,9 +1,9 @@
 /*
- * File: ft_strnrev.c
+ * File: tst_strlcat.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-17 Sun 02:23:26>
- * Updated: <2019-02-21 Thu 11:22:14>
+ * Created: <2019-02-21 Thu 13:25:22>
+ * Updated: <2019-02-21 Thu 13:28:14>
  *
  * Copyright (C) 2019
  *
@@ -24,19 +24,30 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strnrev(char *str, size_t start, size_t end) {
-	size_t length;
-	size_t i;
-	char tmp;
+int main(int argc, char *argv[]) {
+	size_t sz = 1;
+	int i = 2;
+	char *str;
 
-	i = start;
-	length = (end > start) ? end - start : 0;
-	while (i < (length / 2)) {
-		tmp = str[i];
-		str[i] = str[start + length - i - 1];
-		str[start + length - i - 1] = tmp;
+	if (argc <= 3)
+		return 0;
+	sz += strlen(argv[1]);
+	printf("'%s", argv[1]);
+	while (i < argc - 1) {
+		sz += strlen(argv[i]);
+		printf(" %s", argv[i]);
 		i++;
 	}
-	return str;
+	printf("' ");
+	str = ft_memalloc(sz * sizeof(char));
+	i = 1;
+	while (i < argc - 1) {
+		str = ft_strlcat(str, argv[i], atoi(argv[argc - 1]));
+		i++;
+	}
+	printf("'%s'\n", str);
+	free(str);
+	return 0;
 }

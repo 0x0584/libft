@@ -4,7 +4,7 @@
  * Description:
  *
  * Created: <2019-02-06 Wed 21:18:44>
- * Updated: <2019-02-17 Sun 02:28:50>
+ * Updated: <2019-02-21 Thu 13:23:36>
  *
  * Copyright (C) 2019
  *
@@ -28,6 +28,8 @@
 #  define LIBFT_H
 #  include <stdlib.h>
 #  include <unistd.h>
+
+#  define MIN(x, y)			(((x) < y) ? (x) : (y))
 
 /* types */
 typedef unsigned char t_uchar;
@@ -59,6 +61,7 @@ void ft_bzero(void *s, size_t n);
 size_t ft_strlen(const char *str);
 char *ft_strrev(char *str);
 char *ft_strnrev(char *str, size_t start, size_t end);
+void ft_strclr(char *s);
 char *ft_strdup(char *str);
 char *ft_strrdup(char *start, char *end);
 char *ft_strcpy(char *dest, char *src);
@@ -75,6 +78,7 @@ int ft_strncmp(const char *s1, const char *s2, size_t n);
 char *ft_strnew(size_t size);
 void ft_strdel(char **pstr);
 void ft_striter(char *s, void (*f) (char *));
+void ft_striteri(char *s, void (*f) (unsigned int, char *));
 char *ft_strmap(char const *s, char (*f) (char));
 char *ft_strmapi(char const *s, char (*f) (unsigned int, char));
 int ft_strequ(char const *s1, char const *s2);

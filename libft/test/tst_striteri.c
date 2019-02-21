@@ -1,9 +1,9 @@
 /*
- * File: ft_strnrev.c
+ * File: tst_striteri.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-17 Sun 02:23:26>
- * Updated: <2019-02-21 Thu 11:22:14>
+ * Created: <2019-02-21 Thu 13:22:23>
+ * Updated: <2019-02-21 Thu 13:24:16>
  *
  * Copyright (C) 2019
  *
@@ -24,19 +24,24 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strnrev(char *str, size_t start, size_t end) {
-	size_t length;
-	size_t i;
-	char tmp;
+void inc(unsigned int i, char *s) {
+	char c = s[i];
+	char tosub = isupper(c) ? 'A' : 'a';
 
-	i = start;
-	length = (end > start) ? end - start : 0;
-	while (i < (length / 2)) {
-		tmp = str[i];
-		str[i] = str[start + length - i - 1];
-		str[start + length - i - 1] = tmp;
-		i++;
-	}
-	return str;
+	if (isalpha(c))
+		c = (c - tosub + 0x0584) % 26 + tosub;
+	s[i] = c;
+}
+
+int main(int argc, char *argv[]) {
+	char *s;
+	if (argc != 2)
+		return 0;
+	s = strdup(argv[1]);
+	ft_striteri(s, inc);
+	printf("'%s' '%s'", argv[1], s);
+	free(s);
+	return 0;
 }

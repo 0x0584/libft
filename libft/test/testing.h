@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-18 Mon 01:10:01>
+ * Updated: <2019-02-21 Thu 14:09:50>
  *
  * Copyright (C) 2019
  *
@@ -33,6 +33,8 @@
 
 void print_array_of_ints(int *array, size_t size);
 void print_test_of_ints(int *array, int *test, size_t size);
+void print_words(char **words);
+void free_words(char **words);
 
 void print_array_of_ints(int *array, size_t size) {
 	size_t i = 0;
@@ -50,4 +52,18 @@ void print_test_of_ints(int *array, int *test, size_t size) {
 	print_array_of_ints(test, size);
 	putchar(')');
 }
+
+void print_words(char **words) {
+	int i = 0;
+	while (words[i])
+		printf("%s\n", words[i++]);
+}
+
+void free_words(char **words) {
+	int i = 0;
+	while (words[i])
+		free(words[i++]);
+	free(words);
+}
+
 #endif				/* TESTING_H */

@@ -1,9 +1,9 @@
 /*
- * File: ft_strnrev.c
+ * File: tst_strrdup.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-17 Sun 02:23:26>
- * Updated: <2019-02-21 Thu 11:22:14>
+ * Created: <2019-02-21 Thu 12:23:27>
+ * Updated: <2019-02-21 Thu 12:33:40>
  *
  * Copyright (C) 2019
  *
@@ -24,19 +24,16 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strnrev(char *str, size_t start, size_t end) {
-	size_t length;
-	size_t i;
-	char tmp;
+int main(int argc, char *argv[]) {
+	char *str;
 
-	i = start;
-	length = (end > start) ? end - start : 0;
-	while (i < (length / 2)) {
-		tmp = str[i];
-		str[i] = str[start + length - i - 1];
-		str[start + length - i - 1] = tmp;
-		i++;
-	}
-	return str;
+	if (argc != 4)
+		return 0;
+
+	str = ft_strrdup(&argv[1][atoi(argv[2])], &argv[1][atoi(argv[3])]);
+	printf("'%s %s %s' '%s'", argv[1], argv[2], argv[3], str);
+	free(str);
+	return 0;
 }

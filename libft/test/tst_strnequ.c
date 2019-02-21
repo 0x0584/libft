@@ -1,9 +1,9 @@
 /*
- * File: ft_strnrev.c
+ * File: tst_strnequ.c
  * Author: Anas Rchid (0x0584)
  *
- * Created: <2019-02-17 Sun 02:23:26>
- * Updated: <2019-02-21 Thu 11:22:14>
+ * Created: <2019-02-21 Thu 12:20:16>
+ * Updated: <2019-02-21 Thu 12:20:31>
  *
  * Copyright (C) 2019
  *
@@ -24,19 +24,17 @@
  */
 
 #include "libft.h"
+#include "testing.h"
 
-char *ft_strnrev(char *str, size_t start, size_t end) {
-	size_t length;
-	size_t i;
-	char tmp;
+int main(int argc, char *argv[]) {
+	int n;
 
-	i = start;
-	length = (end > start) ? end - start : 0;
-	while (i < (length / 2)) {
-		tmp = str[i];
-		str[i] = str[start + length - i - 1];
-		str[start + length - i - 1] = tmp;
-		i++;
-	}
-	return str;
+	if (argc != 4)
+		return 0;
+
+	n = atoi(argv[3]);
+	printf("'%s %s %d' ('%d' vs '%d')\n", argv[1], argv[2], n,
+		   ft_strnequ(argv[1], argv[2], n), !strncmp(argv[1], argv[2], n));
+
+	return 0;
 }
