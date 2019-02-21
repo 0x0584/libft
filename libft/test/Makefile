@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 23:09:11>
-# Updated: <2019-02-21 Thu 18:47:35>
+# Updated: <2019-02-21 Thu 22:49:24>
 #
 # Copyright (C) 2019
 #
@@ -23,7 +23,7 @@
 
 CC = gcc
 EXT = .out
-CFLAGS += -ggdb -Wall -Wextra #-Werror
+CFLAGS += -ggdb -Wall -Wextra -Werror
 LDFLAGS = -I.
 RM = rm -f
 
