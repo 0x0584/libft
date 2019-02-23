@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-23 Sat 04:13:05>
+# Updated: <2019-02-23 Sat 19:04:08>
 #
 # Copyright (C) 2019
 #
@@ -40,14 +40,14 @@ use Cwd;
 my $main_path = Cwd::realpath("main.pl");
 require $main_path;
 
-# our @tst_params;
 my @tst_files = glob "tst_*.pl";
 
 print "Results: ", join " ", @tst_files, "\n\n";
 
-foreach my $file (@tst_files) {
-	print Cwd::realpath($file), "\n";
-	system $^X, Cwd::realpath($file);
+foreach (@tst_files) {
+	/tst_(.+)\.pl/;
+	print $_, " to test $1()", $/;
+	system $^X, Cwd::realpath($_);
 }
 
 # print "\nResults: ", join " ", @tst_params, "\n";

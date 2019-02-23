@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-23 Sat 19:52:26>
+# Updated: <2019-02-23 Sat 18:28:20>
 #
 # Copyright (C) 2019
 #
@@ -31,49 +31,44 @@
 # 2. compare expected outputs with real outputs
 # 3. print results
 
+# -------------------------------------
 use strict;
 use warnings;
 use Cwd;
-use lib '.';
-use utils qw/rand_int put_line/;
 
-my $description = qq/memset() is used to set an array S
-to a specific value V. The whole array is interpreted as
-`unsigned char' thus the value too is interpreted as
-`unsigned char'/;
-my $exec = "tst_memset.out";
-my $NARGS = 1;
-my $NEXAMPLES = 1;
+# replace foo with function name
+my $exec = "tst_foo.out";
+# those might change from setting to another
+my $nargs = 10;
+my $nexamples = 25;
+# -------------------------------------
 
-sub static_examples {
-
+# this is a general function
+sub rand_int {
+	return int(rand(2147483647)) - int(rand(2147483648)) ;
 }
 
+# this is the methode that would change from function to function
 sub gen_example {
 	my $val = rand_int;
-	my $limit = 1 + int(rand($NARGS));
+	my $limit = 1 + int(rand($nargs));
 	my $args = "";
 
 	$args .= rand_int . " " while $limit--;
 	return "./$exec $val $args";
 }
 
+# this might be a general function??
 sub tst_memset {
-	my $nexamples = 1 + int(rand($NEXAMPLES));
+	my $nexamples = 1 + int(rand($nexamples));
 	my @exs;
+	my $tmp;
 
-	push @exs, static_examples;
 	push @exs, gen_example while $nexamples--;
-
-	put_line;
-	$description =~ s/\n/ /g;
-	print $description, $/;
-	put_line;
 	foreach (@exs) {
-		print "S: ", $_ =~ /.+\.out (.+)/, "$/";
 		qx/$_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
-		print "A: $2$/B: $3$/";
-		put_line;
+		print "S: $1$/A: $2$/B: $3$/";
+		getc
 	}
 }
 
