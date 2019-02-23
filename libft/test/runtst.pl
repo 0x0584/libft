@@ -1,8 +1,9 @@
+#!/usr/bin/perl
 # File: runtst.pl
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-14 Thu 19:22:25>
+# Updated: <2019-02-23 Sat 04:13:05>
 #
 # Copyright (C) 2019
 #
@@ -39,13 +40,20 @@ use Cwd;
 my $main_path = Cwd::realpath("main.pl");
 require $main_path;
 
-our @tst_params;
+# our @tst_params;
 my @tst_files = glob "tst_*.pl";
+
+print "Results: ", join " ", @tst_files, "\n\n";
 
 foreach my $file (@tst_files) {
 	print Cwd::realpath($file), "\n";
 	system $^X, Cwd::realpath($file);
 }
 
-# print "Results: ", join " ", @tst_files, "\n";
 # print "\nResults: ", join " ", @tst_params, "\n";
+
+# call the sub by the name of $action
+# &{\&{$action}}();
+
+# look for valgrind using system
+# test with corrent input first, then try things like passing a NULL or something, since even glibc functions would suffer from the same. an intuitive idea would be creating a function that would take a special syntax and turn it into things like proper strings or NULL.

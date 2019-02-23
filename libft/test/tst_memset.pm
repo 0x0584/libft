@@ -1,9 +1,9 @@
 #!/usr/bin/perl
-# File: tst_memset.pl
+# File: tst_memset.pm
 # Author: Anas Rchid (0x0584)
 #
-# Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-23 Sat 04:09:53>
+# Created: <2019-02-13 Sun 00:15:06>
+# Updated: <2019-02-23 Sat 01:20:41>
 #
 # Copyright (C) 2019
 #
@@ -31,52 +31,22 @@
 # 2. compare expected outputs with real outputs
 # 3. print results
 
+package memset;
+
 use strict;
 use warnings;
-use Cwd;
 
 my $exec = "tst_memset.out";
-my $nargs = 10;
-my $nexamples = 25;
-
-sub rand_int {
-	return -int(rand(2147483648)) + int(rand(2147483647));
-}
 
 sub gen_example {
-	my $val = rand_int;
-	my $limit = 1 + int(rand($nargs));
-	my $args = "";
+	my @args = ("3 5", "\n\n");
 
-	# print "$val $limit $/";
-	$args .= rand_int . " " while $limit--;
-
-
-	# getc;
-	return "./$exec $val $args";
-}
-
-sub get_examples {
-	my $nexamples = 1 + int(rand($nexamples));
-	my @examples;
-
-	while ($nexamples--) {
-		# print "@examples #### $/";
-		push @examples, gen_example;
-	};
-	# print "@examples";
-	return @examples;
+	return "./$exec @args";
 }
 
 sub tst_memset {
-	my @exs = get_examples();
-	my $tmp;
+	my $tmp = gen_example();
+	my $out = `$tmp`;
 
-	foreach (@exs) {
-		qx/$_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
-		print "S: $1$/A: $2$/B: $3$/";
-		getc
-	}
+	print $out, $/;
 }
-
-tst_memset();
