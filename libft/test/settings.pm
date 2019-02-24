@@ -1,8 +1,8 @@
-# File: utils.pm
+# File: settings.pm
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 05:00:26>
+# Updated: <2019-02-24 Sun 05:01:19>
 #
 # Copyright (C) 2019
 #
@@ -21,38 +21,15 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
-package utils;
+package settings;
 
 use strict;
 use warnings;
-use lib '.';
-use report qw/log_tst/;
 use Exporter 'import';
 
-our @EXPORT = qw/put_string put_line rand_int log_tst/;
+our @EXPORT = qw/$EXAMPLE_LIMIT $ARG_LIMIT/;
 
-my $SIZE = 60;
-
-sub put_line {
-	print "=" x $SIZE, $/;
-}
-
-sub put_string	{
-	my $str = shift;
-	my $counter = 0;
-
-	$str =~ s/\n/ /g;
-	$str =~ s/\s+/ /g;
-	while ($str =~ m/(.{1,$SIZE})/gs) {
-		print $1, "\n";
-	}
-}
-
-sub rand_int {
-	my $min = int(rand(2147483648));
-	my $max = int(rand(2147483647));
-
-	return $max % rand($min) - $min % rand($max);
-}
+our $EXAMPLE_LIMIT = 1;
+our $ARG_LIMIT = 1;
 
 1;

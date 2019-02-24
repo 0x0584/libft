@@ -1,6 +1,33 @@
-# Perl 5 code...
+# File: report.pm
+# Author: Anas Rchid (0x0584)
+#
+# Created: <2019-02-10 Sun 02:05:06>
+# Updated: <2019-02-24 Sun 05:00:32>
+#
+# Copyright (C) 2019
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; see the file COPYING.    If not, write to
+# the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+# Floor, Boston, MA 02110-1301, USA.
 
-use Data::Dumper;
+package report;
+
+use strict;
+use warnings;
+use Exporter 'import';
+
+our @EXPORT = qw/log_tst/;
 
 sub log_tst {
     my ($head, $func, $isglibc, $ok_ko, $desc,
@@ -38,44 +65,12 @@ sub log_tst {
    $^L = " =================================================== $/";
 
     if ($head) {
-        $~ = LOG_TOP;
+        $~ = "LOG_TOP";
         write;
     }
-    format_name STDOUT LOG;
-    format_top_name STDOUT LOG_TOP;
+    format_name STDOUT "LOG";
+    format_top_name STDOUT "LOG_TOP";
     write; print $^L;
 }
 
-our @func = (
-    "ft_memset()",
-    "true",
-    "30 27/2",
-    qq/set an array S to a specific value V. are interpreted as `unsigned char' ie, 1 Byte (which 8 bits on most systems)/
-);
-
-our @func0 = (
-    "ft_met()",
-    "true",
-    "30 27/2",
-    qq/44/
-);
-
-our @tst_1 = (
-    "01",
-    "S: 4 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 4 5 1 3 7 8 4 5 1 2 3 5 4 5",
-    "A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
-    "B: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
-);
-
-our @tst_2 = (
-    "02",
-    "S: 0 0 0 0 0 0 1 4 5 1 3 7 8 4 5 1 2 3 5 4 5",
-    "A: 1 1 11 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0",
-    "B: 0 0 0 0 3 3 4 5 6 7 7 8 8 0 0 0 0 0 0 0 0 0 0"
-);
-
-log_tst 1, @func, @tst_1;
-log_tst 0, @func, @tst_2;
-print $/;
-log_tst 1, @func0, @tst_1;
-log_tst 0, @func0, @tst_2;
+1;

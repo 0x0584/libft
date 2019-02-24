@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 02:14:54>
+# Updated: <2019-02-24 Sun 05:07:07>
 #
 # Copyright (C) 2019
 #
@@ -35,15 +35,14 @@ use strict;
 use warnings;
 use Cwd;
 use lib '.';
-use utils qw/rand_int put_string put_line/;
+use utils;
+use settings;
 
-my $description = qq/memset() is used to set an array S
-to a specific value V. The whole array is interpreted as
+my $exec = "tst_memset.out";
+my $desc = qq/memset() is used to set an array S to
+a specific value V. The whole array is interpreted as
 `unsigned char' thus the value too is interpreted as
 `unsigned char'/;
-my $exec = "tst_memset.out";
-my $NARGS = 1;
-my $NEXAMPLES = 1;
 
 sub static_examples {
 	# TODO: add some common tests
@@ -51,7 +50,7 @@ sub static_examples {
 
 sub gen_example {
 	my $val = rand_int;
-	my $limit = 1 + int(rand($NARGS));
+	my $limit = 1 + int(rand($ARG_LIMIT));
 	my $args = "";
 
 	$args .= rand_int . " " while $limit--;
@@ -59,21 +58,44 @@ sub gen_example {
 }
 
 sub tst_memset {
-	my $nexamples = 1 + int(rand($NEXAMPLES));
+	my $nexamples = 1 + int(rand($EXAMPLE_LIMIT));
 	my @exs;
 
 	push @exs, static_examples;
 	push @exs, gen_example while $nexamples--;
 
 	put_line;
-	put_string $description;
+	put_string $desc;
 	put_line;
+
 	foreach (@exs) {
 		print "S: ", $_ =~ /.+\.out (.+)/, "$/";
 		qx/$_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
 		print "A: $2$/B: $3$/";
 		put_line;
 	}
+
 }
 
 tst_memset();
+
+__END__
+# make something like this
+
+our @func_info = (
+	"ft_memset()",				# function name
+	"true",						# is glibc function
+	"30 27/2",					# number of test OK/KO
+	qq/set an array S to a specific value V. are
+interpreted as `unsigned char' ie, 1 Byte
+(which 8 bits on most systems)/	# description
+);
+
+our @func_tst = (
+	"01",						# test ID
+	"S: 4 0 2 0 0 0 0 0 0 0 0",	# input
+	"A: 0 0 0 0 0 0 0 0 0 0 0",	# output
+	"B: 0 0 0 0 0 0 0 0 0 0 0"	# expected
+);
+
+log_tst 1, @func_info, @func_tst;
