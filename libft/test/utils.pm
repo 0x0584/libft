@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 05:00:26>
+# Updated: <2019-02-25 Mon 00:09:25>
 #
 # Copyright (C) 2019
 #
@@ -26,10 +26,10 @@ package utils;
 use strict;
 use warnings;
 use lib '.';
-use report qw/log_tst/;
+use report;
 use Exporter 'import';
 
-our @EXPORT = qw/put_string put_line rand_int log_tst/;
+our @EXPORT = qw/init_info put_string put_line rand_int log_tst/;
 
 my $SIZE = 60;
 
@@ -53,6 +53,39 @@ sub rand_int {
 	my $max = int(rand(2147483647));
 
 	return $max % rand($min) - $min % rand($max);
+}
+
+
+sub init_info {
+	my $script = shift;
+	my ($func, $exec, $desc, $foo);
+	my ($flag, $out);
+
+	$script =~ /.+\/(tst_.+.pl)/;
+
+	$script = $1;
+	$exec = $1;
+	$func = $1;
+	$foo = $1;
+	$desc = "";
+
+	$foo =~ s/^tst_|\.pl$//g;
+	$exec =~ s/\.pl$/.out/g;
+	$func =~ s/^tst_/ft_/g;
+	$func =~ s/\.pl$/()/g;
+
+	$flag = undef;
+	$out = qx/man 3 $foo/;
+	while ($out	=~ /(.+)\n/g) {
+		$flag = undef if $1 =~ /(RETURN)/;
+		$desc .= "$1 " if $flag;
+		$flag = 1 if $1 =~ /(DESCRIPTION)/;
+	}
+
+	$desc =~ s/^\s+|\s+$//g;
+	$desc =~ s/\s+/ /g;
+
+	return ($script, $exec, $func, $desc);
 }
 
 1;

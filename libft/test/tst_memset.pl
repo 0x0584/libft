@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 05:07:07>
+# Updated: <2019-02-24 Sun 23:44:25>
 #
 # Copyright (C) 2019
 #
@@ -31,6 +31,14 @@
 # 2. compare expected outputs with real outputs
 # 3. print results
 
+# IDEA:
+# =====
+#
+# the function name would be the title of this script with changing
+# `tst_' prefix to `ft_' and the executable would be by changing
+# the post-fix `.pl' to `.out'. the description of glibc functions
+# would be extracted from the man (somehow)
+
 use strict;
 use warnings;
 use Cwd;
@@ -38,11 +46,9 @@ use lib '.';
 use utils;
 use settings;
 
-my $exec = "tst_memset.out";
-my $desc = qq/memset() is used to set an array S to
-a specific value V. The whole array is interpreted as
-`unsigned char' thus the value too is interpreted as
-`unsigned char'/;
+my ($script, $exec, $func, $desc) = init_info $0;
+
+# my $exec = "tst_memset.out";
 
 sub static_examples {
 	# TODO: add some common tests
@@ -65,9 +71,10 @@ sub tst_memset {
 	push @exs, gen_example while $nexamples--;
 
 	put_line;
+	print "$script, $exec, $func$/";
+	put_line;
 	put_string $desc;
 	put_line;
-
 	foreach (@exs) {
 		print "S: ", $_ =~ /.+\.out (.+)/, "$/";
 		qx/$_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
@@ -78,6 +85,7 @@ sub tst_memset {
 }
 
 tst_memset();
+
 
 __END__
 # make something like this
