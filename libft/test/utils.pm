@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-23 Sat 19:52:22>
+# Updated: <2019-02-23 Sat 22:46:35>
 #
 # Copyright (C) 2019
 #
@@ -27,13 +27,23 @@ use strict;
 use warnings;
 use Exporter 'import';
 
-our @EXPORT_OK = qw/put_line rand_int/;
+our @EXPORT_OK = qw/put_string put_line rand_int/;
+
+my $SIZE = 60;
 
 sub put_line {
-	my $size = 60;
+	print "=" x $SIZE, $/;
+}
 
-	print "=" while $size--;
-	print $/;
+sub put_string	{
+	my $str = shift;
+	my $counter = 0;
+
+	$str =~ s/\n/ /g;
+	$str =~ s/\s+/ /g;
+	while ($str =~ m/(.{1,$SIZE})/gs) {
+		print $1, "\n";
+	}
 }
 
 sub rand_int {

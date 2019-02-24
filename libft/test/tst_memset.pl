@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-23 Sat 19:52:26>
+# Updated: <2019-02-24 Sun 00:17:13>
 #
 # Copyright (C) 2019
 #
@@ -35,7 +35,7 @@ use strict;
 use warnings;
 use Cwd;
 use lib '.';
-use utils qw/rand_int put_line/;
+use utils qw/rand_int put_string put_line/;
 
 my $description = qq/memset() is used to set an array S
 to a specific value V. The whole array is interpreted as
@@ -66,8 +66,7 @@ sub tst_memset {
 	push @exs, gen_example while $nexamples--;
 
 	put_line;
-	$description =~ s/\n/ /g;
-	print $description, $/;
+	put_string $description;
 	put_line;
 	foreach (@exs) {
 		print "S: ", $_ =~ /.+\.out (.+)/, "$/";
