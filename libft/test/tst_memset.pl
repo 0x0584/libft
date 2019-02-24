@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 00:17:13>
+# Updated: <2019-02-24 Sun 02:14:54>
 #
 # Copyright (C) 2019
 #
@@ -46,7 +46,7 @@ my $NARGS = 1;
 my $NEXAMPLES = 1;
 
 sub static_examples {
-
+	# TODO: add some common tests
 }
 
 sub gen_example {

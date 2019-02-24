@@ -1,35 +1,28 @@
 # Perl 5 code...
 
-our ($func, $isglibc, $ok_ko, $desc) = (
-    "ft_memset()",
-    "true",
-    "30 27/2",
-    qq/set an array S to a specific value V. are interpreted as `unsigned char' ie, 1 Byte (which 8 bits on most systems)/
-);
+use Data::Dumper;
 
-our ($tst_id, $tst_in, $tst_out, $tst_expct) = (
-    "01",
-    "S: 4 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 4 5 1 3 7 8 4 5 1 2 3 5 4 5",
-    "A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
-    "B: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
-);
+sub log_tst {
+    my ($head, $func, $isglibc, $ok_ko, $desc,
+        $tst_id, $tst_in, $tst_out, $tst_expct) = @_;
 
-format STDOUT_TOP =
+    format LOG_TOP =
  ===================================================
 |     Function     |     Glibc?     | Tests - OK/KO |
-|------------------+----------------+---------------|
+|------------------+----------------+-------------- |
 | @||||||||||||||| | @||||||||||||| | @|||||||||||| |
   $func,             $isglibc,        $ok_ko,
-| ==================================================|
+| ================================================= |
 |                                                   |
 | Description:                                      |
 |                                                   |
 |  ^||||||||||||||||||||||||||||||||||||||||||||||  |~~
    $desc,
 |                                                   |
+ ===================================================
 .
 
-format STDOUT =
+    format LOG =
  == @## ============================================
     $tst_id,
 | ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< |~~
@@ -42,7 +35,47 @@ format STDOUT =
   $tst_expct,
 .
 
-$^L = " =================================================== $/";
+   $^L = " =================================================== $/";
 
-write STDOUT;
-print $^L;
+    if ($head) {
+        $~ = LOG_TOP;
+        write;
+    }
+    format_name STDOUT LOG;
+    format_top_name STDOUT LOG_TOP;
+    write; print $^L;
+}
+
+our @func = (
+    "ft_memset()",
+    "true",
+    "30 27/2",
+    qq/set an array S to a specific value V. are interpreted as `unsigned char' ie, 1 Byte (which 8 bits on most systems)/
+);
+
+our @func0 = (
+    "ft_met()",
+    "true",
+    "30 27/2",
+    qq/44/
+);
+
+our @tst_1 = (
+    "01",
+    "S: 4 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 4 5 1 3 7 8 4 5 1 2 3 5 4 5",
+    "A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+    "B: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+);
+
+our @tst_2 = (
+    "02",
+    "S: 0 0 0 0 0 0 1 4 5 1 3 7 8 4 5 1 2 3 5 4 5",
+    "A: 1 1 11 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0",
+    "B: 0 0 0 0 3 3 4 5 6 7 7 8 8 0 0 0 0 0 0 0 0 0 0"
+);
+
+log_tst 1, @func, @tst_1;
+log_tst 0, @func, @tst_2;
+print $/;
+log_tst 1, @func0, @tst_1;
+log_tst 0, @func0, @tst_2;
