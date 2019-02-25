@@ -3,7 +3,7 @@
  * Author: Anas Rchid (0x0584)
  *
  * Created: <2019-02-09 Sat 00:07:30>
- * Updated: <2019-02-21 Thu 17:22:20>
+ * Updated: <2019-02-25 Mon 20:58:20>
  *
  * Copyright (C) 2019
  *
@@ -25,6 +25,7 @@
 
 #ifndef TESTING_H
 #  define TESTING_H
+
 #  include <stdlib.h>
 #  include <stdio.h>
 #  include <string.h>
@@ -33,6 +34,7 @@
 
 #  include "libft.h"
 
+void replace_me(void);
 void print_array_of_ints(int *array, size_t size);
 void print_test_of_ints(int *array, int *test, size_t size);
 void print_words(char **words);
@@ -41,6 +43,10 @@ void del(void *v, size_t sz);
 int *atoi_dup(char *str);
 t_list *int_lst_from_args(int argc, char **argv);
 void dump_as_int(size_t pos, t_list * elem);
+
+void replace_me(void) {
+	printf("'args' ('output' vs 'expected output')");
+}
 
 void print_array_of_ints(int *array, size_t size) {
 	size_t i = 0;

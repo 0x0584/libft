@@ -1,3 +1,5 @@
+use Data::Dumper;
+
 my $func = "memset";
 my $out = qx/man 3 $func/;
 
@@ -34,3 +36,13 @@ use Data::Dumper;
 print Dumper @foo;
 
 print $foo[0][0];
+
+# test args to sub
+
+
+
+sub fuzz {
+	print $/, Dumper shift;
+}
+
+fuzz 1, 2, 3, 5, 6, 7;

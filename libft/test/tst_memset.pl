@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-25 Mon 03:20:57>
+# Updated: <2019-02-25 Mon 20:50:43>
 #
 # Copyright (C) 2019
 #
@@ -22,97 +22,30 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
-# IDEA:
-# =====
+# why removing random/generated args?
 #
-# 1.1. set a list of inputs
-# 1.2. set a list of expected outputs for each input
-# 1.3. set a list of program's outputs for each input
-# 2. compare expected outputs with real outputs
-# 3. print results
-
-# IDEA:
-# =====
-#
-# the function name would be the title of this script with changing
-# `tst_' prefix to `ft_' and the executable would be by changing
-# the post-fix `.pl' to `.out'. the description of glibc functions
-# would be extracted from the man (somehow)
+# well for the moment, i cannot think of a way to generate some
+# "common random input". I might havea set of example whether for
+# integers or strings and choose randomly one input each time,
+# without repetition. IDK, that comes later!
 
 use strict;
 use warnings;
-use Cwd;
 use lib '.';
 use utils;
-use settings;
-use Data::Dumper;
-
-my ($script, $exec, $func, $desc) = init_info $0;
 
 sub static_args {
-	# TODO: add some common tests
+	my $input = "41 32 -17 8 59 -54 -6 65 2 12 11 7 -85 1024";
+	my @args = ();
+
+	push @args, "11 $input";
+	push @args, "-11 $input";
+	push @args, "-1 $input";
+	push @args, "0 $input";
+	push @args, "-2147483648 $input";
+	push @args, "2147483647 $input";
+
+	return @args;
 }
 
-# returns random set args
-sub gen_args {
-	my $limit = 1 + int(rand($ARG_LIMIT));
-	my $args = rand_int;
-
-	$args .= ' ' . rand_int	 while $limit--;
-	return $args;
-}
-
-sub tst_memset {
-	my $nexamples = $EXAMPLE_LIMIT;
-	my (@args, @func_info, @func_tsts);
-	my ($counter, $ok, $ko, $foo) = (0, 0, 0);
-
-	push @args, static_args;
-	push @args, gen_args while $nexamples--;
-
-	foreach (@args) {
-		my @tmp;
-
-		qx/.\/$exec $_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
-		if ($2 eq $3) {
-			$ok++;
-			$foo = "OK";
-		} else {
-			$ko++;
-			$foo = "KO";
-		}
-		push @tmp, ++$counter, $foo, "S: $_", "A: $2", "B: $3";
-		push @func_tsts, \@tmp;
-	}
-
-	push @func_info, $func, ($desc eq "" ? "true" : "false"),
-		"$counter $ok/$ko", $desc;
-	$counter = 1;
-	foreach my $aref (@func_tsts) {
-		log_tst $counter, @func_info, @$aref;
-		$counter = 0;
-	}
-}
-
-tst_memset;
-
-__END__
-# make something like this
-
-our @func_info = (
-	"ft_memset()",				# function name
-	"true",						# is glibc function
-	"30 27/2",					# number of test OK/KO
-	qq/set an array S to a specific value V. are
-interpreted as `unsigned char' ie, 1 Byte
-(which 8 bits on most systems)/	# description
-);
-
-our @func_tst = (
-	"01",						# test ID
-	"S: 4 0 2 0 0 0 0 0 0 0 0",	# input
-	"A: 0 0 0 0 0 0 0 0 0 0 0",	# output
-	"B: 0 0 0 0 0 0 0 0 0 0 0"	# expected
-);
-
-log_tst 1, @func_info, @func_tst;
+run_tst $0, static_args;

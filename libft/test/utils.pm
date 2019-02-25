@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-25 Mon 00:09:25>
+# Updated: <2019-02-25 Mon 21:29:26>
 #
 # Copyright (C) 2019
 #
@@ -29,32 +29,7 @@ use lib '.';
 use report;
 use Exporter 'import';
 
-our @EXPORT = qw/init_info put_string put_line rand_int log_tst/;
-
-my $SIZE = 60;
-
-sub put_line {
-	print "=" x $SIZE, $/;
-}
-
-sub put_string	{
-	my $str = shift;
-	my $counter = 0;
-
-	$str =~ s/\n/ /g;
-	$str =~ s/\s+/ /g;
-	while ($str =~ m/(.{1,$SIZE})/gs) {
-		print $1, "\n";
-	}
-}
-
-sub rand_int {
-	my $min = int(rand(2147483648));
-	my $max = int(rand(2147483647));
-
-	return $max % rand($min) - $min % rand($max);
-}
-
+our @EXPORT = qw/init_info log_tst run_tst/;
 
 sub init_info {
 	my $script = shift;
@@ -86,6 +61,32 @@ sub init_info {
 	$desc =~ s/\s+/ /g;
 
 	return ($script, $exec, $func, $desc);
+}
+
+sub run_tst {
+	my ($script, $exec, $func, $desc) = init_info shift;
+	my ($counter, $ok, $ko, $foo) = (0, 0, 0);
+	my (@args, @func_info, @func_tsts);
+
+	push @args, @_;
+
+	foreach (@args) {
+		my @tmp;
+
+		qx/.\/$exec $_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
+		push @tmp, ++$counter, $2 eq $3 ? "OK" : "KO",
+			"S: $_", "A: $2", "B: $3";
+		push @func_tsts, \@tmp;
+		$ok++ if $2 eq $3; $ko++ if $2 ne $3;
+	}
+
+	push @func_info, $func, ($desc eq "" ? "false" : "true"),
+		"$counter $ok/$ko", $desc;
+	$counter = 1;
+	foreach my $aref (@func_tsts) {
+		log_tst $counter, @func_info, @$aref;
+		$counter = 0;
+	}
 }
 
 1;

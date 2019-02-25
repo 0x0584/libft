@@ -1,8 +1,9 @@
-# File: settings.pm
+#!/bin/bash
+# File: runtst.sh
 # Author: Anas Rchid (0x0584)
 #
-# Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-25 Mon 02:55:27>
+# Created: <2019-02-24 Fri 23:09:11>
+# Updated: <2019-02-25 Mon 21:30:57>
 #
 # Copyright (C) 2019
 #
@@ -21,14 +22,13 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
-package settings;
+# this is a dumb solution, since when I create a symbolic link
+# of `runtst.pl' I got a message that tell's me can't find some
+# file.
+run_tst () {
+	cd test;
+	perl runtst.pl;
+	cd ..;
+}
 
-use strict;
-use warnings;
-use Exporter 'import';
-
-our @EXPORT = qw/$EXAMPLE_LIMIT $ARG_LIMIT/;
-
-our $EXAMPLE_LIMIT = 10;
-our $ARG_LIMIT = 25;
-1;
+run_tst;

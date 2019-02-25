@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-25 Mon 03:14:03>
+# Updated: <2019-02-25 Mon 21:29:06>
 #
 # Copyright (C) 2019
 #
@@ -13,11 +13,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; see the file COPYING.    If not, write to
+# along with this program; see the file COPYING.	If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 # Floor, Boston, MA 02110-1301, USA.
 
@@ -30,46 +30,47 @@ use Exporter 'import';
 our @EXPORT = qw/log_tst/;
 
 sub log_tst {
-    my ($head, $func, $isglibc, $ok_ko, $desc,
-        $tst_id, $tst_state,
-        $tst_in, $tst_out, $tst_expct) = @_;
+	my ($head, $func, $isglibc, $ok_ko, $desc,
+		$tst_id, $tst_state,
+		$tst_in, $tst_out, $tst_expct) = @_;
 
-    format LOG_TOP =
+	format LOG_TOP =
  ===============================================================
-|       Function       |       Glibc?       |   Tests - OK/KO   |
+|		Function	   |	   Glibc?		|	Tests - OK/KO	|
 |----------------------+--------------------+------------------ |
 | @||||||||||||||||||| | @||||||||||||||||| | @|||||||||||||||| |
-  $func,                 $isglibc,            $ok_ko,
+  $func,				 $isglibc,			  $ok_ko,
 | ============================================================= |
-|                                                               |
-| Description:                                                  |
-|                                                               |
-|  ^||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  |~~
+|																|
+| Description:													|
+|																|
+|  ^||||||||||||||||||||||||||||||||||||||||||||||||||||||||||	|~~
    $desc,
-|                                                               |
+|																|
  ===============================================================
 .
 
-    format LOG =
+	format LOG =
  == @<< @>> ====================================================
-    $tst_state, $tst_id,
-| ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  |~~
+	$tst_state, $tst_id,
+| ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	|~~
   $tst_in,
 |---------------------------------------------------------------|
-| ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  |~~
+| ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	|~~
   $tst_out,
 |---------------------------------------------------------------|
-| ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  |~~
+| ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	|~~
   $tst_expct,
 .
+   $= = 0x0584;
 
-    if ($head) {
-        $~ = "LOG_TOP";
-        write;
-    }
-    format_name STDOUT "LOG";
-    format_top_name STDOUT "LOG_TOP";
-    write; print " " . "=" x 63 . $/;;
+	if ($head) {
+		$~ = "LOG_TOP";
+		write;
+	}
+	format_name STDOUT "LOG";
+	format_top_name STDOUT "LOG_TOP";
+	write; print " " . "=" x 63 . $/;;
 }
 
 1;
