@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 22:12:50>
+# Updated: <2019-02-25 Mon 02:55:27>
 #
 # Copyright (C) 2019
 #
@@ -29,6 +29,6 @@ use Exporter 'import';
 
 our @EXPORT = qw/$EXAMPLE_LIMIT $ARG_LIMIT/;
 
-our $EXAMPLE_LIMIT = 1;
-our $ARG_LIMIT = 1;
+our $EXAMPLE_LIMIT = 10;
+our $ARG_LIMIT = 25;
 1;

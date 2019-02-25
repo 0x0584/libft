@@ -3,7 +3,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-10 Sun 02:05:06>
-# Updated: <2019-02-24 Sun 23:44:25>
+# Updated: <2019-02-25 Mon 03:20:57>
 #
 # Copyright (C) 2019
 #
@@ -45,47 +45,56 @@ use Cwd;
 use lib '.';
 use utils;
 use settings;
+use Data::Dumper;
 
 my ($script, $exec, $func, $desc) = init_info $0;
 
-# my $exec = "tst_memset.out";
-
-sub static_examples {
+sub static_args {
 	# TODO: add some common tests
 }
 
-sub gen_example {
-	my $val = rand_int;
+# returns random set args
+sub gen_args {
 	my $limit = 1 + int(rand($ARG_LIMIT));
-	my $args = "";
+	my $args = rand_int;
 
-	$args .= rand_int . " " while $limit--;
-	return "./$exec $val $args";
+	$args .= ' ' . rand_int	 while $limit--;
+	return $args;
 }
 
 sub tst_memset {
-	my $nexamples = 1 + int(rand($EXAMPLE_LIMIT));
-	my @exs;
+	my $nexamples = $EXAMPLE_LIMIT;
+	my (@args, @func_info, @func_tsts);
+	my ($counter, $ok, $ko, $foo) = (0, 0, 0);
 
-	push @exs, static_examples;
-	push @exs, gen_example while $nexamples--;
+	push @args, static_args;
+	push @args, gen_args while $nexamples--;
 
-	put_line;
-	print "$script, $exec, $func$/";
-	put_line;
-	put_string $desc;
-	put_line;
-	foreach (@exs) {
-		print "S: ", $_ =~ /.+\.out (.+)/, "$/";
-		qx/$_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
-		print "A: $2$/B: $3$/";
-		put_line;
+	foreach (@args) {
+		my @tmp;
+
+		qx/.\/$exec $_/ =~ /'(.+)' \('(.+)' vs '(.+)'\)/;
+		if ($2 eq $3) {
+			$ok++;
+			$foo = "OK";
+		} else {
+			$ko++;
+			$foo = "KO";
+		}
+		push @tmp, ++$counter, $foo, "S: $_", "A: $2", "B: $3";
+		push @func_tsts, \@tmp;
 	}
 
+	push @func_info, $func, ($desc eq "" ? "true" : "false"),
+		"$counter $ok/$ko", $desc;
+	$counter = 1;
+	foreach my $aref (@func_tsts) {
+		log_tst $counter, @func_info, @$aref;
+		$counter = 0;
+	}
 }
 
-tst_memset();
-
+tst_memset;
 
 __END__
 # make something like this
