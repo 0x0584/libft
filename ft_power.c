@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/03/31 19:32:10 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/01 20:46:36 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** This is a dump recursive function that returns the y-th power of x...
+ */
+
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int		ft_power(int x, int y)
 {
-	size_t	i;
-	t_uchar *dbuff;
-	t_uchar *sbuff;
-
-	i = 0;
-	sbuff = (t_uchar *)malloc(n);
-	dbuff = (t_uchar *)dest;
-	while (i < n)
-	{
-		dbuff[i] = sbuff[i];
-		i++;
-	}
-	return (dbuff);
+	if (y <= 0)
+		return (1);
+	else if (y == 1)
+		return (x);
+	else
+		return (x * ft_power(x, y - 1));
 }

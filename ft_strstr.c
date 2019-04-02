@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/03/31 15:35:27 by archid-           #+#    #+#             */
+/*   Updated: 2019/03/31 18:49:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strstr(char *s, char *tofind)
 {
-	size_t	i;
-	t_uchar *dbuff;
-	t_uchar *sbuff;
+	size_t i;
+	size_t j;
 
 	i = 0;
-	sbuff = (t_uchar *)malloc(n);
-	dbuff = (t_uchar *)dest;
-	while (i < n)
+	while (s[i])
 	{
-		dbuff[i] = sbuff[i];
+		j = 0;
+		if (tofind[j] && s[i + j] == tofind[j])
+			j++;
+		if (tofind[j] == '\0')
+			return (s + i);
 		i++;
 	}
-	return (dbuff);
+	return (NULL);
 }

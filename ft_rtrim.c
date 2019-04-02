@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_rtrim.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/01 20:56:50 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/01 20:57:07 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_rtrim(const char *s)
 {
-	size_t	i;
-	t_uchar *dbuff;
-	t_uchar *sbuff;
+	size_t i;
 
 	i = 0;
-	sbuff = (t_uchar *)malloc(n);
-	dbuff = (t_uchar *)dest;
-	while (i < n)
-	{
-		dbuff[i] = sbuff[i];
+	while (s[i])
 		i++;
-	}
-	return (dbuff);
+	while (ft_iswhitespace(s[--i]))
+		;
+	return ((char *)s + i);
 }

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/03/31 19:05:19 by archid-           #+#    #+#             */
+/*   Updated: 2019/03/31 19:11:12 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	i;
-	t_uchar *dbuff;
-	t_uchar *sbuff;
+	size_t i;
 
 	i = 0;
-	sbuff = (t_uchar *)malloc(n);
-	dbuff = (t_uchar *)dest;
-	while (i < n)
-	{
-		dbuff[i] = sbuff[i];
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (dbuff);
+	return (s1[i] - s2[i]);
 }

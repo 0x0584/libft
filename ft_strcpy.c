@@ -6,13 +6,13 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 00:14:54 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 00:21:15 by archid-          ###   ########.fr       */
+/*   Updated: 2019/03/31 15:04:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char * dst, const char * src)
+char	*ft_strcpy(char *dst, const char *src)
 {
 	size_t i;
 

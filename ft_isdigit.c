@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/01 21:19:37 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/01 21:26:18 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int		ft_isdigit(int c)
 {
-	size_t	i;
-	t_uchar *dbuff;
-	t_uchar *sbuff;
-
-	i = 0;
-	sbuff = (t_uchar *)malloc(n);
-	dbuff = (t_uchar *)dest;
-	while (i < n)
-	{
-		dbuff[i] = sbuff[i];
-		i++;
-	}
-	return (dbuff);
+	return (c >= '0' && c <= '9');
 }

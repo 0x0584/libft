@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/03/31 19:23:59 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/02 01:06:38 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int		ft_atoi(const char *s)
 {
-	size_t	i;
-	t_uchar *dbuff;
-	t_uchar *sbuff;
+	size_t	len;
+	int		result;
+	int		sign;
+	char	*str;
 
-	i = 0;
-	sbuff = (t_uchar *)malloc(n);
-	dbuff = (t_uchar *)dest;
-	while (i < n)
+	sign = 1;
+	len = 0;
+	result = 0;
+	str = (char *)s;
+	while (ft_iswhitespace(*str) || *str >= 127)
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		dbuff[i] = sbuff[i];
-		i++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	return (dbuff);
+	while (ft_isdigit(str[len]))
+		len++;
+	while (ft_isdigit(*str))
+		result += ft_power(10, --len) * (*str++ - '0');
+	return (result * sign);
 }
