@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 05:35:55 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/03 20:03:35 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/05 01:16:56 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/05 01:29:13 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strtrim(char const *s)
 {
-	size_t	i;
-	char	*tmp;
+	size_t	head;
+	size_t	tail;
+	size_t	slen;
 
-	i = 0;
-	tmp = (char *)s;
-	while (tmp[i])
-		i++;
-	if (c == '\0')
-		return (tmp + i);
-	while (i-- > 0)
-	{
-		if (tmp[i] == (char)c)
-			return (tmp + i);
-	}
-	return (NULL);
+	head = 0;
+	tail = 0;
+	slen = ft_strlen(s);
+	while (ft_iswhitespace(s[head]))
+		head++;
+	while (ft_iswhitespace(s[slen - tail + 1]))
+		tail++;
+	return (ft_strsub(s, head, slen - tail));
 }

@@ -6,7 +6,7 @@
 #    By: archid- <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/30 17:28:04 by archid-           #+#    #+#              #
-#    Updated: 2019/03/30 17:55:30 by archid-          ###   ########.fr        #
+#    Updated: 2019/04/05 01:08:25 by archid-          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,6 +19,8 @@ OBJS=$(patsubst %.c, %.o, $(SRCS))
 
 CC=gcc
 CFLAGS=-Wall -Werror -Wextra
+
+$(NAME): all
 
 all: $(OBJS)
 	ar rc $(NAME) $^

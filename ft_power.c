@@ -6,13 +6,9 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:32:10 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/01 20:46:36 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/04 19:54:38 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** This is a dump recursive function that returns the y-th power of x...
- */
 
 #include "libft.h"
 

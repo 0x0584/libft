@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltrim.c                                         :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/01 20:46:58 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/01 20:59:41 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/04 05:39:05 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/04 19:59:21 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** FIXME: return a pointer or a new string!?
- */
-
-char	*ft_ltrim(const char *s)
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	size_t i;
-
-	i = 0;
-	while (ft_iswhitespace(s[i]))
-		i++;
-	return ((char *)s + i);
+	return (ft_strncmp(s1, s2, n) == 0);
 }

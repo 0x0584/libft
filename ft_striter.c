@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 05:35:55 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/03 20:03:35 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/04 05:14:42 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/05 01:28:15 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_striter(char *s, void (*f)(char *))
 {
-	size_t	i;
-	char	*tmp;
+	size_t i;
 
 	i = 0;
-	tmp = (char *)s;
-	while (tmp[i])
-		i++;
-	if (c == '\0')
-		return (tmp + i);
-	while (i-- > 0)
-	{
-		if (tmp[i] == (char)c)
-			return (tmp + i);
-	}
-	return (NULL);
+	while (s[i])
+		(*f)(&s[i++]);
 }

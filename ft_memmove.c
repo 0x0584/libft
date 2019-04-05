@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 21:54:26 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 23:53:41 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/03 03:22:04 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	t_uchar *dbuff;
 	t_uchar *sbuff;
 
-	i = 0;
-	sbuff = (t_uchar *)malloc(n);
+	i = -1;
+	sbuff = (t_uchar *)malloc(n * sizeof(t_uchar));
 	dbuff = (t_uchar *)dest;
-	while (i < n)
-	{
+	ft_memcpy(sbuff, src, n);
+	while (++i < n)
 		dbuff[i] = sbuff[i];
-		i++;
-	}
+	free(sbuff);
 	return (dbuff);
 }

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rtrim.c                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/01 20:56:50 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/01 20:57:07 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/03 18:17:07 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/03 18:40:32 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_rtrim(const char *s)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t i;
+	t_uchar *buff1;
+	t_uchar *buff2;
+	size_t	i;
 
 	i = 0;
-	while (s[i])
+	buff1 = (t_uchar *)s1;
+	buff2 = (t_uchar *)s2;
+	if (n == 0)
+		return (0);
+	while (buff1[i] == buff2[i] && --n)
 		i++;
-	while (ft_iswhitespace(s[--i]))
-		;
-	return ((char *)s + i);
+	return (buff1[i] - buff2[i]);
 }

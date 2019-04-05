@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 05:35:55 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/03 20:03:35 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/02 22:21:43 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/03 03:40:15 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+size_t	ft_strlcat(char *dest, const char *src, size_t len)
 {
 	size_t	i;
-	char	*tmp;
+	size_t	lens[2];
+	size_t	ret;
+	int		limit;
 
-	i = 0;
-	tmp = (char *)s;
-	while (tmp[i])
-		i++;
-	if (c == '\0')
-		return (tmp + i);
-	while (i-- > 0)
-	{
-		if (tmp[i] == (char)c)
-			return (tmp + i);
-	}
-	return (NULL);
+	i = -1;
+	lens[0] = ft_strlen(dest);
+	lens[1] = ft_strlen(src);
+	limit = len - lens[0];
+	ret = ((len >= lens[0]) ? lens[0] : len) + lens[1];
+	while (src[++i] != '\0' && limit-- > 1)
+		dest[lens[0] + i] = src[i];
+	dest[lens[0] + i] = '\0';
+	return (ret);
 }

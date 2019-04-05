@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 18:50:51 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 19:04:15 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/04 00:09:12 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strnstr(char *s, char *tofind, size_t len)
 	size_t i;
 	size_t j;
 
+	if (len == 0)
+		return (NULL);
 	i = 0;
 	while (s[i] && --len)
 	{

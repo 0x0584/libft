@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 15:35:27 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 18:49:44 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/04 00:07:15 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strstr(char *s, char *tofind)
 	while (s[i])
 	{
 		j = 0;
-		if (tofind[j] && s[i + j] == tofind[j])
+		while (tofind[j] && s[i + j] == tofind[j])
 			j++;
 		if (tofind[j] == '\0')
 			return (s + i);

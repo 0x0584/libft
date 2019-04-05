@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:08:28 by archid-           #+#    #+#             */
-/*   Updated: 2019/03/31 19:16:14 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/04 00:28:33 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t len)
 {
 	size_t i;
 
+	if (len == 0)
+		return (0);
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i] && --len)
 		i++;

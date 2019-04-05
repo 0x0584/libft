@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strrdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 05:35:55 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/03 20:03:35 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/05 01:45:03 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/05 03:30:56 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strrdup(const char *head, const char *tail)
 {
-	size_t	i;
-	char	*tmp;
+	char *buff;
+	size_t length;
 
-	i = 0;
-	tmp = (char *)s;
-	while (tmp[i])
-		i++;
-	if (c == '\0')
-		return (tmp + i);
-	while (i-- > 0)
-	{
-		if (tmp[i] == (char)c)
-			return (tmp + i);
-	}
-	return (NULL);
+	length = 0;
+	while (head + length < tail)
+		length++;
+	if (!(buff = ALLOC(char *, length + 1)))
+		return (NULL);
+	while (head + --length >= head)
+		buff[length] = head[length];
+	return (buff);
 }
