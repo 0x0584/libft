@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:23:59 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/04 00:41:49 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/05 07:41:57 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		ft_atoi(const char *s)
 		return (0);
 	sign = 1;
 	str = (char *)s;
-	while (ft_iswhitespace(*str) || *str >= 127)
+	while (*str == '\n' || *str == '\t' || *str == ' ' ||
+			*str == '\r' || *str == '\f' || *str == '\v')
 		str++;
 	if (*str == '-' || *str == '+')
 	{

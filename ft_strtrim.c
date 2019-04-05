@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:16:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/05 01:29:13 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/05 06:17:22 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strtrim(char const *s)
 {
-	size_t	head;
-	size_t	tail;
 	size_t	slen;
+	char	*head;
+	char	*tail;
 
-	head = 0;
-	tail = 0;
 	slen = ft_strlen(s);
-	while (ft_iswhitespace(s[head]))
+	head = (char *)s;
+	tail = (char *)s + ft_strlen(s) - 1;
+	while (ISWHITESPC(*head))
 		head++;
-	while (ft_iswhitespace(s[slen - tail + 1]))
-		tail++;
-	return (ft_strsub(s, head, slen - tail));
+	while (ISWHITESPC(*tail))
+		tail--;
+	return (ft_strrdup(head, tail));
 }
