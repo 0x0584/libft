@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 00:04:18 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/06 08:46:52 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/05 06:51:01 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/06 09:51:47 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+char	**ft_strsplit(char const *s, char c)
 {
-	size_t	i;
-	size_t	length;
-	char	*buff;
+	char	**aspltd;
+	char	*range[2];
+	size_t	count;
+	size_t	index;
 
-	i = -1;
-	length = ft_strlen(str) + 1;
-	if (!(buff = ALLOC(char *, length * sizeof(char))))
+	index = 0;
+	count = ft_wordcount(s, c) + 1;
+	if (!(aspltd = ALLOC(char **, count * sizeof(char *))))
 		return (NULL);
-	while (++i < length - 1)
-		buff[i] = str[i];
-	return (buff);
+	while (index < count - 1)
+	{
+		while (*s && *s == c)
+			s++;
+		range[0] = (char *)s;
+		while (*s && *s != c)
+			s++;
+		range[1] = (char *)s - 1;
+		aspltd[index++] = ft_strrdup(range[0], range[1]);
+	}
+	return (aspltd);
 }

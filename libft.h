@@ -6,14 +6,14 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/05 04:18:59 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/06 00:49:09 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define ALLOC(type, size) ((char *)ft_memalloc(size + 1))
+# define ALLOC(type, size) ((type)ft_memalloc(size))
 # define ISWHITESPC(c) (c == ' ' || c == '\t' || c == '\n')
 
 # include <stdlib.h>
@@ -71,12 +71,14 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 size_t			ft_strlcat(char *s1, const char *s2, size_t len);
 
+char			**ft_strsplit(char const *s, char c);
 char			*ft_strrdup(const char *head, const char *tail);
 char			*ft_strmap(char const *s, char (*f)(char));
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s);
+size_t			ft_wordcount(char const *s, int using);
 void			ft_striter(char *s, void (*f)(char *));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 int				ft_strequ(char const *s1, char const *s2);

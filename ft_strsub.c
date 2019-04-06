@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 05:42:35 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/05 04:19:37 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/06 08:50:55 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
-	if (!(buff = ALLOC(char *, len + 1)))
+	if (!(buff = ALLOC(char *, (len + 1) * sizeof(char))))
 		return (NULL);
 	while (s[start] && len)
 	{

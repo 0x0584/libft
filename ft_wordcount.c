@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_wordcount.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 00:04:18 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/06 08:46:52 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/05 23:00:18 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/06 07:27:53 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+size_t	ft_wordcount(char const *s, int using)
 {
-	size_t	i;
-	size_t	length;
-	char	*buff;
+	size_t count;
 
-	i = -1;
-	length = ft_strlen(str) + 1;
-	if (!(buff = ALLOC(char *, length * sizeof(char))))
-		return (NULL);
-	while (++i < length - 1)
-		buff[i] = str[i];
-	return (buff);
+	count = 0;
+	while (*s == using)
+		s++;
+	while (*s)
+	{
+		while (*s && *s == using)
+			s++;
+		count += !(!*s);
+		while (*s && *s != using)
+			s++;
+	}
+	return (count);
 }
