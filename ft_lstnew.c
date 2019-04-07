@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 19:05:19 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/07 05:04:49 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/07 07:02:23 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/07 08:37:43 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	size_t i;
+	t_list *alst;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((t_byte)s1[i] - (t_byte)s2[i]);
+	if (!(alst = ALLOC(t_list *, sizeof(t_list))))
+		return (NULL);
+	alst->content = content ? ft_memdup(content, content_size) : NULL;
+	alst->content_size = content ? content_size : 0;
+	return (alst);
 }

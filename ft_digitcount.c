@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_digitcount.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 19:05:19 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/07 05:04:49 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/07 05:22:36 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/07 06:58:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+t_byte	ft_digitcount(int n)
 {
-	size_t i;
+	t_byte count;
+	t_uint u;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((t_byte)s1[i] - (t_byte)s2[i]);
+	if (n == 0)
+		return (1);
+	u = (n < 0) ? -n : n;
+	count = 1 + (n < 0);
+	while (u / 10)
+	{
+		u /= 10;
+		count++;
+	}
+	return (count);
 }

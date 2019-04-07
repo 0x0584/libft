@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 19:05:19 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/07 05:04:49 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/07 08:47:01 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/07 09:25:43 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	size_t i;
+	t_list *tmp[2];
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((t_byte)s1[i] - (t_byte)s2[i]);
+	if (!lst || !(*tmp = ALLOC(t_list *, sizeof(t_list))))
+		return (NULL);
+	*tmp = ft_memdup((*f)(lst), sizeof(t_list));
+	tmp[1] = *tmp;
+	while ((lst = lst->next))
+	{
+		tmp[1]->next = ft_memdup((*f)(lst), sizeof(t_list));
+		tmp[1] = tmp[1]->next;
+	}
+	return (*tmp);
 }
