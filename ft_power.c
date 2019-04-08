@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:32:10 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/04 19:54:38 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/08 10:35:06 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int		ft_power(int x, int y)
 {
-	if (y <= 0)
-		return (1);
-	else if (y == 1)
-		return (x);
-	else
-		return (x * ft_power(x, y - 1));
+	long int result;
+
+	result = 1;
+	if (y == 0)
+		return (result);
+	while (y--)
+		result *= x;
+	return ((int)result);
 }

@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 06:51:01 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/06 09:51:47 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/08 10:32:46 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ char	**ft_strsplit(char const *s, char c)
 {
 	char	**aspltd;
 	char	*range[2];
-	size_t	count;
-	size_t	index;
+	size_t	tmp[2];
 
-	index = 0;
-	count = ft_wordcount(s, c) + 1;
-	if (!(aspltd = ALLOC(char **, count * sizeof(char *))))
+	if (!s)
 		return (NULL);
-	while (index < count - 1)
+	tmp[0] = 0;
+	tmp[1] = ft_wordcount(s, c) + 1;
+	if (!(aspltd = ALLOC(char **, tmp[1] * sizeof(char *))))
+		return (NULL);
+	while (tmp[0] < tmp[1] - 1)
 	{
 		while (*s && *s == c)
 			s++;
@@ -31,7 +32,7 @@ char	**ft_strsplit(char const *s, char c)
 		while (*s && *s != c)
 			s++;
 		range[1] = (char *)s - 1;
-		aspltd[index++] = ft_strrdup(range[0], range[1]);
+		aspltd[tmp[0]++] = ft_strrdup(range[0], range[1]);
 	}
 	return (aspltd);
 }

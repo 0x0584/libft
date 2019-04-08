@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:23:59 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/07 05:15:07 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/08 10:32:09 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		ft_atoi(const char *s)
 {
-	size_t	len;
-	int		result;
+	long	result;
 	int		sign;
 	char	*str;
+	size_t	len;
 
 	if (s[0] == '\0')
 		return (0);
@@ -26,16 +26,17 @@ int		ft_atoi(const char *s)
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
+		if (*str++ == '-')
 			sign = -1;
-		str++;
-	}
 	len = 0;
 	while (ft_isdigit(str[len]))
 		len++;
 	result = 0;
 	while (ft_isdigit(*str))
+	{
+		if (result > INT_VALMAX || result < INT_VALMIN)
+			return (sign == 1 ? -1 : 0);
 		result += ft_power(10, --len) * (*str++ - '0');
+	}
 	return (result * sign);
 }

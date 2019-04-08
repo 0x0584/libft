@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 07:46:28 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/07 07:58:10 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/08 10:32:23 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_lstdel(t_list **alst, void (*del)(void*, size_t))
 		tmp[1] = tmp[0];
 		tmp[0] = tmp[0]->next;
 		(*del)(tmp[1]->content, tmp[1]->content_size);
+		free(tmp[1]);
 	}
 	*alst = NULL;
 }

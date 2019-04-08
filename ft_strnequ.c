@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 05:39:05 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/04 19:59:21 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/08 08:07:24 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
+	if (!s1 || !s2)
+		return (0);
 	return (ft_strncmp(s1, s2, n) == 0);
 }
