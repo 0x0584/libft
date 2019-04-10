@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/08 10:34:33 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/10 17:51:40 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # define ALLOC(type, size)				((type)ft_memalloc(size))
 # define SAFE_PTRVAL(ptr)				(ptr && *ptr)
-
-# define INT_VALMIN						(-2147483648)
-# define INT_VALMAX						(2147483647)
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -57,7 +54,6 @@ void			ft_strclr(char *s);
 int				ft_strcmp(const char *s1, const char *s2);
 size_t			ft_strlen(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t len);
-int				ft_isspace(int c);
 int				ft_isdigit(int c);
 int				ft_isalpha(int c);
 int				ft_isalnum(int c);
@@ -100,6 +96,7 @@ void			*ft_memdup(const void *mem, size_t n);
 size_t			ft_wordcount(char const *s, char using);
 int				ft_power(int x, int y);
 t_byte			ft_digitcount(int n);
+int				ft_isspace(int c);
 int				ft_isblank(int c);
 int				ft_iscntrl(int c);
 
