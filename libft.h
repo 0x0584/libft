@@ -6,12 +6,15 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/10 17:51:40 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/11 15:10:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# define INT_VALMAX						(2147483647)
+# define INT_VALMIN						(-2147483648)
 
 # define ALLOC(type, size)				((type)ft_memalloc(size))
 # define SAFE_PTRVAL(ptr)				(ptr && *ptr)
