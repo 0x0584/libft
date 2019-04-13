@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/13 16:38:12 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/13 18:00:06 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,12 @@ int		get_next_line(const int fd, char **line)
 		return (RET_FAILURE);
 	while (read(fd, tmp[0], BUFF_SIZE))
 	{
-		printf("\nread: >>> '%s'\n", tmp[0]);
-		if ((tmp[1] = ft_strchr(tmp[0], 0x0A)))
-		{
-			*line = ft_strrdup(tmp[0], tmp[1] - 1);
-			tmp[2] = ft_strjoin(cache, tmp[1] - 1);
-			printf("line:'%s' cache:'%s' joined:'%s'\n", *line, cache, tmp[2]);
-			free(cache);
-			cache = tmp[2];
-			return (RET_SUCCESS);
-		}
-		else
-		{
-
-		}
+		*line = ft_strdup(tmp[0]);
+		free(tmp[0]);
+		return (RET_SUCCESS);
 	}
+	puts("read returned 0");
+	free(tmp[0]);
 	return (RET_EOF);
 }
 

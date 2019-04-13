@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/13 02:39:46 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/13 17:22:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 typedef struct	s_fileinfo
 {
-	int fd;
-	char *rest;
+	int		fd;
+	char	*rest;
 }				t_fileinfo;
 
 int		get_next_line(const int fd, char **line);
