@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/11 15:10:44 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:57:46 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char			*ft_strnew(size_t size);
 char			*ft_strdup(const char *str);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
-char			*ft_strcat(char *dst, char *src);
+char			*ft_strcat(char *dst, const char *src);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strncat(char *dst, const char *src, size_t len);
-char			*ft_strstr(char *s, char *to_find);
-char			*ft_strnstr(char *s, char *tofind, size_t len);
+char			*ft_strstr(const char *s, const char *to_find);
+char			*ft_strnstr(const char *s, const char *tofind, size_t len);
 void			ft_strdel(char **s);
 void			ft_strclr(char *s);
 int				ft_strcmp(const char *s1, const char *s2);
