@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/13 18:00:06 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/13 19:14:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,21 @@ int		get_next_line(const int fd, char **line)
 		return (RET_FAILURE);
 	while (read(fd, tmp[0], BUFF_SIZE))
 	{
-		*line = ft_strdup(tmp[0]);
-		free(tmp[0]);
-		return (RET_SUCCESS);
+		if (ft_strchr(tmp[0], 0x0A))
+		{
+			if (cache)
+				tmp[1] = ft_strjoin(cache, tmp[0]);
+			*line = ft_strdup(tmp[1]);
+			free(tmp[0]);
+			ft_strdel(&cache);
+			return (RET_SUCCESS);
+		}
+		else
+		{
+			tmp[1] = ft_strjoin(cache, tmp[0]);
+			free(cache);
+			cache = tmp[1];
+		}
 	}
 	puts("read returned 0");
 	free(tmp[0]);
@@ -51,7 +63,7 @@ int		main(int argc, char **argv)
 	while (get_next_line(fd, &s))
 	{
 		i++;
-		printf("%d %s\n", i, s);
+		printf("%-3d %s\n", i, s);
 		free(s);
 		s = NULL;
 	}
