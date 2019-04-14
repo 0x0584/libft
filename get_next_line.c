@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/14 15:09:18 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/14 23:10:40 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,58 +19,50 @@
 int		get_next_line(const int fd, char **line)
 {
 	static char *cache[0xFF] = {NULL};
-	char		*tmp[3];
+	char		*tmp[count];
 	size_t		nbytes;
 
-	if (!(tmp[0] = ALLOC(char *, BUFF_SIZE + 1)))
-		return (RET_FAILURE);
-	if (fd < 0 || line == NULL || read(fd, tmp[0], 0) < 0)
-		return (RET_FAILURE);
-	if (cache[fd] != NULL)
-	{
-		if ((tmp[2] = ft_strchr(cache[fd], '\n')))
-		{
-			*line = ft_strrdup(cache[fd], tmp[2] - 1);
-			tmp[1] = ft_strdup(tmp[2] + 1);
-			ft_strdel(&cache[fd]);
-			cache[fd] = tmp[1];
-		}
-		else
-		{
+	/* printf(" ####  \n this is \n ###### \n"); */
 
-		}
-		printf("\n line:'%s' cache[fd]'%s' \n", *line, cache[fd]);
-		return (RET_SUCCESS);
+	if (!(tmp[buffer] = ALLOC(char *, BUFF_SIZE + 1)))
+		return (failure);
+	/* printf(" ####  \n this is \n ###### \n"); */
+	if (fd < 0 || !line || read(fd, tmp[buffer], 0) < 0)
+		return (failure);
+
+	if ((tmp[bar] = ft_strchr(cache[fd], 0x0A)))
+	{
+		*line = ft_strrdup(cache[fd], tmp[bar] - 1);
+		cache[fd] = tmp[bar] + 1;
+		return (success);
 	}
+	/* printf(" ####  \n this is \n ###### \n"); */
+	while ((nbytes = read(fd, tmp[buffer], BUFF_SIZE)))
+	{
+		if (!(cache[fd] = ft_strjoin(!cache[fd] ? "" : cache[fd], tmp[buffer])))
+		{
+			puts("memory allocation failure!");
+			return (failure);
+		}
+		printf("cache:'%s' buffer:'%s'\n", cache[fd], tmp[buffer]);
+		if ((tmp[bar] = ft_strchr(tmp[buffer], 0x0A)))
+		{
+			puts("found a new line");
+			break ;
+		}
+	}
+	if (nbytes < BUFF_SIZE && !ft_strlen(tmp[buffer]))
+	{
+		puts("read returned 0. EOF");
+		return (eof);
+	}
+	/* copy until 0x0A, excluded */
+	*line = ft_strrdup(cache[fd], ft_strchr(cache[fd], 0x0A) - 1);
+	if (!*(tmp[bar] + 1))
+		ft_strclr(cache[fd]);
 	else
-	{
-		if (!(cache[fd] = ALLOC(char *, 1)))
-			return (RET_FAILURE);
-	}
-	while ((nbytes = read(fd, tmp[0], BUFF_SIZE)))
-	{
-		if ((tmp[2] = ft_strchr(tmp[0], 0x0A)))
-		{
-			if (cache[fd])
-				*line = ft_strjoin(cache[fd], ft_strrdup(tmp[0], tmp[2] - 1));
-			else
-				*line = ft_strdup(tmp[0]);
-			ft_strdel(&cache[fd]);
-			cache[fd] = ft_strdup(tmp[2] + 1);
-			printf("\n----saved: '%s'----\n", cache[fd]);
-			free(tmp[0]);
-			return (RET_SUCCESS);
-		}
-		else
-		{
-			tmp[1] = ft_strjoin(cache[fd], tmp[0]);
-			free(cache[fd]);
-			cache[fd] = tmp[1];
-		}
-	}
-	puts("read returned 0");
-	free(tmp[0]);
-	return (RET_EOF);
+		cache[fd] = tmp[bar] + 1;
+	return (success);
 }
 
 int		main(int argc, char **argv)
