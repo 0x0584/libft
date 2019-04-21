@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/16 03:37:12 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/21 08:11:19 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define BUFF_SIZE				10
-# define CACHE_SIZE				(2 * BUFF_SIZE + 1)
-# define S_LEN(s)				(ft_strlen(s))
-# define S_SIZE(s)				(ft_strlen(s) + 1)
 # define NL						0x0A
+
+# define BUFF_SIZE				10
+# define IS_EOF(n)				(n < BUFF_SIZE)
+
+# define CACHE_SIZE				2 * BUFF_SIZE
+# define INCR_CACHE_SIZE(c)		((c)->size + CACHE_SIZE + 1)
+# define ISFULL_CACHE(c)		((c)->length + 1 == c->size)
+
+# define S_SIZE(s)				(ft_strlen(s) + 1)
+
 
 /*
 ** this enumeration would hold some useful values for the rest
@@ -28,32 +34,40 @@
 ** return states: success, failure and eof
 */
 
-enum			e_fuzzbuzz
-{
-	ibuffer, ifoo, ibar, icount,
-
-	failure = -1, eof, success
-};
 
 /*
 ** who said C does not have a bool type?
 */
 
-typedef enum	e_bool
+enum			e_bool
 {
 	false = (1 == 0),
 	true = !false
-}				t_bool;
+};
+
+enum			e_fuzzbuzz
+{
+	ibuffer, ifoo,
+	ibar, icount,
+
+	failure = -1, eof, success
+};
 
 /*
 ** FIXME: do I have to use this? or an array would be perfect!
 */
 
-typedef struct	s_fileinfo
+typedef struct	s_cache
 {
-	int		fd;
-	char	*rest;
-}				t_fileinfo;
+	char			*buff;
+	char			*nl;
+	size_t			length;
+	size_t			size;
+}				t_cache;
+
+int				cache_alloc(t_cache **cache);
+int				cache_free(t_cache **cache);
+int				cached_read(const int fd, char **line, char **args);
 
 int				get_next_line(const int fd, char **line);
 

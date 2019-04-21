@@ -6,18 +6,18 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/16 04:53:24 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/21 12:01:39 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** TODO: remove unused headers
+** FIXME: remove unused headers
 */
 /*
-** TODO: remove comments
+** FIXME: remove comments
 */
 /*
-** TODO: check the norm
+** FIXME: check the norm
 */
 /*
 **TODO: improve the code
@@ -25,53 +25,79 @@
 /*
 ** FIXEME: reorder e_fuzzbuzz
 */
+/*
+** FIXME: ft_realloc()
+*/
+
+/*
+**
+*/
 
 #include <fcntl.h>
 #include <stdio.h>
 
 #include "get_next_line.h"
 
-/*
-** TODO: ft_realloc()
-*/
-
-int	   cache_alloc(char **s, t_bool isfull)
+void	cache_init(t_cache **cache, size_t size)
 {
-	char *tmp[2];
+	t_cache *c;
 
-	if (s == NULL)
+	if (!(c = ALLOC(t_cache *, CACHE_SIZE)))
+		return ;
+
+	c->size = size;
+	*cache = c;
+}
+
+int		cache_alloc(t_cache **cache)
+{
+	t_cache			*c;
+
+	/* NULL is not accepted as a parameter */
+	if (cache == NULL)
 		return (failure);
-	else if (*s == NULL)
-		*s = ALLOC(char *, CACHE_SIZE);
-	else if (*s && isfull)
+	c = *cache;
+	/* if cache is NULL, allocate some memory */
+	if (c == NULL)
+		cache_init(cache, CACHE_SIZE);
+	/* if cache is full, reallocate memory */
+	else if (ISFULL_CACHE(c))
 	{
-		if (!(tmp[0] = ALLOC(char *, S_LEN(tmp[0]) + CACHE_SIZE)))
-			return (failure);
-		ft_memcpy(tmp[0], *s, S_SIZE(tmp[0]));
-		tmp[1] = *s;
-		free(*s);
-		*s = tmp[1];
+		(void)ft_dumb_realloc((void **)cache, c->size, INCR_CACHE_SIZE(c));
+		c->size = INCR_CACHE_SIZE(c);
 	}
 	return (success);
 }
 
-void	cache_free(char **s, t_bool has_nl)
+int		cache_free(t_cache **cache)
 {
-	char *tmp;
+	/* free the cache if cache->nl != NULL and reallocte memory for
+	 * len(cache->buff) */
 
-	if (!s || !*s)
+	t_cache		*c;
+
+	printf("before '%s' '%s' ", (*cache)->buff, (*cache)->nl);
+	c = *cache;
+	if (c->nl)
 	{
-		if (has_nl)
-		{
-			tmp = *s;
-			*s = ft_strdup(ft_strchr(*s, NL) + 1);
-			free(tmp);
-		}
-		else
-		{
-			/* FIXME: something is missing here */
-		}
+		(void)ft_strcpy(c->buff, c->nl + 1);
+		(void)ft_dumb_realloc((void **)&(c->buff),
+								c->size, S_SIZE(c->nl + 1));
+		c->size = S_SIZE(c->buff);
 	}
+	printf("after '%s' '%s'\n", (*cache)->buff, (*cache)->nl);
+	return (success);
+}
+
+int		cache_concat(t_cache *cache, char *buff)
+{
+	char		*tmp;
+
+	if (!(tmp = ft_strjoin(!cache->buff ? "" : cache->buff, buff)))
+		return (failure);
+	free(cache->buff);
+	cache->buff = tmp;
+	return (success);
 }
 
 /*
@@ -81,55 +107,57 @@ void	cache_free(char **s, t_bool has_nl)
 ** s1 is allocated using cache_alloc() and free'd using cache_free()
 */
 
-char	*cache_concat(char *s1, const char *s2, size_t size)
-{
+/* int		cached_read(const int fd, char **line, char **args) */
+/* { */
 
-	return (s1);
-}
+/* } */
 
 int		get_next_line(const int fd, char **line)
 {
-	static char *cache[0xFF] = {NULL};
-	char		*tmp[icount];
-	size_t		nbytes;
+	static t_cache *cache[0xFF] = {NULL};
+	char			*buff;
+	size_t			nbytes;
 
-	/* TODO: add a cache_alloc() somwhere in here */
 
-	/* 0.1 check if memory is allocated */
-	if (!(tmp[ibuffer] = ALLOC(char *, BUFF_SIZE + 1)))
-		return (failure);
-	/* 0.2 check if fd, and line and we can read the file */
-	if (fd < 0 || !line || read(fd, tmp[ibuffer], 0) < 0)
-		return (failure);
-	/* 1.0 check if cache has already a NL */
-	if (cache[fd] && (tmp[ibar] = ft_strchr(cache[fd], NL)))
+	cache_alloc(&cache[fd]);
+	if (cache[fd] && cache[fd]->nl)
 	{
-		/* if so duplicated from from 0 to index of NL */
-		*line = ft_strrdup(cache[fd], tmp[ibar] - 1);
-		// cache[fd] = tmp[ibar] + 1;
-		/* free copied part of the cache using cache_free() */
-		cache_free(&cache[fd], tmp[ibar] != NULL);
+		*line = ft_strrdup(cache[fd]->buff, cache[fd]->nl);
+		cache[fd]->nl = ft_strchr(cache[fd]->buff, NL);
+		cache_free(&cache[fd]);
 		return (success);
 	}
-	/* 2.0 if the cache does not have a NL in it, we read a BUFF_SIZE
-	 * chars into our tmporary buffer */
-	while ((nbytes = read(fd, tmp[ibuffer], BUFF_SIZE)))
+	if (!(buff = ALLOC(char *, BUFF_SIZE + 1)) ||
+			fd < 0 || !line)
+		return (failure);
+	while ((nbytes = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		/* 2.1 join the read chars with the previous cache content */
-		if (!(cache[fd] = ft_strjoin(cache[fd] ? cache[fd] : "", tmp[ibuffer])))
+		if (cache_concat(cache[fd], buff) == failure)
 			return (failure);
-		/* 2.2 if we have read a NL we stop reading from fd */
-		if ((tmp[ibar] = ft_strchr(tmp[ibuffer], NL)))
+		printf("cache:'%s' nl:'%s'\n", cache[fd]->buff, cache[fd]->nl);
+
+	   if ((cache[fd]->nl = ft_strchr(cache[fd]->buff, NL)))
 			break ;
+	   ft_bzero(buff, BUFF_SIZE);
 	}
-	/* 2.3 if we have read less than BUFF_SIZE and the temporary buffer is
-	 * empty, then it must be an EOF */
-	if (nbytes < BUFF_SIZE && !ft_strlen(tmp[ibuffer]))
+	if (IS_EOF(nbytes) && !cache[fd]->buff)
 		return (eof);
-	/* 3.0 copy from cache until NL */
-	*line = ft_strrdup(cache[fd], (tmp[ifoo] = ft_strchr(cache[fd], NL)) - 1);
-	/* 3.1 free the copied version */
-	cache_free(&cache[fd], tmp[ifoo]!= NULL);
+
+	if (cache[fd]->nl)
+		*line = ft_strrdup(cache[fd]->buff, cache[fd]->nl - 1);
+	else
+		*line = ft_strdup(cache[fd]->buff);
+
+	printf(" >> line:'%s' cache:'%s' nl:'%s'\n",
+		   *line, cache[fd]->buff, cache[fd]->nl);
+	if (!*(cache[fd]->nl + 1))
+		ft_strclr(cache[fd]->buff);
+	cache_free(&cache[fd]);
+	/* if (IS_EOF(nbytes) && cache[fd]->buff) */
+	/* 	ft_strclr(cache[fd]->buff); */
+	free(buff);
+	printf(" >>> line:'%s' cache:'%s' nl:'%s'\n",
+		   *line, cache[fd]->buff, cache[fd]->nl);
 	return (success);
 }
 
