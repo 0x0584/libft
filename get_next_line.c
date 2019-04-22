@@ -6,158 +6,73 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/21 12:01:39 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/22 05:21:33 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** FIXME: remove unused headers
-*/
-/*
-** FIXME: remove comments
-*/
-/*
-** FIXME: check the norm
-*/
-/*
-**TODO: improve the code
-*/
-/*
-** FIXEME: reorder e_fuzzbuzz
-*/
-/*
-** FIXME: ft_realloc()
-*/
-
-/*
-**
-*/
 
 #include <fcntl.h>
 #include <stdio.h>
 
 #include "get_next_line.h"
 
-void	cache_init(t_cache **cache, size_t size)
+static int extract_nl_line(char **cache, char **line)
 {
-	t_cache *c;
+    char    *nl;
 
-	if (!(c = ALLOC(t_cache *, CACHE_SIZE)))
-		return ;
-
-	c->size = size;
-	*cache = c;
+    assert_ret(cache == NULL || line == NULL, failure);
+    nl = *cache;
+    while (*nl != NIL && *nl != NL)
+        nl++;
+	assert_ret(*nl == NIL, false);
+	*nl = NIL;
+    unless_ret(*line = ft_strdup(*cache), failure);
+	unless_ret(*cache = ft_strdup(nl + 1), failure);
+    return (true);
 }
 
-int		cache_alloc(t_cache **cache)
+static int read_file(const int fd, char **cache, char **line)
 {
-	t_cache			*c;
+	char		*buff;
+	char		*foo;
+	ssize_t		nbytes;
 
-	/* NULL is not accepted as a parameter */
-	if (cache == NULL)
-		return (failure);
-	c = *cache;
-	/* if cache is NULL, allocate some memory */
-	if (c == NULL)
-		cache_init(cache, CACHE_SIZE);
-	/* if cache is full, reallocate memory */
-	else if (ISFULL_CACHE(c))
+	unless_ret(buff = ALLOC(char *, BUFF_SIZE + 1), failure);
+	while ((nbytes = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		(void)ft_dumb_realloc((void **)cache, c->size, INCR_CACHE_SIZE(c));
-		c->size = INCR_CACHE_SIZE(c);
+		if (*cache == NULL)
+			*cache = ft_strdup(buff);
+		else
+		{
+			foo = *cache;
+			*cache = ft_strjoin(foo, buff);
+			ft_strdel(&foo);
+		}
+		if (extract_nl_line(cache, line))
+			break ;
 	}
-	return (success);
+	free(buff);
+	return (nbytes > 0 ? success : failure);
 }
-
-int		cache_free(t_cache **cache)
-{
-	/* free the cache if cache->nl != NULL and reallocte memory for
-	 * len(cache->buff) */
-
-	t_cache		*c;
-
-	printf("before '%s' '%s' ", (*cache)->buff, (*cache)->nl);
-	c = *cache;
-	if (c->nl)
-	{
-		(void)ft_strcpy(c->buff, c->nl + 1);
-		(void)ft_dumb_realloc((void **)&(c->buff),
-								c->size, S_SIZE(c->nl + 1));
-		c->size = S_SIZE(c->buff);
-	}
-	printf("after '%s' '%s'\n", (*cache)->buff, (*cache)->nl);
-	return (success);
-}
-
-int		cache_concat(t_cache *cache, char *buff)
-{
-	char		*tmp;
-
-	if (!(tmp = ft_strjoin(!cache->buff ? "" : cache->buff, buff)))
-		return (failure);
-	free(cache->buff);
-	cache->buff = tmp;
-	return (success);
-}
-
-/*
-** this would concatinate s1 with s2, and reallocate memory if
-** nessecary i.e. when (S_LEN(foo) >= size - 1).
-**
-** s1 is allocated using cache_alloc() and free'd using cache_free()
-*/
-
-/* int		cached_read(const int fd, char **line, char **args) */
-/* { */
-
-/* } */
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_cache *cache[0xFF] = {NULL};
-	char			*buff;
-	size_t			nbytes;
+	/* static t_list	*lst = NULL; */
+	static char	*cache[0xFF];
+	ssize_t		nbytes;
 
+	assert_ret(!line || fd < 0 || read(fd, NULL, 0) < 0, failure);
+	assert_ret(cache[fd] && extract_nl_line(cache, line), success);
+	assert_ret((nbytes = read_file(fd, &cache[fd], line)) < 0, failure);
 
-	cache_alloc(&cache[fd]);
-	if (cache[fd] && cache[fd]->nl)
+	(void)printf("line: '%s' cache: '%s'\n", *line, cache[fd]);
+	if (nbytes && !cache[fd] && !*cache[fd])
 	{
-		*line = ft_strrdup(cache[fd]->buff, cache[fd]->nl);
-		cache[fd]->nl = ft_strchr(cache[fd]->buff, NL);
-		cache_free(&cache[fd]);
-		return (success);
+		if (!nbytes && *line)
+			*line = NULL;
+		return (nbytes);
 	}
-	if (!(buff = ALLOC(char *, BUFF_SIZE + 1)) ||
-			fd < 0 || !line)
-		return (failure);
-	while ((nbytes = read(fd, buff, BUFF_SIZE)) > 0)
-	{
-		if (cache_concat(cache[fd], buff) == failure)
-			return (failure);
-		printf("cache:'%s' nl:'%s'\n", cache[fd]->buff, cache[fd]->nl);
-
-	   if ((cache[fd]->nl = ft_strchr(cache[fd]->buff, NL)))
-			break ;
-	   ft_bzero(buff, BUFF_SIZE);
-	}
-	if (IS_EOF(nbytes) && !cache[fd]->buff)
-		return (eof);
-
-	if (cache[fd]->nl)
-		*line = ft_strrdup(cache[fd]->buff, cache[fd]->nl - 1);
-	else
-		*line = ft_strdup(cache[fd]->buff);
-
-	printf(" >> line:'%s' cache:'%s' nl:'%s'\n",
-		   *line, cache[fd]->buff, cache[fd]->nl);
-	if (!*(cache[fd]->nl + 1))
-		ft_strclr(cache[fd]->buff);
-	cache_free(&cache[fd]);
-	/* if (IS_EOF(nbytes) && cache[fd]->buff) */
-	/* 	ft_strclr(cache[fd]->buff); */
-	free(buff);
-	printf(" >>> line:'%s' cache:'%s' nl:'%s'\n",
-		   *line, cache[fd]->buff, cache[fd]->nl);
+	*line = cache[fd];
+	cache[fd] = NULL;
 	return (success);
 }
 
@@ -172,7 +87,7 @@ int		main(int argc, char **argv)
 
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &s))
+	while (get_next_line(fd, &s) == 1)
 	{
 		i++;
 		printf("%3d| '%s'\n", i, s);

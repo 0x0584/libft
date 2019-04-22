@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/21 08:11:19 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/22 05:16:04 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft/libft.h"
 
 # define NL						0x0A
+# define NIL					0x00
 
 # define BUFF_SIZE				10
 # define IS_EOF(n)				(n < BUFF_SIZE)
@@ -27,29 +28,17 @@
 
 # define S_SIZE(s)				(ft_strlen(s) + 1)
 
+# define assert_ret(expr, ret)	if ((expr)) return (ret)
+# define unless_ret(expr, ret)	if (!(expr)) return (ret)
 
-/*
-** this enumeration would hold some useful values for the rest
-** of the program like the the tmp buffer indexes, and also
-** return states: success, failure and eof
-*/
-
-
-/*
-** who said C does not have a bool type?
-*/
-
-enum			e_bool
+enum			e_gnl_bool
 {
-	false = (1 == 0),
+	false = (1==0),
 	true = !false
 };
 
-enum			e_fuzzbuzz
+enum			e_gnl_exit
 {
-	ibuffer, ifoo,
-	ibar, icount,
-
 	failure = -1, eof, success
 };
 
@@ -67,7 +56,6 @@ typedef struct	s_cache
 
 int				cache_alloc(t_cache **cache);
 int				cache_free(t_cache **cache);
-int				cached_read(const int fd, char **line, char **args);
 
 int				get_next_line(const int fd, char **line);
 
