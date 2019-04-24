@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/22 05:16:04 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/24 17:22:22 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 # define S_SIZE(s)				(ft_strlen(s) + 1)
 
-# define assert_ret(expr, ret)	if ((expr)) return (ret)
-# define unless_ret(expr, ret)	if (!(expr)) return (ret)
+# define ASSERT_RET(expr, ret)	if ((expr)) return (ret)
+# define UNLESS_RET(expr, ret)	if (!(expr)) return (ret)
 
 enum			e_gnl_bool
 {
@@ -54,9 +54,8 @@ typedef struct	s_cache
 	size_t			size;
 }				t_cache;
 
-int				cache_alloc(t_cache **cache);
-int				cache_free(t_cache **cache);
-
+int				read_file(const int fd, char **cache, char **line);
+int				extract_nl_line(char **cache, char **line);
 int				get_next_line(const int fd, char **line);
 
 #endif
