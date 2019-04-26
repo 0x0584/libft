@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/24 17:22:22 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/24 23:12:04 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ enum			e_gnl_exit
 };
 
 /*
-** FIXME: do I have to use this? or an array would be perfect!
+** FIXME: find how to bring this idea to life!!!
 */
 
 typedef struct	s_cache
