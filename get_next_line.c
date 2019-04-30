@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/29 03:21:18 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/30 20:43:29 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int		extract_nl_line(char **cache, char **line)
 	UNLESS_RET(*cache = ft_strdup(nl + 1), failure);
 	/* (void)printf("\n \n >>> final output: line: [%s] enl@new cache: {%s}\n\n", */
 	/* 			 *line, *cache); */
-	/* FISME: free teh old *cache */
+	/* FIXME: free the old *cache */
 	free(old_cache);
 	return (true);
 }
 
-int		read_file(const int fd, char **cache, char **line)
+ssize_t		cached_read(const int fd, char **cache, char **line)
 {
 	char		*buff;
 	char		*old_cache;
@@ -48,7 +48,7 @@ int		read_file(const int fd, char **cache, char **line)
 	char		*tmp = NULL;
 
 	/* printf("in read_file(%d, '%s', '%s')\n---------------\n", */
-		   /* fd, *cache, *line); */
+	/* 	   fd, *cache, *line); */
 	UNLESS_RET(buff = ALLOC(char *, BUFF_SIZE + 1), failure);
 	while ((nbytes = read(fd, buff, BUFF_SIZE)) > 0)
 	{
@@ -78,8 +78,8 @@ int		read_file(const int fd, char **cache, char **line)
 	}
 	ft_strdel(&buff);
 	/* (void)printf("cache :: [%s]\n", *cache); */
-	/* TODO: this is where the bug begins!! */
 	/* printf("read bytes => %zu", nbytes); */
+
 	if (nbytes == 0 && *cache)
 	{
 		*line = ft_strdup(*cache);
@@ -90,14 +90,13 @@ int		read_file(const int fd, char **cache, char **line)
 	if (!extract_nl_line(cache, line))
 	{
 		*line = ft_strdup(*cache);
-		/*
-		(void)printf("%s cache has no newline\n"
-					 "free it and set it to NULL", *line);
-		*/
+		/* (void)printf("%s cache has no newline\n" */
+		/* 			 "free it and set it to NULL", *line); */
 	}
+
 	/* (void)printf("freeing the buffer <%s>\n" */
-				 /* "ret value %d\n", buff, (nbytes >= 0 ? success : failure)); */
-	return (nbytes > 0 ? success : failure);
+	/* 			 "ret value %zu\n", buff, nbytes); */
+	return (nbytes);
 }
 
 int		get_next_line(const int fd, char **line)
@@ -108,64 +107,101 @@ int		get_next_line(const int fd, char **line)
 
 	ASSERT_RET(BUFF_SIZE <= 0 || read(fd, NULL, 0) < 0, failure);
 	ASSERT_RET(!line || fd < 0, failure);
-    /*
-	  (void)printf("%s %d\n", "BUFF_SIZE:", BUFF_SIZE);
-	  (void)printf("%s", "everything is safe\n\n");
-	  printf("==> previous cache[%d] = '%s'\n", fd, cache[fd]);
-	*/
 
+	/* (void)printf("%s %d\n", "BUFF_SIZE:", BUFF_SIZE); */
+	/* (void)printf("%s", "everything is safe\n\n"); */
+	/* printf("==> previous cache[%d] = '%s'\n", fd, cache[fd]); */
+
+	*line = NULL;
 	/* ASSERT_RET(cache[fd] && extract_nl_line(cache, line), success); */
 	if (cache[fd]) {
-		/*
-		(void)printf("  -*-  %s [%s] -*- \n \t -------------------- \n",
-					 "gnl@cache found! old:", cache[fd]);
-		*/
+
+		/* (void)printf("  -*-  %s [%s] -*- \n \t -------------------- \n", */
+		/* 			 "gnl@cache found! old:", cache[fd]); */
 		if (extract_nl_line(&cache[fd], line)) {
 			/* (void)printf("%s [%s]\n", "new: ", cache[fd]); */
 			return (success);
 		}
 	}
-	ASSERT_RET((nbytes = read_file(fd, &cache[fd], line)) < 0, failure);
-	/*
-	(void)printf("\n >>> read was done! \n     line@gnl:[%s] cache@gnl:{%s}\n\n",
-				 *line, cache[fd]);
-				 */
+	ASSERT_RET((nbytes = cached_read(fd, &cache[fd], line)) < 0, failure);
+
+	/* (void)printf("\n >>> read was done! \n     line@gnl:[%s] cache@gnl:{%s}\n\n", */
+	/* 			 *line, cache[fd]); */
 
 	/* TODO:  ==================== HERE IS THE BUG! ====================  */
 
+
 	if (nbytes == 0)
 	{
-		if (cache[fd])
-			ft_strdel(&cache[fd]);
+		if (*line && ft_strlen(*line) != 0)
+			return (success);
 		return (eof);
 	}
 
-	/*
-	(void)printf("%s [%s] ", "final gnl@cache", cache[fd]);
-	(void)printf("%s [%s] ", "final gnl@line", *line);
-	(void)printf("'%s' '%s'", cache[fd], *line);
-	*/
+
+
+	/* (void)printf("%s [%s] ", "final gnl@cache", cache[fd]); */
+	/* (void)printf("%s [%s] ", "final gnl@line", *line); */
+	/* (void)printf("'%s' '%s'", cache[fd], *line); */
 	return (success);
 }
 
-int		main(int argc, char **argv)
-{
-	int		fd, i = 0;
-	size_t	nbytes;
-	char	*str = NULL;
+/* int				main(void) */
+/* { */
+/* 	char		*line; */
+/* 	int			fd; */
+/* 	int			ret; */
+/* 	int			count_lines; */
+/* 	char		*filename; */
+/* 	int			errors; */
 
-	if (argc != 2)
-		return (0);
+/* 	filename = "gnl7_1.txt"; */
+/* 	fd = open(filename, O_RDONLY); */
+/* 	if (fd > 2) */
+/* 	{ */
+/* 		count_lines = 0; */
+/* 		errors = 0; */
+/* 		line = NULL; */
+/* 		while ((ret = get_next_line(fd, &line)) > 0) */
+/* 		{ */
+/* 			if (count_lines == 0 && strcmp(line, "12345678") != 0) */
+/* 				errors++; */
+/* 			count_lines++; */
+/* 			(void)printf(">>> count: %d line: %s\n", count_lines, line); */
+/* 			if (count_lines > 50) */
+/* 				break ; */
+/* 		} */
+/* 		close(fd); */
+/* 		if (count_lines != 1) */
+/* 			printf("-> must have returned '1' once instead of %d time(s)\n", count_lines); */
+/* 		if (errors > 0) */
+/* 			printf("-> must have read \"12345678\" instead of \"%s\"\n", line); */
+/* 		if (count_lines == 1 && errors == 0) */
+/* 			printf("OK\n"); */
+/* 	} */
+/* 	else */
+/* 		printf("An error occured while opening file %s\n", filename); */
+/* 	return (0); */
+/* } */
 
-	fd = open(argv[1], O_RDONLY);
-	while ((nbytes = get_next_line(fd, &str)) == 1)
-	{
-		i++;
-		printf("\n\n   ===> %3d| '%s'\n\n", i, str);
-		printf("freeing the line, gnl@ret: %zu\n\n", nbytes);
-		ft_strdel(&str);
-	}
-	printf("final gnl@ret: %zu\n final gnl@line: '%s'\n", nbytes, str);
-	ft_strdel(&str);
-	return (0);
-}
+/* int		main(int argc, char **argv) */
+/* { */
+/* 	int		fd, i = 0; */
+/* 	size_t	nbytes; */
+/* 	char	*str = NULL; */
+
+/* 	if (argc != 2) */
+/* 		return (0); */
+
+/* 	fd = open(argv[1], O_RDONLY); */
+/* 	while ((nbytes = get_next_line(fd, &str)) == 1) */
+/* 	{ */
+/* 		i++; */
+/* 		printf("\n\n   ===> %3d| '%s'\n\n", i, str); */
+/* 		printf("freeing the line, gnl@ret: %zu\n\n", nbytes); */
+/* 		ft_strdel(&str); */
+/* 	} */
+/* 	printf("final gnl@ret: %zu\n final gnl@line: '%s'\n", nbytes, str); */
+/* 	ft_strdel(&str); */
+/* 	return (0); */
+/* } */

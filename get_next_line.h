@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/24 23:12:04 by archid-          ###   ########.fr       */
+/*   Updated: 2019/04/29 05:09:58 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_cache
 	size_t			size;
 }				t_cache;
 
-int				read_file(const int fd, char **cache, char **line);
+ssize_t			cached_read(const int fd, char **cache, char **line);
 int				extract_nl_line(char **cache, char **line);
 int				get_next_line(const int fd, char **line);
 
