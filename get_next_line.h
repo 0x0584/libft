@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:16 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/29 05:09:58 by archid-          ###   ########.fr       */
+/*   Updated: 2019/05/01 03:14:39 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define NL						0x0A
 # define NIL					0x00
 
-# define BUFF_SIZE				10
+# define BUFF_SIZE				1
 # define IS_EOF(n)				(n < BUFF_SIZE)
 
 # define CACHE_SIZE				2 * BUFF_SIZE
@@ -33,7 +33,7 @@
 
 enum			e_gnl_bool
 {
-	false = (1==0),
+	false = (1 == 0),
 	true = !false
 };
 
@@ -54,7 +54,7 @@ typedef struct	s_cache
 	size_t			size;
 }				t_cache;
 
-ssize_t			cached_read(const int fd, char **cache, char **line);
+ssize_t			cached_read(const int fd, char **cache);
 int				extract_nl_line(char **cache, char **line);
 int				get_next_line(const int fd, char **line);
 

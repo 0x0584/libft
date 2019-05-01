@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 01:40:07 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/21 04:02:49 by archid-          ###   ########.fr       */
+/*   Updated: 2019/05/01 03:15:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,4 @@ void	*ft_dumb_realloc(void **ptr, size_t old, size_t new)
 	tmp = *ptr;
 	free(*ptr);
 	return (*ptr = mem);
-
 }
