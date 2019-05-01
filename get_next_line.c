@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/05/01 03:14:15 by archid-          ###   ########.fr       */
+/*   Updated: 2019/05/01 20:44:33 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ ssize_t	cached_read(const int fd, char **cache)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*cache[0xFF] = {NULL};
-	int			nbytes;
+	static char	*cache[FD_SIZE] = {NULL};
+	ssize_t		nbytes;
 
 	ASSERT_RET(BUFF_SIZE <= 0 || read(fd, NULL, 0) < 0, failure);
 	ASSERT_RET(!line || fd < 0, failure);
@@ -70,7 +70,6 @@ int		get_next_line(const int fd, char **line)
 		ft_strdel(&cache[fd]);
 		return ((*line && ft_strlen(*line)) ? success : eof);
 	}
-	if (!extract_nl_line(&cache[fd], line))
-		*line = ft_strdup(cache[fd]);
+	extract_nl_line(&cache[fd], line);
 	return (nbytes == 0 ? eof : success);
 }
