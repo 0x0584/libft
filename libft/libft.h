@@ -6,24 +6,32 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/20 18:25:04 by archid-          ###   ########.fr       */
+/*   Updated: 2019/05/03 00:45:34 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define INT_VALMAX						(2147483647)
-# define INT_VALMIN						(-2147483648)
-
-# define ALLOC(type, size)				((type)ft_memalloc(size))
-# define SAFE_PTRVAL(ptr)				(ptr && *ptr)
-
 # include <stdlib.h>
 # include <unistd.h>
 
+# define INT_VALMAX							(2147483647)
+# define INT_VALMIN							(-2147483648)
+
+# define ALLOC(type, size)					((type)ft_memalloc(size))
+# define SAFE_PTRVAL(ptr)					(ptr && *ptr)
+# define ASSERT_RET(expr, ret)				if ((expr)) return (ret)
+# define UNLESS_RET(expr, ret)				if (!(expr)) return (ret)
+
 typedef unsigned char	t_byte;
 typedef unsigned int	t_uint;
+
+typedef enum	e_ft_states
+{
+	failure = -1, eof, success,
+	false = (1 == 0), true = !false
+}				t_states;
 
 typedef struct	s_list
 {
