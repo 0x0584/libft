@@ -1,3 +1,0 @@
-* DONE Handle digital and escape characters as input
-- State "DONE"       from "TODO"       [2019-02-17 Sun 01:13]
-+ in all =tst_is*= files
