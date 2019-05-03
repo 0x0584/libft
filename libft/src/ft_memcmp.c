@@ -1,44 +1,29 @@
-/*
- * File: ft_memcmp.c
- * Author: Anas Rchid (0x0584)
- *
- * Created: <2019-02-08 Fri 22:44:57>
- * Updated: <2019-02-18 Mon 03:29:03>
- *
- * Copyright (C) 2019
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.	If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
- * Floor, Boston, MA 02110-1301, USA.
- */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/03 18:17:07 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/07 06:54:51 by archid-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_memcmp(const void *s1, const void *s2, size_t n) {
-	t_uchar *foo;
-	t_uchar *bar;
-	size_t i;
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	t_byte	*buff1;
+	t_byte	*buff2;
+	size_t	i;
 
-	if (n == 0)
-		return 0;
 	i = 0;
-	foo = (t_uchar *) s1;
-	bar = (t_uchar *) s2;
-	while (i < n) {
-		if (foo[i] != bar[i])
-			break;
+	buff1 = (t_byte *)s1;
+	buff2 = (t_byte *)s2;
+	if (n == 0)
+		return (0);
+	while (buff1[i] == buff2[i] && --n)
 		i++;
-	}
-	return (foo[i] - bar[i]);
+	return (buff1[i] - buff2[i]);
 }

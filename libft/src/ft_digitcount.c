@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_digitcount.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 01:16:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/08 08:11:18 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/07 05:22:36 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/07 06:58:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+t_byte	ft_digitcount(int n)
 {
-	size_t	slen;
-	char	*head;
-	char	*tail;
+	t_byte count;
+	t_uint u;
 
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	head = (char *)s;
-	tail = (char *)s + ft_strlen(s) - 1;
-	while (ft_isspace(*head))
-		head++;
-	while (ft_isspace(*tail))
-		tail--;
-	return (ft_strrdup(head, tail));
+	if (n == 0)
+		return (1);
+	u = (n < 0) ? -n : n;
+	count = 1 + (n < 0);
+	while (u / 10)
+	{
+		u /= 10;
+		count++;
+	}
+	return (count);
 }

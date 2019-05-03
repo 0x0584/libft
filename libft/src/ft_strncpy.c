@@ -1,38 +1,28 @@
-/*
- * File: ft_strncpy.c
- * Author: Anas Rchid (0x0584)
- *
- * Created: <2019-02-10 Sun 03:09:24>
- * Updated: <2019-02-12 Tue 00:00:33>
- *
- * Copyright (C) 2019
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.	If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
- * Floor, Boston, MA 02110-1301, USA.
- */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/31 00:34:01 by archid-           #+#    #+#             */
+/*   Updated: 2019/03/31 23:56:54 by archid-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strncpy(char *dest, char *src, size_t n) {
-	size_t i = 0;
+char	*ft_strncpy(char *dst, const char *src, size_t len)
+{
+	size_t i;
 
-	while (src[i] && i < n) {
-		dest[i] = src[i];
+	i = 0;
+	while (src[i] && i < len)
+	{
+		dst[i] = src[i];
 		i++;
 	}
-	while (n && i <= n)
-		dest[i++] = '\0';
-	return dest;
+	while (i < len)
+		dst[i++] = '\0';
+	return (dst);
 }

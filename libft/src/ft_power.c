@@ -1,35 +1,30 @@
-/*
- * File: ft_power.c
- * Author: Anas Rchid (0x0584)
- *
- * Created: <2019-02-11 Mon 17:05:03>
- * Updated: <2019-02-11 Mon 22:48:17>
- *
- * Copyright (C) 2019
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.	If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
- * Floor, Boston, MA 02110-1301, USA.
- */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/31 19:32:10 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/11 16:58:10 by archid-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_power(int x, int y) {
-	if (y < 0)
-		return 0;
-	else if (y == 0)
-		return 1;
-	else
-		return x * (ft_power(x, y - 1));
+int		ft_power(int x, int y)
+{
+	long int result;
+
+	result = 1;
+	if (y == 0)
+		return (result);
+	while (y--)
+	{
+		if (result > (long int)INT_VALMAX ||
+			result < (long int)INT_VALMIN)
+			return (0);
+		result *= x;
+	}
+	return ((int)result);
 }

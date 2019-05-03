@@ -1,37 +1,30 @@
-/*
- * File: ft_strchr.c
- * Author: Anas Rchid (0x0584)
- *
- * Created: <2019-02-10 Sun 17:03:53>
- * Updated: <2019-02-21 Thu 10:43:58>
- *
- * Copyright (C) 2019
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.	If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
- * Floor, Boston, MA 02110-1301, USA.
- */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/31 04:50:23 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/14 23:09:42 by archid-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strchr(const char *str, int c) {
-	char *buff;
+char	*ft_strchr(const char *s, int c)
+{
+	size_t	i;
+	char	*tmp;
 
-	if (str == NULL)
-		return NULL;
-	buff = (char *) str;
-	while (*buff && *buff != (char) c)
-		buff++;
-	return (*buff == (char) c) ? buff : NULL;
+	if (s == NULL)
+		return (NULL);
+	i = 0;
+	if (s[0] == c)
+		return ((char *)s);
+	tmp = (char *)s;
+	while (tmp[i++])
+		if (tmp[i] == (char)c)
+			return ((char *)tmp + i);
+	return (NULL);
 }

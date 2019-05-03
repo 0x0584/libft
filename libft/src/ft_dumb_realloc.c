@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_dumb_realloc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 01:16:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/08 08:11:18 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/18 01:40:07 by archid-           #+#    #+#             */
+/*   Updated: 2019/05/01 03:15:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+void	*ft_dumb_realloc(void **ptr, size_t old, size_t new)
 {
-	size_t	slen;
-	char	*head;
-	char	*tail;
+	void *mem;
+	void *tmp;
 
-	if (!s)
+	if (!(mem = ALLOC(void *, new)))
 		return (NULL);
-	slen = ft_strlen(s);
-	head = (char *)s;
-	tail = (char *)s + ft_strlen(s) - 1;
-	while (ft_isspace(*head))
-		head++;
-	while (ft_isspace(*tail))
-		tail--;
-	return (ft_strrdup(head, tail));
+	(void)ft_memcpy(mem, ptr, old);
+	tmp = *ptr;
+	free(*ptr);
+	return (*ptr = mem);
 }

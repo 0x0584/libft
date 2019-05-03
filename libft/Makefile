@@ -2,7 +2,7 @@
 # Author: Anas Rchid (0x0584)
 #
 # Created: <2019-02-08 Fri 22:26:56>
-# Updated: <2019-02-18 Mon 20:40:49>
+#    Updated: 2019/05/03 04:45:50 by archid-          ###   ########.fr        #
 #
 # Copyright (C) 2019
 #
@@ -50,7 +50,7 @@ all: $(LIBFT)
 	@make -C $(TEST_DIR)
 
 $(LIBFT): build-dir $(OBJS)
-	@ar rc -o $(LIBFT) $(OBJS)
+	@ar rc $(LIBFT) $(OBJS)
 
 build-dir:
 	@mkdir -p $(OBJS_DIR)

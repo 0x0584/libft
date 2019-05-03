@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_wordcount.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 01:16:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/08 08:11:18 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/05 23:00:18 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/06 10:14:27 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+size_t	ft_wordcount(char const *s, char using)
 {
-	size_t	slen;
-	char	*head;
-	char	*tail;
+	size_t count;
 
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	head = (char *)s;
-	tail = (char *)s + ft_strlen(s) - 1;
-	while (ft_isspace(*head))
-		head++;
-	while (ft_isspace(*tail))
-		tail--;
-	return (ft_strrdup(head, tail));
+	count = 0;
+	while (*s == using)
+		s++;
+	while (*s)
+	{
+		while (*s && *s == using)
+			s++;
+		count += !!*s;
+		while (*s && *s != using)
+			s++;
+	}
+	return (count);
 }

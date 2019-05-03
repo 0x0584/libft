@@ -1,43 +1,26 @@
-/*
- * File: ft_strmap.c
- * Author: Anas Rchid (0x0584)
- *
- * Created: <2019-02-11 Mon 01:02:15>
- * Updated: <2019-02-11 Mon 23:00:50>
- *
- * Copyright (C) 2019
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.	If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
- * Floor, Boston, MA 02110-1301, USA.
- */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/04 05:20:13 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/08 08:03:28 by archid-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strmap(char const *s, char (*f) (char)) {
-	char *buff;
-	size_t i;
+char	*ft_strmap(char const *s, char (*f)(char))
+{
+	char	*buff;
+	size_t	i;
 
-	i = 0;
-	if (s == NULL || f	== NULL)
-		return NULL;
-	buff = ft_strdup((char *) s);
-	if (buff == NULL)
-		return NULL;
-	while (buff[i]) {
-		buff[i] = f(buff[i]);
-		i++;
-	}
-	return buff;
+	i = -1;
+	if (!s || !(buff = ALLOC(char *, (ft_strlen(s) + 1) * sizeof(char))))
+		return (NULL);
+	while (s[++i])
+		buff[i] = (*f)(s[i]);
+	return (buff);
 }

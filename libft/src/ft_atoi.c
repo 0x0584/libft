@@ -1,52 +1,35 @@
-/*
- * File: ft_atoi.c
- * Author: Anas Rchid (0x0584)
- *
- * Created: <2019-02-10 Sun 20:17:17>
- * Updated: <2019-02-11 Mon 22:34:46>
- *
- * Copyright (C) 2019
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.	If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
- * Floor, Boston, MA 02110-1301, USA.
- */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/31 19:23:59 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/10 17:50:46 by archid-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_atoi(const char *nptr) {
-	int nbr;
-	int len;
-	int sign;
-	int i;
+int		ft_atoi(const char *s)
+{
+	long	result;
+	int		sign;
+	char	*str;
+	size_t	len;
 
-	if (nptr == NULL)
-		return 0;
-	while (*nptr <= ' ')
-		nptr++;
 	sign = 1;
-	if (*nptr == '-' || *nptr == '+')
-		sign = *nptr++ == '-' ? (-1) : (1);
+	str = (char *)s;
+	while (ft_isspace(*str))
+		str++;
+	if ((*str == '-' || *str == '+') && (*str++ == '-'))
+		sign = -1;
 	len = 0;
-	while (nptr[len] && ft_isdigit(nptr[len]))
+	while (ft_isdigit(str[len]))
 		len++;
-	i = -1;
-	nbr = 0;
-	while (++i < len) {
-		if (!ft_isdigit(nptr[i]))
-			return (nbr * sign * ft_power(10, len - i));
-		nbr += ft_power(10, len - i - 1) * (nptr[i] - '0');
-	}
-	return (nbr * sign);
+	result = 0;
+	while (ft_isdigit(*str))
+		result += ft_power(10, --len) * (*str++ - '0');
+	return ((int)result * sign);
 }

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_memdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 01:16:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/08 08:11:18 by archid-          ###   ########.fr       */
+/*   Created: 2019/04/07 07:06:13 by archid-           #+#    #+#             */
+/*   Updated: 2019/04/08 10:37:29 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+void	*ft_memdup(const void *mem, size_t n)
 {
-	size_t	slen;
-	char	*head;
-	char	*tail;
+	t_byte *buff;
 
-	if (!s)
+	if (!(buff = ALLOC(t_byte *, n * sizeof(t_byte))))
 		return (NULL);
-	slen = ft_strlen(s);
-	head = (char *)s;
-	tail = (char *)s + ft_strlen(s) - 1;
-	while (ft_isspace(*head))
-		head++;
-	while (ft_isspace(*tail))
-		tail--;
-	return (ft_strrdup(head, tail));
+	return (ft_memcpy(buff, mem, n));
 }
