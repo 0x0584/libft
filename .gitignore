@@ -199,4 +199,8 @@ flycheck_*.el
 *.rss
 *.xhtml
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> gnl/master
 # End of https://www.gitignore.io/api/c,web,linux,emacs,images

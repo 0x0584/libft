@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # File: Makefile
 # Author: Anas Rchid (0x0584)
 #
@@ -58,11 +59,43 @@ build-dir:
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DEPS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
+=======
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: archid- <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/03/30 17:28:04 by archid-           #+#    #+#              #
+#    Updated: 2019/04/08 11:08:06 by archid-          ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
+NAME	= libft.a
+RM		= rm -f
+
+DEPS	= libft.h
+SRCS	= $(shell find . -type f -name "*.c")
+OBJS	= $(patsubst %.c, %.o, $(SRCS))
+
+CC		= gcc
+CFLAGS	= -Wall -Werror -Wextra
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	ar rc $(NAME) $^
+
+%.o: %.c $(DEPS)
+	$(CC) $(CFLAGS) -c $< -o $@
+>>>>>>> gnl/master
 
 clean:
 	$(RM) $(OBJS)
 
 fclean: clean
+<<<<<<< HEAD
 	$(RM) $(LIBFT) $(TEST_DIR)/$(LIBFT)
 
 re: fclean all test
@@ -81,3 +114,8 @@ re: fclean all test
 #		ln -s ../$(DEPS) $(notdir $(DEPS)); \
 #	fi
 #	@make -C $(TEST_DIR)
+=======
+	$(RM) $(NAME)
+
+re: fclean all
+>>>>>>> gnl/master
