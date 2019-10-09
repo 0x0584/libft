@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 01:22:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 18:24:50 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/09 15:30:32 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef void						*t_obj;
 */
 
 typedef struct s_list				t_list;
+typedef struct s_list				*t_lst;
 typedef struct s_list				*t_plist;
 
 #endif
