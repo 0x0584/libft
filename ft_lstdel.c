@@ -6,11 +6,17 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 07:46:28 by archid-           #+#    #+#             */
-/*   Updated: 2019/04/08 10:32:23 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/11 06:06:55 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	lstdel_helper(void *content, size_t size)
+{
+	if (size)
+		free(content);
+}
 
 void	ft_lstdel(t_list **alst, void (*del)(void*, size_t))
 {
