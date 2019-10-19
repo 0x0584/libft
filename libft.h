@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/11 06:07:18 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/19 13:58:07 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ struct			s_list
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
+};
+
+struct			s_list_container
+{
+	struct t_list *head;
+	struct t_list *tail;
 };
 
 enum			e_string_position
@@ -132,6 +138,8 @@ int				ft_lstpush(t_list **alst, t_list *e);
 size_t			ft_lstlen(t_list *lst);
 void			ft_lst_mergesort(t_plist *alst, int (cmp)(t_plist, t_plist));
 void			lstdel_helper(void *content, size_t size);
+void			lstiter_helper_as_int(t_list *nb);
+t_list			*ft_lstdup(t_list *lst);
 
 t_list			*ft_lstpeek(t_list **alst);
 t_list			*ft_lstpop(t_list **alst);
