@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 19:26:20 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 18:21:12 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/22 03:50:50 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_list			*ft_lstpeek(t_list **alst)
 			*alst = foo->next;
 		else
 			*alst = NULL;
+		foo->next = NULL;
 		return (foo);
 	}
 	return (NULL);

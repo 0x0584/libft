@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 05:19:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/19 13:05:57 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/19 18:04:06 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	lstiter_helper_as_int(t_list *nb)
 {
 	if (nb)
+	{
 		ft_putnumber(*((int *)nb->content));
+		ft_putendl("");
+	}
 }
 
 void	ft_lstiter_recu(t_list *lst, void (*f)(t_list *elem))
