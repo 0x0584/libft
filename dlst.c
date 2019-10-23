@@ -1,18 +1,17 @@
 #include "dlst.h"
 
-t_dlst_node		*ft_dlstnew(void *blob, size_t size, int (*type)(void *))
+t_dlst		ft_dlstnew(void *blob, size_t size)
 {
-	t_dlst_node *lst;
+	t_dlst lst;
 
-	if (!(lst = ALLOC(t_dlst_node *, 1, sizeof(t_dlst_node))))
+	if (!(lst = ALLOC(t_dlst, 1, sizeof(t_dlst_node))))
 		return (NULL);
 	lst->blob = blob ? ft_memdup(blob, size) : NULL;
 	lst->size = blob ? size : 0;
-	lst->type = type;
 	return (lst);
 }
 
-void			ft_dlstdel(void (*del)(void *, size_t), t_dlst *alst)
+void			ft_dlstdel(t_delfunc del, t_dlst *alst)
 {
 	t_dlst walk;
 	t_dlst tmp;
@@ -22,7 +21,6 @@ void			ft_dlstdel(void (*del)(void *, size_t), t_dlst *alst)
 	walk = *alst;
 	while (walk)
 	{
-		ft_putendl("here");
 		tmp = walk;
 		walk = walk->next;
 		ft_dlstdelone(del, &tmp);
@@ -30,7 +28,7 @@ void			ft_dlstdel(void (*del)(void *, size_t), t_dlst *alst)
 	*alst = NULL;
 }
 
-void			ft_dlstdelone(void (*del)(void *, size_t), t_dlst *anode)
+void		ft_dlstdelone(void (*del)(void *, size_t), t_dlst *anode)
 {
 	if (!SAFE_PTRVAL(anode))
 		return ;
@@ -43,42 +41,38 @@ void			ft_dlstdelone(void (*del)(void *, size_t), t_dlst *anode)
 	*anode = NULL;
 }
 
-void			ft_dlstpush(t_dlst *alst, t_dlst_node *e)
+t_dlst		ft_dlstpush(t_dlst *alst, t_dlst e)
 {
 	t_dlst walk;
 
-	if (!alst)
-		return ;
+	if (!alst || !e)
+		return (NULL);
 	if (!*alst)
-	{
-		*alst = e;
-		return ;
-	}
+		return (*alst = e);
 	walk = *alst;
 	while (walk->next)
 		walk = walk->next;
 	e->prev = walk;
 	walk->next = e;
+	return (e);
 }
 
-void			ft_dlstadd(t_dlst *alst, t_dlst_node *e)
+t_dlst		ft_dlstadd(t_dlst *alst, t_dlst e)
 {
 	t_dlst tmp;
 
-	if (!alst)
-		return ;
-	if (!*alst)
-	{
-		*alst = e;
-		return ;
-	}
+	if (!alst || !e)
+		return (NULL);
+	else if (!*alst)
+		return (*alst = e);
 	tmp = *alst;
 	tmp->prev = e;
 	*alst = e;
 	e->next = tmp;
+	return (e);
 }
 
-t_dlst_node			*ft_dlstpop(t_dlst *alst)
+t_dlst		ft_dlstpop(t_dlst *alst)
 {
 	t_dlst poped;
 	t_dlst walk;
@@ -91,10 +85,12 @@ t_dlst_node			*ft_dlstpop(t_dlst *alst)
 	if (walk->prev)
 		walk->prev->next = walk->next;
 	poped = walk;
-	return poped;
+	poped->next = NULL;
+	poped->prev = NULL;
+	return (poped);
 }
 
-t_dlst_node			*ft_dlstpeek(t_dlst *alst)
+t_dlst		ft_dlstpeek(t_dlst *alst)
 {
 	t_dlst peeked;
 	t_dlst tmp;
@@ -106,5 +102,7 @@ t_dlst_node			*ft_dlstpeek(t_dlst *alst)
 	if (tmp->next)
 		tmp->next->prev = tmp->prev;
 	*alst = tmp->next;
-	return peeked;
+	peeked->next = NULL;
+	peeked->prev = NULL;
+	return (peeked);
 }
