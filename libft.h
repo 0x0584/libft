@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/19 13:58:07 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/24 03:33:22 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@
 # define GET_DIGI(i)						((i) - '0')
 # define TO_DIGI(i)							((i) + '0')
 
+# define BUFF_SIZE							512
+
+typedef enum	e_read_states
+{
+	failure = -1, eof, success,
+}				t_state;
+
 struct			s_list
 {
 	void			*content;
@@ -57,6 +64,8 @@ enum			e_string_position
 	TOWARD_HEAD = true,
 	TOWARD_TAIL = false
 };
+
+int				gnl(const int fd, char **line);
 
 void			*ft_memset(void *s, int c, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
@@ -101,6 +110,7 @@ int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
+void			ft_strtolower(char **str);
 size_t			ft_strlcat(char *s1, const char *s2, size_t len);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strmap(char const *s, char (*f)(char));
