@@ -48,10 +48,11 @@ t_dlst		ft_dlstpush(t_dlst *alst, t_dlst e)
 	if (!alst || !e)
 		return (NULL);
 	if (!*alst)
-		return (*alst = e);
+		return (*alst = ft_dlstnulify(e));
 	walk = *alst;
 	while (walk->next)
 		walk = walk->next;
+	ft_dlstnulify(e);
 	e->prev = walk;
 	walk->next = e;
 	return (e);
@@ -64,9 +65,9 @@ t_dlst		ft_dlstadd(t_dlst *alst, t_dlst e)
 	if (!alst || !e)
 		return (NULL);
 	else if (!*alst)
-		return (*alst = e);
+		return (*alst = ft_dlstnulify(e));
 	tmp = *alst;
-	tmp->prev = e;
+	tmp->prev = ft_dlstnulify(e);
 	*alst = e;
 	e->next = tmp;
 	return (e);
@@ -85,9 +86,7 @@ t_dlst		ft_dlstpop(t_dlst *alst)
 	if (walk->prev)
 		walk->prev->next = walk->next;
 	poped = walk;
-	poped->next = NULL;
-	poped->prev = NULL;
-	return (poped);
+	return (ft_dlstnulify(poped));
 }
 
 t_dlst		ft_dlstpeek(t_dlst *alst)
@@ -96,13 +95,20 @@ t_dlst		ft_dlstpeek(t_dlst *alst)
 	t_dlst tmp;
 
 	if (!SAFE_PTRVAL(alst))
-		return NULL;
+		return (NULL);
 	tmp = *alst;
 	peeked = tmp;
 	if (tmp->next)
 		tmp->next->prev = tmp->prev;
 	*alst = tmp->next;
-	peeked->next = NULL;
-	peeked->prev = NULL;
-	return (peeked);
+	return ft_dlstnulify(peeked);
+}
+
+t_dlst		ft_dlstnulify(t_dlst node)
+{
+	if (!node)
+		return NULL;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }

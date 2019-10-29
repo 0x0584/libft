@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 01:22:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/09 15:30:32 by archid-          ###   ########.fr       */
+/*   Updated: 2019/10/29 00:50:14 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include <limits.h>
 
 # define INT_VALMAX					(2147483647)
 # define INT_VALMIN					(-2147483648)
