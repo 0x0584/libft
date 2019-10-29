@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/10/23 05:16:11 by archid-          ###   ########.fr        #
+#    Updated: 2019/10/29 18:57:55 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -15,10 +15,10 @@ DEBUG	= 1
 NAME	= libft.a
 RM		= rm -f
 
-DEPS	= libft.h
-SRCS	= $(shell find . -type f -name "*.c")
+DEPS	= $(shell find . -type f -name '*.h' | cut -c 3-)
+SRCS	= $(shell find . -type f -name "*.c" | cut -c 3-)
 OBJDIR	= obj
-OBJS	= $(patsubst %.c, %.o, $(SRCS))
+OBJS	= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra
@@ -38,8 +38,9 @@ $(NAME): $(OBJS)
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
 
-%.o: %.c $(DEPS)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJDIR)/%.o: %.c $(DEPS)
+	@mkdir -p  $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean:
 	@$(RM) $(notdir $(OBJS))

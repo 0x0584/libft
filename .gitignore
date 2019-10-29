@@ -199,4 +199,4 @@ flycheck_*.el
 *.rss
 *.xhtml
 
-# End of https://www.gitignore.io/api/c,web,linux,emacs,images
+# End of https://www.gitignore.io/api/c,web,linux,emacs,images.DS_Store
