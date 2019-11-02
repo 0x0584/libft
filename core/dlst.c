@@ -11,7 +11,7 @@ t_dlst		ft_dlstnew(void *blob, size_t size)
 	return (lst);
 }
 
-void			ft_dlstdel(t_delfunc del, t_dlst *alst)
+void		ft_dlstdel(t_delfunc del, t_dlst *alst)
 {
 	t_dlst walk;
 	t_dlst tmp;
@@ -52,8 +52,7 @@ t_dlst		ft_dlstpush(t_dlst *alst, t_dlst e)
 	walk = *alst;
 	while (walk->next)
 		walk = walk->next;
-	ft_dlstnulify(e);
-	e->prev = walk;
+	ft_dlstset(walk, e, walk->next);
 	walk->next = e;
 	return (e);
 }
@@ -66,10 +65,13 @@ t_dlst		ft_dlstadd(t_dlst *alst, t_dlst e)
 		return (NULL);
 	else if (!*alst)
 		return (*alst = ft_dlstnulify(e));
+	ft_dlstnulify(e);
 	tmp = *alst;
-	tmp->prev = ft_dlstnulify(e);
+	ft_dlstset(tmp->prev, e, tmp);
+	if (tmp->prev)
+		tmp->prev->next = e;
+	tmp->prev = e;
 	*alst = e;
-	e->next = tmp;
 	return (e);
 }
 
@@ -79,7 +81,7 @@ t_dlst		ft_dlstpop(t_dlst *alst)
 	t_dlst walk;
 
 	if (!SAFE_PTRVAL(alst))
-		return NULL;
+		return (NULL);
 	walk = *alst;
 	while (walk->next)
 		walk = walk->next;
@@ -101,7 +103,16 @@ t_dlst		ft_dlstpeek(t_dlst *alst)
 	if (tmp->next)
 		tmp->next->prev = tmp->prev;
 	*alst = tmp->next;
-	return ft_dlstnulify(peeked);
+	return (ft_dlstnulify(peeked));
+}
+
+t_dlst		ft_dlstset(t_dlst prev, t_dlst node, t_dlst next)
+{
+	if (!node)
+		return (NULL);
+	node->prev = prev;
+	node->next = next;
+	return (node);
 }
 
 t_dlst		ft_dlstnulify(t_dlst node)
@@ -134,4 +145,72 @@ void		ft_dlstiter(t_dlst lst, void (*callback)(t_dlst))
 		(*callback)(lst);
 		lst = lst->next;
 	}
+}
+
+
+static t_dlst		helper_merge(t_dlst left, t_dlst right,
+								 int (cmp)(t_dlst, t_dlst))
+{
+	t_dlst root;
+	bool	sort_on_left;
+
+	if (!left || !right)
+		return (!left ? right : left);
+	sort_on_left = cmp(left, right) > 0;
+	root = sort_on_left ? left : right;
+	root->next = helper_merge(sort_on_left ? left->next : left,
+							  sort_on_left ? right : right->next,
+							  cmp);
+	return (root);
+}
+
+static void			helper_halfsplit(t_dlst root, t_dlst *ahead,
+										t_dlst *atail)
+{
+	t_dlst foo;
+	t_dlst bar;
+
+	bar = root;
+	foo = root->next;
+	while (foo)
+	{
+		foo = foo->next;
+		if (foo)
+		{
+			bar = bar->next;
+			foo = foo->next;
+		}
+	}
+	*ahead = root;
+	*atail = bar->next;
+	bar->next = NULL;
+}
+
+static void		helper_fix_prev(t_dlst lst)
+{
+	t_dlst prev;
+
+	if (lst == NULL)
+		return ;
+	lst->prev = NULL;
+	prev = NULL;
+	while (lst)
+	{
+		lst->prev = prev;
+		prev = lst;
+		lst = lst->next;
+	}
+}
+
+void				ft_dlstmergesort(t_dlst *alst, int (cmp)(t_dlst, t_dlst))
+{
+	t_dlst left;
+	t_dlst right;
+
+	if (!alst || !*alst || !(*alst)->next)
+		return ;
+	helper_halfsplit(*alst, &left, &right);
+	ft_dlstmergesort(&left, cmp);
+	ft_dlstmergesort(&right, cmp);
+	helper_fix_prev(*alst = helper_merge(left, right, cmp));
 }

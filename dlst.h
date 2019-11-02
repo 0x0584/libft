@@ -29,5 +29,6 @@ t_dlst			ft_dlstnulify(t_dlst node);
 t_dlst			ft_dlst_gettail(t_dlst head);
 
 void			ft_dlstiter(t_dlst lst, void (*callback)(t_dlst));
-
+t_dlst			ft_dlstset(t_dlst prev, t_dlst node, t_dlst next);
+void			ft_dlstmergesort(t_dlst *alst, int (cmp)(t_dlst, t_dlst));
 #endif
