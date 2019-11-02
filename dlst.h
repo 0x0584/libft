@@ -26,5 +26,8 @@ t_dlst			ft_dlstpop(t_dlst *alst);
 t_dlst			ft_dlstadd(t_dlst *alst, t_dlst e);
 t_dlst			ft_dlstpeek(t_dlst *alst);
 t_dlst			ft_dlstnulify(t_dlst node);
+t_dlst			ft_dlst_gettail(t_dlst head);
+
+void			ft_dlstiter(t_dlst lst, void (*callback)(t_dlst));
 
 #endif

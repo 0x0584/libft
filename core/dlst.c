@@ -112,3 +112,26 @@ t_dlst		ft_dlstnulify(t_dlst node)
 	node->prev = NULL;
 	return (node);
 }
+
+t_dlst		ft_dlst_gettail(t_dlst head)
+{
+	t_dlst tail;
+
+	if (!head)
+		return (NULL);
+	tail = head;
+	while (tail->next)
+		tail = tail->next;
+	return (tail);
+}
+
+void		ft_dlstiter(t_dlst lst, void (*callback)(t_dlst))
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		(*callback)(lst);
+		lst = lst->next;
+	}
+}
