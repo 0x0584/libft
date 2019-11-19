@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/17 16:19:38 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/19 15:51:40 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,7 @@ int				ft_swap(void *u, void *v, size_t size);
 
 char			*ft_itoa_base(t_s128 nb, const char *base);
 char			*ft_utoa_base(t_u128 nb, const char *base);
+
+void			**ft_lst_content_asarray(t_lst head, size_t *size);
 
 #endif
