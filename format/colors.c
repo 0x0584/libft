@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 18:38:13 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 18:54:07 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/19 17:05:20 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,18 @@ static char *g_all_colors[][2] =
 static char		*get_color(char *buff)
 {
 	t_s16 i;
+	char *s;
 
+	s = ft_strdup(buff);
+	ft_strtolower(&s);
 	i = 0;
 	while (buff && g_all_colors[i][0])
 	{
-		if (!ft_strcmp(g_all_colors[i][0], buff))
+		if (!ft_strcmp(g_all_colors[i][0], s))
 			return (g_all_colors[i][1]);
 		i++;
 	}
+	free(s);
 	return (NULL);
 }
 

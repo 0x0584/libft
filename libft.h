@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/19 15:51:40 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/19 17:20:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ void			ft_strappend(char **astr, const char *s);
 char			*ft_strnonprintable(const char *str);
 
 int				ft_atoi(const char *s);
-t_s128			ft_atoll(const char *s);
+long			ft_atol(const char *s);
+
 int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 void			ft_striter(char *s, void (*f)(char *));

@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_digitcount_128bit.c                             :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/19 03:23:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 18:27:59 by archid-          ###   ########.fr       */
+/*   Created: 2019/07/22 04:39:36 by archid-           #+#    #+#             */
+/*   Updated: 2019/11/20 23:28:02 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_s32		ft_digitcount_128bit(t_s128 n)
-{
-	t_s32	count;
-	t_u128	u;
+/*
+** legacy code
+*/
 
-	if (n == 0)
-		return (1);
-	u = (n < 0) ? -n : n;
-	count = 1 + (n < 0);
-	while (u / 10)
-	{
-		u /= 10;
-		count++;
-	}
-	return (count);
+long	ft_atol(const char *s)
+{
+	long	result;
+	long	sign;
+	char	*str;
+	size_t	len;
+
+	sign = 1;
+	str = (char *)s;
+	while (ft_isspace(*str))
+		str++;
+	if ((*str == '-' || *str == '+') && (*str++ == '-'))
+		sign = -1;
+	len = 0;
+	while (ft_isdigit(str[len]))
+		len++;
+	result = 0;
+	while (ft_isdigit(*str))
+		result += ft_power(10, --len) * (*str++ - '0');
+	return ((long)result * sign);
 }

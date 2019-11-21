@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/10/29 18:57:55 by archid-          ###   ########.fr        #
+#    Updated: 2019/11/19 16:49:43 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -26,7 +26,7 @@ CFLAGS	= -Wall -Wextra
 YLW		= \033[0;33m[o]\033[0m
 
 ifeq ($(DEBUG), 1)
-	CFLAGS += -ggdb
+	CFLAGS += -g
 else
 	CFLAGS += -Werror
 endif
