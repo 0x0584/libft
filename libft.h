@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/19 17:20:54 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/22 18:46:18 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,4 +178,18 @@ char			*ft_utoa_base(t_u128 nb, const char *base);
 
 void			**ft_lst_content_asarray(t_lst head, size_t *size);
 
+/* binary search */
+
+int				ascending_order(int a, int b);
+int				descending_order(int a, int b);
+int				binary_search(int val, int *arr, size_t size,
+							  int cmp(int, int));
+int				binary_search_recu(int val, int *arr, size_t low,
+								   size_t high, int (*cmp)(int, int));
+int				binary_search_rot(int val, int *arr ,size_t low,
+								  size_t high, int (*cmp)(int, int));
+int				binary_search_find_min(int *arr, size_t low, size_t high,
+									   int (*cmp)(int, int));
+int				binary_search_range(int val, int *arr, size_t low,
+									size_t high, int (*cmp)(int, int));
 #endif
