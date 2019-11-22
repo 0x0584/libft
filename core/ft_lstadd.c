@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 07:53:21 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 18:22:07 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/22 23:43:29 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		ft_lstadd(t_list **alst, t_list *new)
 	if (!alst)
 		return (0);
 	else if (!*alst)
+	{
 		*alst = new;
+		new->next = NULL;
+	}
 	return (1);
 }

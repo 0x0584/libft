@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/22 18:46:18 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/22 23:50:18 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@
 # define TO_DIGI(i)							((i) + '0')
 
 # define BUFF_SIZE							512
+
+/*
+   FIXME: adjust list function
+   fix bugs && so that they can handle lists instead of nodes
+*/
 
 typedef enum	e_read_states
 {
@@ -177,6 +182,7 @@ char			*ft_itoa_base(t_s128 nb, const char *base);
 char			*ft_utoa_base(t_u128 nb, const char *base);
 
 void			**ft_lst_content_asarray(t_lst head, size_t *size);
+int				*ft_lst_int_asarray(t_lst head, size_t *size);
 
 /* binary search */
 
