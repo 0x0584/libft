@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_digitcount_128bit.c                             :+:      :+:    :+:   */
+/*   ft_lst_content_asarray.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/19 03:23:56 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 18:27:59 by archid-          ###   ########.fr       */
+/*   Created: 2019/11/19 15:48:31 by archid-           #+#    #+#             */
+/*   Updated: 2019/11/19 15:50:55 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_s32		ft_digitcount_128bit(t_s128 n)
+void			**ft_lst_content_asarray(t_lst head, size_t *size)
 {
-	t_s32	count;
-	t_u128	u;
+	void **arr;
+	t_lst walk;
+	size_t sz;
 
-	if (n == 0)
-		return (1);
-	u = (n < 0) ? -n : n;
-	count = 1 + (n < 0);
-	while (u / 10)
+	if (!(arr = ALLOC(void **, ft_lstlen(head) + 1, sizeof(void *))))
+		return (NULL);
+	walk = head;
+	sz = 0;
+	while (walk)
 	{
-		u /= 10;
-		count++;
+		arr[sz++] = walk->content;
+		walk = walk->next;
 	}
-	return (count);
+	if (size)
+		*size = sz;
+	return (arr);
 }
