@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 23:26:01 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/22 18:35:38 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/24 22:31:30 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int binary_search_find_min(int *arr, size_t low, size_t high,
 	mid = (low + high) / 2;
 	if (low > high)
 		return (-1);
-	if (cmp(arr[low], arr[high]) < 0)
+	if (cmp(arr[low], arr[high]) < 0 || low == high)
 		return (low);
 	else if (cmp(arr[mid], arr[mid + 1]) < 0
 				&& cmp(arr[mid], arr[mid - 1]) < 0)
@@ -116,6 +116,7 @@ int binary_search_find_min(int *arr, size_t low, size_t high,
 		return binary_search_find_min(arr, low, mid - 1, cmp);
 }
 
+/* FIXME: shoudl return the index of the lowest number of rots */
 int binary_search_range(int val, int *arr, size_t low, size_t high,
 						int (*cmp)(int, int))
 {
@@ -129,9 +130,6 @@ int binary_search_range(int val, int *arr, size_t low, size_t high,
 		old_max = high;
 	else
 		old_max = old_min - 1;
-	/* ft_printf("%{blue_fg} %d %{green_fg}[%zu] -> %d " */
-	/* 		  "%{red_fg}[%zu] -> %d %{reset}\n", */
-	/* 		  val, old_min, arr[old_min], old_max, arr[old_max]); */
 	n_rots = 0;
 	if (old_min == 0)
 	{
@@ -151,85 +149,23 @@ int binary_search_range(int val, int *arr, size_t low, size_t high,
 	{
 		if (cmp(val, arr[0]) < 0 && cmp(val, arr[high]) > 0)
 				return 0;
+		if (cmp(val, arr[old_min]) < 0 || cmp(val, arr[old_max]) > 0)
+		{
+			n_rots = high - old_min - 1;
+			if (n_rots < 0 && ABS(n_rots) < old_max + 1)
+				return n_rots;
+			else
+				return (old_max + 1);
+		}
 		while (n_rots++ < (int)high / 2)
 		{
-			if (n_rots == (int)old_min)
-			{
-				if (cmp(val, arr[old_min]) < 0
-						|| cmp(val, arr[old_max]) > 0)
-					return (n_rots);
-			}
 			if (cmp(val, arr[n_rots]) < 0
 					&& cmp(val, arr[n_rots - 1]) > 0)
 				return n_rots;
-			else if (cmp(val, arr[high - n_rots + 1]) < 0
+			if (cmp(val, arr[high - n_rots + 1]) < 0
 					 && cmp(val, arr[high - n_rots]) > 0)
 				return (n_rots * (-1));
 		}
 	}
 	return (n_rots);
 }
-
-/* int main(int argc, char **argv) */
-/* { */
-/* 	int	*arr; */
-/* 	int i; */
-/* 	size_t size; */
-
-/* 	i = 0; */
-/* 	if (argc == 1 || !(arr = ALLOC(int *, argc - 1, sizeof(int)))) */
-/* 		return (-1); */
-/* 	size = argc - 1; */
-/* 	while (i < argc - 1) */
-/* 	{ */
-/* 		arr[i] = ft_atoi(argv[i + 1]); */
-/* 		i++; */
-/* 	} */
-
-/* 	/\* */
-
-/* 	size_t j = 0; */
-
-/* 	while (j < size) */
-/* 	{ */
-/* 		i = binary_search_rot(arr[j], arr, 0, size - 1, ascending_order); */
-/* 		if (i == -1) */
-/* 			ft_printf("%d not found.\n\n", arr[j]); */
-/* 		else */
-/* 			ft_printf("[%d] -> %{green_fg}%d %{yellow_fg}%d%{reset}\n\n", */
-/* 					  i, arr[i], arr[j]); */
-/* 		j++; */
-/* 	} */
-
-/* 	i = binary_search_find_min(arr, 0, size - 1, ascending_order); */
-/* 	if (i == -1) */
-/* 		ft_printf("%d not found.\n\n", arr[j]); */
-/* 	else */
-/* 		ft_printf("[%d] -> %{cyan_fg}%d%{reset}\n\n", */
-/* 				  i, arr[i]); */
-
-/* 	*\/ */
-
-/* 	char *str = NULL; */
-/* 	int val; */
-
-/* 	while (gnl(0, &str)) */
-/* 	{ */
-/* 		val = ft_atoi(str); */
-/* 		i = binary_search_range(val, arr, 0, size - 1, ascending_order); */
-
-/* 		ft_printf("%{yellow_fg}n_rots: %d%{reset} -> ", i); */
-
-/* 		if (i == 0) */
-/* 			ft_printf("%{cyan_fg}[%d] %d [%d]%{reset}\n", arr[i], */
-/* 					  val, arr[size - 1]); */
-/* 		if (i > 0) */
-/* 			ft_printf("%{cyan_fg}[%d] %d [%d]%{reset}\n", arr[i - 1], */
-/* 					  val, arr[i]); */
-/* 		else */
-/* 			ft_printf("%{cyan_fg}[%d] %d [%d]%{reset}\n", arr[size - 1 + i], */
-/* 					  val, arr[size - 1 + i + 1]); */
-
-/* 		ft_strdel(&str); */
-/* 	} */
-/* } */
