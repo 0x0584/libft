@@ -6,24 +6,56 @@
 #    By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 23:13:45 by archid-           #+#    #+#              #
-#    Updated: 2019/11/26 18:00:36 by archid-          ###   ########.fr        #
+#    Updated: 2019/11/27 11:12:30 by archid-          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-ARGS		= 1 5 4 2 7 3 8
-CORE_SRCS 	= src/op.c src/ps.c src/reader.c src/ops.c src/bs.c
-PUSH_SWAP	= src/push_swap.c
-CHECKER 	= src/checker.c
+FTDIR		= libft
+SRCDIR		= src
+DEPSDIR		= include
+COREDIR		= $(SRCDIR)/core
 
-CFLAGS		= -g -Wall -Wextra
-LDFLAGS 	= -Iinclude -Ilibft -Llibft -lft
+CORESRCS 	= $(shell find $(COREDIR) -name '*.c' -type f)
+COREOBJS	= $(patsubst $(COREDIR)/%.c, $(COREDIR)/%.o, $(CORESRCS))
 
-all:
-	@make -C libft
-	gcc $(CFLAGS) $(CORE_SRCS) $(PUSH_SWAP) -o push_swap $(LDFLAGS)
-	gcc $(CFLAGS) $(CORE_SRCS) $(CHECKER) -o checker $(LDFLAGS)
+PUSH_SWAP	= $(SRCDIR)/push_swap.c
+CHECKER 	= $(SRCDIR)/checker.c
 
-it: all
-	./checker $(ARGS) < ./push_swap $(ARGS)
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+LDFT		= -L$(FTDIR) -lft
+DEPS		= -I$(DEPSDIR) -I$(FTDIR)
 
-.PHONY: all it
+MIN			= -1000
+MAX			= 1000
+N_ELEMS		= 100
+
+all: init push_swap checker
+
+push_swap: init
+	@$(CC) $(CFLAGS) $(COREOBJS) $(PUSH_SWAP) -o push_swap $(DEPS) $(LDFT)
+
+checker: init
+	@$(CC) $(CFLAGS) $(COREOBJS) $(CHECKER) -o checker $(DEPS) $(LDFT)
+
+init: $(COREOBJS)
+	@make -C $(FTDIR)
+
+$(COREDIR)/%.o: $(COREDIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(DEPS)
+
+clean:
+	@make -C $(FTDIR) clean
+	$(shell find $(COREDIR) -name '*.o' -type f -delete)
+
+fclean:
+	@make -C $(FTDIR) fclean
+	$(shell find $(COREDIR) -name '*.o' -type f -delete)
+	@rm -rf push_swap* checker*
+
+re: fclean all
+
+gen:
+	@ruby -e "puts ($(MIN)..$(MAX)).to_a.shuffle.take($(N_ELEMS)).join(' ')"
+
+.PHONY: all clean init push_swap checker gen
