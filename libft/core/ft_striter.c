@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 05:14:42 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 16:23:33 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:54:43 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_striter(char *s, void (*f)(char *))
 	while (s && s[i] && f)
 		(*f)(&s[i++]);
 }
-
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {

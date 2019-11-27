@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 20:42:23 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 18:25:45 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:28:53 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 int		main(int argc, char *argv[])
 {
-    t_ps	ps_a, ps_b;
+	t_ps	ps_a;
+	t_ps	ps_b;
 	t_lst	ops;
 	t_lst	walk;
 
@@ -38,5 +39,5 @@ int		main(int argc, char *argv[])
 	ft_lstdel(&ops, lstdel_helper);
 	ps_del(&ps_a);
 	ps_del(&ps_b);
-    return (0);
+	return (0);
 }

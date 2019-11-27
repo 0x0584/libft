@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:18:20 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 19:17:02 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:35:22 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ t_lst	gen_ops(t_ps_array arr, t_ps b, int b_rots, t_ps_node *node)
 	j = 0;
 	i = 0;
 	ops = NULL;
-	node->a_cost = binary_search_range(node->value, arr.base,
-										0, arr.size - 1);
+	node->a_cost = find_range(node->value, arr.base, 0, arr.size - 1);
 	if (b_rots > (int)(b->len - 1) / 2)
 		b_rots -= (int)b->len;
 	node->b_cost = b_rots;
@@ -105,7 +104,7 @@ void	push_swap(t_ps a, t_ps b, t_lst *ops)
 		b_rots = 0;
 		walk = b->stack;
 		arr = ps_vals_asarray(a);
- 		while (walk)
+		while (walk)
 		{
 			tmp_ops[1] = gen_ops(arr, b, b_rots++, walk->content);
 			take_best_ops(&tmp_ops[0], &tmp_ops[1]);
@@ -118,12 +117,13 @@ void	push_swap(t_ps a, t_ps b, t_lst *ops)
 
 int		main(int argc, char **argv)
 {
-	t_ps ps_a;
-	t_ps ps_b;
-	t_lst ops;
+	t_ps	ps_a;
+	t_ps	ps_b;
+	t_lst	ops;
 
-	if (!(ps_a = read_args(argc, argv)) || !(ps_b = ps_alloc('b', ps_a->size)))
-		return EXIT_FAILURE;
+	if (!(ps_a = read_args(argc, argv))
+			|| !(ps_b = ps_alloc('b', ps_a->size)))
+		return (EXIT_FAILURE);
 	ops = NULL;
 	if (ps_issorted(ps_a, ps_b))
 		return (EXIT_SUCCESS);

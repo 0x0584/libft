@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 18:38:13 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 03:37:01 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:53:02 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static char *g_all_colors[][2] =
 
 static char		*get_color(char *buff)
 {
-	t_s16 i;
-	char *s;
-	char *ret;
+	t_s16	i;
+	char	*s;
+	char	*ret;
 
 	s = ft_strdup(buff);
 	ft_strtolower(&s);

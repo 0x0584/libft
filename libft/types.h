@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 01:22:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/25 23:20:55 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:45:58 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef void						*t_obj;
 
 typedef struct s_int_array			t_intarr;
 typedef enum e_read_states			t_state;
-
 
 typedef struct s_list				t_list;
 typedef struct s_list				*t_lst;

@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 03:41:51 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 19:15:09 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:33:12 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	op_isvalid(char const *str, t_op *op)
 	return (OP_IS_GOOD(op));
 }
 
-bool		op_apply(t_op op, t_ps foo, t_ps bar)
+bool	op_apply(t_op op, t_ps foo, t_ps bar)
 {
 	if (op.op == OP_PUSH)
 		return (op_dopsh(!op.which ? foo : bar, !op.which ? bar : foo));

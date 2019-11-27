@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 21:36:42 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 18:25:59 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:33:24 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static long	get_numeric_val(char *str)
 	return (val >= INT_MIN && val <= INT_MAX ? val : LONG_MIN);
 }
 
-t_ps		read_args(int ac, char**av)
+t_ps		read_args(int ac, char **av)
 {
 	t_ps_node	node;
 	t_ps		ps;

@@ -6,14 +6,14 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 03:22:14 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/26 19:07:21 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:50:05 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 #include "op.h"
 
-t_ps	ps_alloc(char symb, size_t size)
+t_ps		ps_alloc(char symb, size_t size)
 {
 	t_ps ps;
 
@@ -21,12 +21,10 @@ t_ps	ps_alloc(char symb, size_t size)
 		return (NULL);
 	ps->symb = symb;
 	ps->size = size;
-	ps->max = (t_ps_node){INT_MIN, 0, 0};
-	ps->min = (t_ps_node){INT_MAX, 0, 0};
 	return (ps);
 }
 
-void	ps_del(t_ps *aps)
+void		ps_del(t_ps *aps)
 {
 	if (!SAFE_PTRVAL(aps))
 		return ;
@@ -35,7 +33,7 @@ void	ps_del(t_ps *aps)
 	*aps = NULL;
 }
 
-bool	ps_issorted(t_ps ps_a, t_ps ps_b)
+bool		ps_issorted(t_ps ps_a, t_ps ps_b)
 {
 	t_lst walk;
 
@@ -52,13 +50,13 @@ bool	ps_issorted(t_ps ps_a, t_ps ps_b)
 	return (true);
 }
 
-void	ps_sort_few(t_ps a, t_ps b, t_lst *ops)
+void		ps_sort_few(t_ps a, t_ps b, t_lst *ops)
 {
 	t_ps_array arr;
 
 	arr = ps_vals_asarray(a);
 	if (arr.size == 2 && arr.base[0] > arr.base[1])
-		return op_save(OP_INIT(OP_SWAP, APPLY_ON_A), ops, a, b);
+		return (op_save(OP_INIT(OP_SWAP, APPLY_ON_A), ops, a, b));
 	if (arr.base[0] > arr.base[1] && arr.base[1] < arr.base[2])
 		op_save(OP_INIT(arr.base[0] > arr.base[2] ? OP_ROT : OP_SWAP,
 								APPLY_ON_A), ops, a, b);
