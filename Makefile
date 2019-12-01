@@ -1,61 +1,53 @@
 #******************************************************************************#
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/11/01 23:13:45 by archid-           #+#    #+#              #
-#    Updated: 2019/11/27 11:12:30 by archid-          ###   ########.fr        #
-#                                                                              #
+#																			   #
+#														  :::	   ::::::::	   #
+#	 Makefile											:+:		 :+:	:+:	   #
+#													  +:+ +:+		  +:+	   #
+#	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
+#												  +#+#+#+#+#+	+#+			   #
+#	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
+#    Updated: 2019/11/26 00:34:49 by archid-          ###   ########.fr        #
+#																			   #
 #******************************************************************************#
 
-FTDIR		= libft
-SRCDIR		= src
-DEPSDIR		= include
-COREDIR		= $(SRCDIR)/core
+DEBUG	= 1
 
-CORESRCS 	= $(shell find $(COREDIR) -name '*.c' -type f)
-COREOBJS	= $(patsubst $(COREDIR)/%.c, $(COREDIR)/%.o, $(CORESRCS))
+NAME	= libft.a
+RM		= rm -f
 
-PUSH_SWAP	= $(SRCDIR)/push_swap.c
-CHECKER 	= $(SRCDIR)/checker.c
+DEPS	= $(shell find . -type f -name '*.h' | cut -c 3-)
+SRCS	= $(shell find . -type f -name "*.c" | cut -c 3-)
+OBJDIR	= obj
+OBJS	:= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
-LDFT		= -L$(FTDIR) -lft
-DEPS		= -I$(DEPSDIR) -I$(FTDIR)
+CC		= gcc
+CFLAGS	= -Wall -Wextra
 
-MIN			= -1000
-MAX			= 1000
-N_ELEMS		= 100
+YLW		= \033[0;33m[o]\033[0m
 
-all: init push_swap checker
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g
+else
+	CFLAGS += -Werror
+endif
 
-push_swap: init
-	@$(CC) $(CFLAGS) $(COREOBJS) $(PUSH_SWAP) -o push_swap $(DEPS) $(LDFT)
+all: $(NAME)
 
-checker: init
-	@$(CC) $(CFLAGS) $(COREOBJS) $(CHECKER) -o checker $(DEPS) $(LDFT)
-
-init: $(COREOBJS)
-	@make -C $(FTDIR)
-
-$(COREDIR)/%.o: $(COREDIR)/%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(DEPS)
+$(NAME): $(OBJS)
+#	@printf "$(YLW) archiving $(NAME)..\n"
+	@rm -rf $(NAME)
+	@ar rc $(NAME) $^
+$(OBJDIR)/%.o: %.c $(DEPS)
+	@mkdir -p  $(@D)
+#	@printf "compiling $<\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean:
-	@make -C $(FTDIR) clean
-	$(shell find $(COREDIR) -name '*.o' -type f -delete)
+	@$(RM) $(shell find $(OBJDIR) -name '*.o')
 
-fclean:
-	@make -C $(FTDIR) fclean
-	$(shell find $(COREDIR) -name '*.o' -type f -delete)
-	@rm -rf push_swap* checker*
+fclean: clean
+	@$(RM) $(NAME)
 
 re: fclean all
 
-gen:
-	@ruby -e "puts ($(MIN)..$(MAX)).to_a.shuffle.take($(N_ELEMS)).join(' ')"
-
-.PHONY: all clean init push_swap checker gen
+.PHONY: setup all clean fclean re
