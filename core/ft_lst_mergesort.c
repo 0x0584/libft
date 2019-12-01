@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:54:41 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/19 13:59:45 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:54:54 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_lst		helper_merge(t_lst left, t_lst right,
 									int (cmp)(t_lst, t_lst))
 {
-	t_lst root;
+	t_lst	root;
 	bool	sort_on_left;
 
 	if (!left || !right)
