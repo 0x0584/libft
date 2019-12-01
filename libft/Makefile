@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/12/01 19:42:53 by archid-          ###   ########.fr        #
+#    Updated: 2019/11/26 00:34:49 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -34,13 +34,13 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@printf "$(YLW) archiving $(NAME)..\n"
+#	@printf "$(YLW) archiving $(NAME)..\n"
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
 #	@printf "compiling $<\n"
-	$(CC) $(CFLAGS) -c $< -o $@ -I.
+	@$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean:
 	@$(RM) $(shell find $(OBJDIR) -name '*.o')
