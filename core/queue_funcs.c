@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 19:26:58 by archid-           #+#    #+#             */
-/*   Updated: 2019/12/01 19:29:28 by archid-          ###   ########.fr       */
+/*   Updated: 2019/12/05 16:55:00 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_qnode 	*queue_deq(t_queue *queue)
 	node = queue->head->next;
 	node->next->prev = queue->head;
 	queue->head->next = node->next;
+	node->next = NULL;
+	node->prev = NULL;
 	return (node);
 }
 
@@ -42,20 +44,22 @@ void		queue_push_front(t_queue *queue, t_qnode *node)
 	if (!queue || !node)
 		return ;
 	node->next = queue->head->next;
-	queue->head->prev = node;
-	queue->head->next = node;
+	queue->head->next->prev = node;
 	node->prev = queue->head;
+	queue->head->next = node;
 }
 
-t_qnode 	*queue_peek(t_queue *queue)
+t_qnode 	*queue_pop(t_queue *queue)
 {
 	t_qnode *node;
 
 	if (!queue || queue->head->next == queue->tail)
 		return (NULL);
-	node = queue->head->next;
-	queue->head->next = node->next;
-	node->next->prev = queue->head;
+	node = queue->tail->prev;
+	queue->tail->prev = node->prev;
+	node->prev->next = queue->tail;
+	node->prev = NULL;
+	node->next = NULL;
 	return (node);
 }
 
