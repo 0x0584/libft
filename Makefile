@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/11/24 20:22:44 by archid-          ###   ########.fr        #
+#    Updated: 2019/12/05 14:25:01 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -34,7 +34,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@printf "$(YLW) archiving $(NAME)..\n"
+#	@printf "$(YLW) archiving $(NAME)..\n"
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
 $(OBJDIR)/%.o: %.c $(DEPS)

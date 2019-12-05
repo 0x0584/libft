@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/22 19:09:08 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 10:53:49 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static ssize_t	cached_read(const int fd, char **cache)
 	return (nbytes);
 }
 
-int			gnl (const int fd, char **line)
+int				gnl(const int fd, char **line)
 {
 	static char	*cache[0xFF] = {NULL};
 	ssize_t		nbytes;

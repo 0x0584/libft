@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/22 23:50:18 by archid-          ###   ########.fr       */
+/*   Updated: 2019/11/27 20:34:34 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LIBFT_H
 
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 
 # include "types.h"
 
@@ -41,21 +44,22 @@
 
 # define BUFF_SIZE							512
 
-/*
-   FIXME: adjust list function
-   fix bugs && so that they can handle lists instead of nodes
-*/
-
-typedef enum	e_read_states
+enum			e_read_states
 {
 	failure = -1, eof, success,
-}				t_state;
+};
 
 struct			s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
+};
+
+struct			s_int_array
+{
+	int		*base;
+	size_t	size;
 };
 
 struct			s_list_container
@@ -135,6 +139,7 @@ long			ft_atol(const char *s);
 
 int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
+void			striter_tolower(char *s);
 void			ft_striter(char *s, void (*f)(char *));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 void			ft_putchar_fd(char c, int fd);
@@ -184,18 +189,4 @@ char			*ft_utoa_base(t_u128 nb, const char *base);
 void			**ft_lst_content_asarray(t_lst head, size_t *size);
 int				*ft_lst_int_asarray(t_lst head, size_t *size);
 
-/* binary search */
-
-int				ascending_order(int a, int b);
-int				descending_order(int a, int b);
-int				binary_search(int val, int *arr, size_t size,
-							  int cmp(int, int));
-int				binary_search_recu(int val, int *arr, size_t low,
-								   size_t high, int (*cmp)(int, int));
-int				binary_search_rot(int val, int *arr ,size_t low,
-								  size_t high, int (*cmp)(int, int));
-int				binary_search_find_min(int *arr, size_t low, size_t high,
-									   int (*cmp)(int, int));
-int				binary_search_range(int val, int *arr, size_t low,
-									size_t high, int (*cmp)(int, int));
 #endif
