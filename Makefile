@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/12/05 14:25:01 by archid-          ###   ########.fr        #
+#    Updated: 2019/12/05 14:44:15 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJS)
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
 #	@printf "compiling $<\n"
-	$(CC) $(CFLAGS) -c $< -o $@ -I.
+	@$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean:
 	@$(RM) $(shell find $(OBJDIR) -name '*.o')
