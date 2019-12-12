@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 19:27:45 by archid-           #+#    #+#             */
-/*   Updated: 2019/12/05 16:42:21 by archid-          ###   ########.fr       */
+/*   Updated: 2019/12/10 20:10:59 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,15 @@ void		queue_iter_back(t_queue *q, void (*dump)(t_qnode *))
 		dump(walk);
 		walk = walk->prev;
 	}
+}
+
+t_qnode		*queue_node_init(t_qnode *e, void *blob, size_t size)
+{
+	if (!e)
+		return (NULL);
+	e->blob = blob;
+	e->size = size;
+	e->next = NULL;
+	e->prev = NULL;
+	return (e);
 }

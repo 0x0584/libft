@@ -6,18 +6,18 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/12/05 14:44:15 by archid-          ###   ########.fr        #
+#    Updated: 2019/12/10 20:07:00 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
 DEBUG	= 1
 
 NAME	= libft.a
-RM		= rm -f
+RM		= rm -rf
 
 DEPS	= $(shell find . -type f -name '*.h' | cut -c 3-)
 SRCS	= $(shell find . -type f -name "*.c" | cut -c 3-)
-OBJDIR	= obj
+OBJDIR	= .obj
 OBJS	:= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
 CC		= gcc
@@ -37,16 +37,18 @@ $(NAME): $(OBJS)
 #	@printf "$(YLW) archiving $(NAME)..\n"
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
+
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
 #	@printf "compiling $<\n"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I.
+	$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean:
-	@$(RM) $(shell find $(OBJDIR) -name '*.o')
+	@rm -rf $(OBJS)
 
-fclean: clean
-	@$(RM) $(NAME)
+fclean:
+	@rm -rf $(OBJDIR)
+	@rm -rf $(NAME)
 
 re: fclean all
 
