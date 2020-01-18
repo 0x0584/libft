@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2019/12/05 14:44:35 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/17 22:54:04 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				gnl(const int fd, char **line);
 int				ft_printf(const char *fmt, ...);
 int				ft_dprintf(const int fd, const char *fmt, ...);
 int				ft_asprintf(char **ret, const char *fmt, ...);
+int				ft_snprintf(char *astr, size_t n, const char *fmt, ...);
 
 void			*ft_memset(void *s, int c, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
