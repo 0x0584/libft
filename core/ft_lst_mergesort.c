@@ -6,14 +6,14 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:54:41 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/27 10:54:54 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/19 15:11:35 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static t_lst		helper_merge(t_lst left, t_lst right,
-									int (cmp)(t_lst, t_lst))
+									int (*cmp)(t_lst, t_lst))
 {
 	t_lst	root;
 	bool	sort_on_left;

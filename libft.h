@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/17 22:54:04 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/19 15:11:24 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void			ft_lstiter_recu(t_list *lst, void (*f)(t_list *elem));
 int				ft_lstadd(t_list **alst, t_list *new);
 int				ft_lstpush(t_list **alst, t_list *e);
 size_t			ft_lstlen(t_list *lst);
-void			ft_lst_mergesort(t_plist *alst, int (cmp)(t_plist, t_plist));
+void			ft_lst_mergesort(t_plist *alst, int (*cmp)(t_plist, t_plist));
 void			lstdel_helper(void *content, size_t size);
 void			lstiter_helper_as_int(t_list *nb);
 t_list			*ft_lstdup(t_list *lst);
