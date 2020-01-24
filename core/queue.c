@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:12:11 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/19 16:51:32 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/24 01:19:46 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,4 +317,26 @@ void queue_penq(t_queue *queue, t_qnode *node,
 	}
 	if (!inserted)
 		queue_enq(queue, node);
+}
+
+t_qnode **queue_as_array(t_queue *q, bool from_head, size_t *sz)
+{
+	t_qnode **array;
+	t_qnode *walk;
+	size_t	size;
+
+	if (!q)
+		return NULL;
+	size = 0;
+	array = malloc((queue_size(q) + 1) * sizeof(t_qnode *));
+	walk = from_head ? QFIRST(q) : QLAST(q);
+	while (walk != (from_head ? QTAIL(q) : QHEAD(q)))
+	{
+		array[size++] = walk;
+		walk = from_head ? walk->next : walk->prev;
+	}
+	array[size] = NULL;
+	if (sz)
+		*sz = size;
+	return (array);
 }

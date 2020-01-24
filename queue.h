@@ -6,7 +6,7 @@
 /*   By: melalj <melalj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 16:34:27 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/21 11:40:42 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/24 01:20:04 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ void							queue_mergesort(t_queue **q,
 													int (*cmp)(t_qnode *,
 																t_qnode *));
 bool							queue_isempty(t_queue *q);
+t_qnode							**queue_as_array(t_queue *q,
+												 bool from_head, size_t *sz);
 
 #endif
