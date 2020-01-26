@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:59:49 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/19 21:30:54 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/26 04:48:08 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@
 # define COL_DIM               "\x1b[2m"
 # define COL_ITALIC            "\x1b[3m"
 # define COL_UNDERLINE		   "\x1b[4m"
-# define COL_BLINK			   "\xb[5m"
+# define COL_BLINK			   "\x1b[5m"
 
 # define COLORS_BUFF_SIZE			11
 
-enum e_colors
+enum					e_colors
 {
 	FG_BLACK, FG_RED, FG_GREEN, FG_YELLOW, FG_BLUE,
 	FG_MAGENTA, FG_CYAN, FG_WHITE,
@@ -53,12 +53,12 @@ enum e_colors
 	RESET, BOLD, DIM, ITALIC, UNDERLINE, BLINK
 };
 
-typedef struct	s_color
+typedef struct			s_color
 {
 	char *base;
 	bool is_auto_reset;
-}				t_color;
+}						t_color;
 
-char	*get_color_name(enum e_colors col);
+char					*get_color_name(enum e_colors col);
 
 #endif

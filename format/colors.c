@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 18:38:13 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/19 21:31:53 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/26 04:47:31 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static char *g_all_colors[][2] =
 	{"dim", COL_DIM},
 	{"italic", COL_ITALIC},
 	{"underline", COL_UNDERLINE},
-	{"blink", COL_BOLD},
+	{"blink", COL_BLINK},
 
 	{NULL, NULL}
 };
 
-char	*get_color_name(enum e_colors col)
+char			*get_color_name(enum e_colors col)
 {
-	return g_all_colors[col][0];
+	return (g_all_colors[col][0]);
 }
 
 static char		*get_color(char *buff)

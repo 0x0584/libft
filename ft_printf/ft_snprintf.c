@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 22:52:11 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/22 14:50:36 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/26 05:29:03 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_snprintf(char *astr, size_t n, const char *fmt, ...)
 	ft_lstdel(&lstfrmt, format_free);
 	va_end(args);
 	if (n_chars >= 0)
-		ft_strncpy(astr, buff->base, n);
+		ft_strncpy(astr, buff->base, buff->len);
 	buff_free(&buff);
 	return (n);
 }

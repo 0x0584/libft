@@ -6,16 +6,11 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 23:26:01 by archid-           #+#    #+#             */
-/*   Updated: 2019/12/10 20:12:16 by archid-          ###   ########.fr       */
+/*   Updated: 2020/01/26 01:06:45 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-** the following binary_search function require a normal or rotated
-** sorted unique interger array
-*/
 
 int ascending_order(int a, int b)
 {
@@ -51,7 +46,7 @@ int binary_search_recu(int val, int *arr, size_t low, size_t high,
 {
 	size_t mid;
 
-	if (low > high)				/* !(low <= high) */
+	if (low > high)
 		return (-1);
 	mid = (low + high) / 2;
 	if (cmp(arr[mid], val) == 0)
@@ -79,7 +74,6 @@ int binary_search_rot(int val, int *arr ,size_t low, size_t high,
 	{
 		if (cmp(arr[low], arr[mid]) < 0)
 		{
-			/* left is sorted -- more half elements */
 			if (cmp(val, arr[low]) >= 0 && cmp(val, arr[mid]) < 0)
 				return binary_search_recu(val, arr, low, mid - 1, cmp);
 			else
@@ -87,7 +81,6 @@ int binary_search_rot(int val, int *arr ,size_t low, size_t high,
 		}
 		else
 		{
-			/* right is sorted -- less half elements */
 			if (cmp(val, arr[mid]) > 0 && cmp(val, arr[high]) <= 0)
 				return binary_search_recu(val, arr, mid + 1, high, cmp);
 			else
