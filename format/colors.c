@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 18:38:13 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/26 01:06:06 by archid-          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:06:13 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char *g_all_colors[][2] =
 	{"dim", COL_DIM},
 	{"italic", COL_ITALIC},
 	{"underline", COL_UNDERLINE},
-	{"blink", COL_BOLD},
+	{"blink", COL_BLINK},
 
 	{NULL, NULL}
 };

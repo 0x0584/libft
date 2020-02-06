@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:59:49 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/26 01:05:48 by archid-          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:06:07 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define COL_DIM               "\x1b[2m"
 # define COL_ITALIC            "\x1b[3m"
 # define COL_UNDERLINE		   "\x1b[4m"
-# define COL_BLINK			   "\xb[5m"
+# define COL_BLINK			   "\x1b[5m"
 
 # define COLORS_BUFF_SIZE			11
 
