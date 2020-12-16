@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 01:14:53 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:46:42 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:41:21 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 char	*ft_strnew(size_t size)
 {
-	return (ALLOC(char *, size + 1, sizeof(char)));
+	return (ft_calloc(size + 1, sizeof(char)));
 }

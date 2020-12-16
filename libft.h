@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/19 15:11:24 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 17:10:06 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,14 @@
 
 # include "types.h"
 
+# define BUFF_SIZE						    16384
+# define CACHE_SIZE							32
+
 # define BASE_LHEX							"0123456789abcdef"
 # define BASE_UHEX							"0123456789ABCDEF"
 # define BASE_DEC							"0123456789"
 # define BASE_OCT							"01234567"
 # define BASE_BIN							"01"
-
-# define IS_ODD(a)							((a) & 1U)
-# define IS_EVEN(a)							(!IS_ODD(a))
-
-# define ABS(x)								((x) < 0 ? (x) * -1 : (x))
-# define MAX(a, b)							((a) > (b) ? (a) : (b))
-# define MIN(a, b)							((a) < (b) ? (a) : (b))
-# define IN_RANGE(n, a, b)					(MIN(n, a) <= a && MAX(n, b) <= b)
-
-# define ALLOC(type, n, sz)					((type)ft_memalloc((n) * (sz)))
-# define SAFE_PTRVAL(ptr)					(ptr && *ptr)
-
-# define LST_NEXT(e)						e = e->next
-
-# define GET_DIGI(i)						((i) - '0')
-# define TO_DIGI(i)							((i) + '0')
-
-# define BUFF_SIZE							512
-
-enum			e_read_states
-{
-	failure = -1, eof, success,
-};
 
 struct			s_list
 {
@@ -74,7 +54,26 @@ enum			e_string_position
 	TOWARD_TAIL = false
 };
 
+typedef struct	s_cache {
+	int		fd;
+	char	*base;
+	size_t	size;
+	size_t	length;
+	size_t	index;
+}				t_cache;
+
+extern char		*g_buff;
+extern bool		g_cache_ready;
+extern t_cache	g_cache[CACHE_SIZE];
+
 int				gnl(const int fd, char **line);
+t_cache			*cache_alloc(const int fd);
+void			cache_setup(void);
+void			cache_grow(t_cache *cache);
+bool			has_line(t_cache *cache, char **line);
+void			gnl_cleanup(void);
+int				gnl_clean(const int fd);
+
 int				ft_printf(const char *fmt, ...);
 int				ft_dprintf(const int fd, const char *fmt, ...);
 int				ft_asprintf(char **ret, const char *fmt, ...);
@@ -161,7 +160,7 @@ void			ft_lstiter_recu(t_list *lst, void (*f)(t_list *elem));
 int				ft_lstadd(t_list **alst, t_list *new);
 int				ft_lstpush(t_list **alst, t_list *e);
 size_t			ft_lstlen(t_list *lst);
-void			ft_lst_mergesort(t_plist *alst, int (*cmp)(t_plist, t_plist));
+void			ft_lst_mergesort(t_list **alst, int (*cmp)(t_list *, t_list *));
 void			lstdel_helper(void *content, size_t size);
 void			lstiter_helper_as_int(t_list *nb);
 t_list			*ft_lstdup(t_list *lst);
@@ -187,7 +186,19 @@ int				ft_swap(void *u, void *v, size_t size);
 char			*ft_itoa_base(t_s128 nb, const char *base);
 char			*ft_utoa_base(t_u128 nb, const char *base);
 
-void			**ft_lst_content_asarray(t_lst head, size_t *size);
-int				*ft_lst_int_asarray(t_lst head, size_t *size);
+void			**ft_lst_content_asarray(t_list *head, size_t *size);
+int				*ft_lst_int_asarray(t_list *head, size_t *size);
+
+/*
+** ***************** added after macro ***************
+*/
+
+t_s64			max(t_s64 a, t_s64 b);
+t_s64			min(t_s64 a, t_s64 b);
+t_u64			umax(size_t a, size_t b);
+t_u64			umin(size_t a, size_t b);
+t_u64			ft_abs(t_s64 x);
+
+void			*ft_calloc(size_t n, size_t sz);
 
 #endif

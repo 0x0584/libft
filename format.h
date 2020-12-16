@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:16:27 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/30 02:46:31 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 17:13:26 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,8 @@
 # include "ieeefp.h"
 # include "colors.h"
 
-# define FLAG(fl)					(1U << fl)
-# define IS_FLAG(val, fl)			((val & FLAG(fl)) != 0)
-# define HAS_FLAG(frmt, fl)			(IS_FLAG(frmt->flags, fl))
-
-# define IS_PREFIX_SIGN(c)			(c == '+' || c == '-' || c == ' ')
-
 # define LONG_TYPES					"DOUSC"
 # define UPPER_TYPES				"XFEAGB"
-
-# define LEN_DIFF(s1, s2)			(s2 ? (size_t)(s2 - s1 - 1) : ft_strlen(s1))
 
 typedef enum	e_flags
 {
@@ -105,10 +97,10 @@ typedef struct	s_format
 }				t_frmt;
 
 void			format_parse(const char *fmt, t_list **alst);
-void			format_doparse(char **fmt, t_plist *alst, int *index);
+void			format_doparse(char **fmt, t_list **alst, int *index);
 bool			format_apply_color(char **fmt, t_list **alst, int *index);
 bool			format_percentage(char **fmt, t_list **alst, int *index);
-int				format_populate(t_plist *alst, va_list *arglst);
+int				format_populate(t_list **alst, va_list *arglst);
 int				format_to_buff(t_list *lstfrmt, t_buff *buff);
 void			format_free(void *dat, size_t size);
 t_frmt			*format_const_string(int index, char *str);
@@ -154,5 +146,18 @@ void			set_width(char **fmt, t_frmt *frmt);
 void			get_wild_args(t_frmt *frmt, va_list *alst);
 
 size_t			format_init_padding(t_frmt *frmt, char const *str);
+
+/*
+********* extra after fixing norm ***********
+*/
+
+int				flag(int fl);
+bool			is_flag(int val, int fl);
+bool			has_flag(t_frmt *frmt, int fl);
+bool			is_hash(t_frmt *frmt);
+bool			is_hex(t_frmt *frmt, t_conv c);
+bool			good_adjust_args(char **astr, t_frmt *frmt, size_t *pad);
+bool			is_prefix_sign(char c);
+size_t			str_len_diff(const char *s1, const char *s2);
 
 #endif

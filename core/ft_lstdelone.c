@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 07:42:23 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/20 22:38:31 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:38:25 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
 	t_list *foo;
 
-	if (!SAFE_PTRVAL(alst))
+	if (!(alst && *alst))
 		return ;
 	foo = *alst;
 	*alst = NULL;

@@ -6,11 +6,11 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2019/12/10 20:07:00 by archid-          ###   ########.fr        #
+#    Updated: 2020/11/25 04:00:44 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
-DEBUG	= 1
+DEBUG	?= 0
 
 NAME	= libft.a
 RM		= rm -rf
@@ -21,7 +21,6 @@ OBJDIR	= .obj
 OBJS	:= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra
 
 YLW		= \033[0;33m[o]\033[0m
 
@@ -30,6 +29,8 @@ ifeq ($(DEBUG), 1)
 else
 	CFLAGS += -Werror
 endif
+
+CFLAGS	+= -Wall -Wextra -I.
 
 all: $(NAME)
 
@@ -41,7 +42,7 @@ $(NAME): $(OBJS)
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
 #	@printf "compiling $<\n"
-	$(CC) $(CFLAGS) -c $< -o $@ -I.
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJS)

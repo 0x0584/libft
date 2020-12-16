@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 07:46:28 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/11 06:06:55 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:38:00 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_lstdel(t_list **alst, void (*del)(void*, size_t))
 {
 	t_list *tmp[2];
 
-	if (!SAFE_PTRVAL(alst))
+	if (!(alst && *alst))
 		return ;
 	tmp[0] = *alst;
 	while (tmp[0])

@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:45:03 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:52:37 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:41:39 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strrdup(const char *head, const char *tail)
 	length = 1;
 	while (head + length <= tail)
 		length++;
-	if (!(buff = ALLOC(char *, length + 1, sizeof(char))))
+	if (!(buff = ft_calloc(length + 1, sizeof(char))))
 		return (NULL);
 	while (head + --length >= head)
 		buff[length] = head[length];

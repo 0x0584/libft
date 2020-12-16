@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 05:42:35 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 13:42:17 by archid-          ###   ########.fr       */
+/*   Created: 2020/12/16 16:36:09 by archid-           #+#    #+#             */
+/*   Updated: 2020/12/16 16:36:16 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+t_u64		ft_abs(t_s64 x)
 {
-	char	*buff;
-	size_t	i;
-
-	i = 0;
-	if (!s || !(buff = ft_calloc(len + 1, sizeof(char))))
-		return (NULL);
-	while (s[start] && len)
-	{
-		buff[i] = s[start + i];
-		i++;
-		len--;
-	}
-	return (buff);
+	return ((x) < 0 ? (x) * -1 : (x));
 }

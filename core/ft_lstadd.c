@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 07:53:21 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/22 23:43:29 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:37:25 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_lstadd(t_list **alst, t_list *new)
 {
 	t_list *tmp;
 
-	if (SAFE_PTRVAL(alst) && new)
+	if (alst && *alst && new)
 	{
 		tmp = *alst;
 		new->next = tmp;

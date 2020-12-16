@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_content_asarray.c                           :+:      :+:    :+:   */
+/*   adjust_extra.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 15:48:31 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 13:37:07 by archid-          ###   ########.fr       */
+/*   Created: 2020/12/16 12:46:42 by archid-           #+#    #+#             */
+/*   Updated: 2020/12/16 14:06:11 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "format.h"
 
-void			**ft_lst_content_asarray(t_list *head, size_t *size)
+bool	good_adjust_args(char **astr, t_frmt *frmt, size_t *pad)
 {
-	void	**arr;
-	size_t	sz;
-	t_list	*walk;
-
-	if (!(arr = ft_calloc(ft_lstlen(head) + 1, sizeof(void *))))
-		return (NULL);
-	walk = head;
-	sz = 0;
-	while (walk)
-	{
-		arr[sz++] = walk->content;
-		walk = walk->next;
-	}
-	if (size)
-		*size = sz;
-	return (arr);
+	return (astr && *astr && frmt && pad);
 }

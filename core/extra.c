@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_content_asarray.c                           :+:      :+:    :+:   */
+/*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 15:48:31 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 13:37:07 by archid-          ###   ########.fr       */
+/*   Created: 2020/12/16 13:08:01 by archid-           #+#    #+#             */
+/*   Updated: 2020/12/16 17:04:48 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			**ft_lst_content_asarray(t_list *head, size_t *size)
+t_s64		max(t_s64 a, t_s64 b)
 {
-	void	**arr;
-	size_t	sz;
-	t_list	*walk;
+	return ((a) > (b) ? (a) : (b));
+}
 
-	if (!(arr = ft_calloc(ft_lstlen(head) + 1, sizeof(void *))))
-		return (NULL);
-	walk = head;
-	sz = 0;
-	while (walk)
-	{
-		arr[sz++] = walk->content;
-		walk = walk->next;
-	}
-	if (size)
-		*size = sz;
-	return (arr);
+t_s64		min(t_s64 a, t_s64 b)
+{
+	return ((a) < (b) ? (a) : (b));
+}
+
+t_u64		umax(t_u64 a, t_u64 b)
+{
+	return ((a) > (b) ? (a) : (b));
+}
+
+t_u64		umin(t_u64 a, t_u64 b)
+{
+	return ((a) < (b) ? (a) : (b));
+}
+
+void		*ft_calloc(size_t n, size_t sz)
+{
+	return (ft_memalloc((n) * (sz)));
 }

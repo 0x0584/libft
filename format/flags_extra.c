@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_content_asarray.c                           :+:      :+:    :+:   */
+/*   flags_extra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 15:48:31 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 13:37:07 by archid-          ###   ########.fr       */
+/*   Created: 2020/12/16 12:55:01 by archid-           #+#    #+#             */
+/*   Updated: 2020/12/16 17:13:30 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "format.h"
 
-void			**ft_lst_content_asarray(t_list *head, size_t *size)
+int		flag(int fl)
 {
-	void	**arr;
-	size_t	sz;
-	t_list	*walk;
+	return (1U << fl);
+}
 
-	if (!(arr = ft_calloc(ft_lstlen(head) + 1, sizeof(void *))))
-		return (NULL);
-	walk = head;
-	sz = 0;
-	while (walk)
-	{
-		arr[sz++] = walk->content;
-		walk = walk->next;
-	}
-	if (size)
-		*size = sz;
-	return (arr);
+bool	is_flag(int val, int fl)
+{
+	return ((val & flag(fl)) != 0);
+}
+
+bool	has_flag(t_frmt *frmt, int fl)
+{
+	return (frmt && is_flag(frmt->flags, fl));
+}
+
+bool	is_hash(t_frmt *frmt)
+{
+	return (has_flag(frmt, FL_HASH));
+}
+
+bool	is_hex(t_frmt *frmt, t_conv c)
+{
+	return ((c == CONV_UHEX && is_hash(frmt)) || c == CONV_PTR);
 }

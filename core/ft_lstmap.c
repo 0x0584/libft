@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 08:47:01 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:59:09 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:38:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list *tmp[2];
 
-	if (!lst || !(*tmp = ALLOC(t_list *, 1, sizeof(t_list))))
+	if (!lst || !(*tmp = ft_calloc(1, sizeof(t_list))))
 		return (NULL);
 	*tmp = ft_memdup((*f)(lst), sizeof(t_list));
 	tmp[1] = *tmp;

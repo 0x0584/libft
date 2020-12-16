@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 02:27:35 by archid-           #+#    #+#             */
-/*   Updated: 2019/10/24 02:29:24 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:43:07 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			ft_strtolower(char **astr)
 {
 	char *s;
 
-	if (!SAFE_PTRVAL(astr))
+	if (!(astr && *astr))
 		return ;
 	s = *astr;
 	while (*s)

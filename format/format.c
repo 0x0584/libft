@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:20:34 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/30 02:44:32 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 14:05:03 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool		g_sort_lstfrmt = true;
 
-static int		cmp_by_argindex(t_plist e1, t_plist e2)
+static int		cmp_by_argindex(t_list *e1, t_list *e2)
 {
 	t_frmt *foo;
 	t_frmt *bar;
@@ -24,7 +24,7 @@ static int		cmp_by_argindex(t_plist e1, t_plist e2)
 	return (foo->iarg < bar->iarg);
 }
 
-static int		cmp_by_frmtindex(t_plist e1, t_plist e2)
+static int		cmp_by_frmtindex(t_list *e1, t_list *e2)
 {
 	t_frmt *foo;
 	t_frmt *bar;
@@ -78,7 +78,7 @@ void			format_doparse(char **fmt, t_list **alstfrmt, int *index)
 	ft_lstpush(alstfrmt, ft_lstnew(&frmt, sizeof(t_frmt)));
 }
 
-int				format_populate(t_plist *alstfrmt, va_list *arglst)
+int				format_populate(t_list **alstfrmt, va_list *arglst)
 {
 	t_list	*e;
 	t_frmt	*frmt;
@@ -90,7 +90,7 @@ int				format_populate(t_plist *alstfrmt, va_list *arglst)
 	{
 		if (frmt->conv == CONV_FRMT)
 		{
-			LST_NEXT(e);
+			e = e->next;
 			continue ;
 		}
 		get_wild_args(frmt, arglst);
@@ -98,7 +98,7 @@ int				format_populate(t_plist *alstfrmt, va_list *arglst)
 			if (!get_unsigned_args(frmt, arglst))
 				if (!get_floating_point_args(frmt, arglst))
 					(void)get_string_args(frmt, arglst);
-		while ((LST_NEXT(e)) && g_sort_lstfrmt && e->content
+		while ((e = e->next) && g_sort_lstfrmt && e->content
 					&& ((t_frmt *)e->content)->iarg == frmt->iarg)
 			((t_frmt *)e->content)->data = frmt->data;
 	}

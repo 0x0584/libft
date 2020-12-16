@@ -6,16 +6,16 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 20:54:41 by archid-           #+#    #+#             */
-/*   Updated: 2020/01/19 15:11:35 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 11:27:35 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_lst		helper_merge(t_lst left, t_lst right,
-									int (*cmp)(t_lst, t_lst))
+static t_list	*helper_merge(t_list *left, t_list *right,
+								int (*cmp)(t_list *, t_list *))
 {
-	t_lst	root;
+	t_list	*root;
 	bool	sort_on_left;
 
 	if (!left || !right)
@@ -28,11 +28,11 @@ static t_lst		helper_merge(t_lst left, t_lst right,
 	return (root);
 }
 
-static void			helper_halfsplit(t_lst root, t_lst *ahead,
-										t_lst *atail)
+static void		helper_halfsplit(t_list *root, t_list **ahead,
+									t_list **atail)
 {
-	t_lst foo;
-	t_lst bar;
+	t_list *foo;
+	t_list *bar;
 
 	bar = root;
 	foo = root->next;
@@ -50,10 +50,10 @@ static void			helper_halfsplit(t_lst root, t_lst *ahead,
 	bar->next = NULL;
 }
 
-void				ft_lst_mergesort(t_lst *alst, int (cmp)(t_lst, t_lst))
+void			ft_lst_mergesort(t_list **alst, int (cmp)(t_list *, t_list *))
 {
-	t_lst left;
-	t_lst right;
+	t_list *left;
+	t_list *right;
 
 	if (!alst || !*alst || !(*alst)->next)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 21:42:27 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:49:18 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:40:28 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(buff = ALLOC(char *, size, sizeof(char))))
+	if (!(buff = ft_calloc(size, sizeof(char))))
 		return (NULL);
 	ft_strcpy(buff, (char *)s1);
 	ft_strcat(buff, (char *)s2);

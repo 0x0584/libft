@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 21:28:46 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/29 08:08:00 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 14:07:24 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	format_parse(const char *fmt, t_list **alstfrmt)
 		}
 		tmp = ft_strchr(fmt, '%');
 		ft_lstpush(alstfrmt, ft_lstnew(format_const_string(index,
-			ft_strrdup(fmt, fmt + LEN_DIFF(fmt, tmp))), sizeof(t_frmt)));
+			ft_strrdup(fmt, fmt + str_len_diff(fmt, tmp))), sizeof(t_frmt)));
 		fmt = tmp;
 	}
 }

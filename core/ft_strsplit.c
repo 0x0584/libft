@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 06:51:01 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:42:10 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:41:57 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_strsplit(char const *s, char c)
 		return (NULL);
 	tmp[0] = 0;
 	tmp[1] = ft_wordcount(s, c) + 1;
-	if (!(aspltd = ALLOC(char **, tmp[1], sizeof(char *))))
+	if (!(aspltd = ft_calloc(tmp[1], sizeof(char *))))
 		return (NULL);
 	while (tmp[0] < tmp[1] - 1)
 	{

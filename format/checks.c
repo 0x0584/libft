@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 13:53:22 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/30 02:08:50 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 14:04:19 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ int				check_flags(char **fmt, t_frmt *frmt)
 	while (*bar)
 	{
 		if (*bar == '#')
-			frmt->flags |= FLAG(FL_HASH);
+			frmt->flags |= flag(FL_HASH);
 		else if (*bar == '+')
-			frmt->flags |= FLAG(FL_PLUS);
+			frmt->flags |= flag(FL_PLUS);
 		else if (*bar == ' ')
-			frmt->flags |= FLAG(FL_SPACE);
+			frmt->flags |= flag(FL_SPACE);
 		else if (*bar == '-')
-			frmt->flags |= FLAG(FL_MINUS);
+			frmt->flags |= flag(FL_MINUS);
 		else if (*bar == '0')
-			frmt->flags |= FLAG(FL_ZERO);
+			frmt->flags |= flag(FL_ZERO);
 		else
 			break ;
 		bar++;
@@ -98,7 +98,7 @@ int				check_modifier(char **fmt, t_frmt *frmt)
 
 int				check_conversion(char **fmt, t_frmt *frmt)
 {
-	if (!SAFE_PTRVAL(fmt) || !(*fmt)[0] || !frmt)
+	if (!(fmt && *fmt) || !(*fmt)[0] || !frmt)
 		return (0);
 	if (!check_integer_conversions(frmt, (*fmt)[0]))
 		if (!check_floating_point_conv(frmt, (*fmt)[0]))

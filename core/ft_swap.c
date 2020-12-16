@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 03:52:32 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:41:43 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:43:25 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			ft_swap(void *u, void *v, size_t size)
 {
 	void *tmp;
 
-	if (!(tmp = ALLOC(void *, 1, size)))
+	if (!(tmp = ft_calloc(1, size)))
 		return (0);
 	ft_memcpy(tmp, v, size);
 	ft_memcpy(v, u, size);

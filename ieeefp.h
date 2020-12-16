@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 18:00:10 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 19:55:58 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 16:56:57 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,20 @@
 #  error this implementation works on Little Endian machines only.
 # endif
 
-# define F128BIT_MAN			63
-# define F128BIT_BAIS			16383
-# define F128BIT_FULLBAIS		(F128BIT_MAN + F128BIT_BAIS)
-# define F128BIT_IMPL			(1ULL << F128BIT_MAN)
+extern const t_u16 g_f128bit_man;
+extern const t_u32 g_f128bit_bais;
+extern const t_u64 g_f128bit_fullbais;
+extern const t_u64 g_f128bit_impl;
 
-# define F64BIT_MAN				52
-# define F64BIT_BAIS			1023
-# define F64BIT_FULLBAIS		(F64BIT_MAN + F64BIT_BAIS)
-# define F64BIT_IMPL			(1ULL << F64BIT_MAN)
+extern const t_u16 g_f64bit_man;
+extern const t_u32 g_f64bit_bais;
+extern const t_u64 g_f64bit_fullbais;
+extern const t_u64 g_f64bit_impl;
 
-# define F32BIT_MAN				23
-# define F32BIT_BAIS			127
-# define F32BIT_FULLBAIS		(F32BIT_MAN + F32BIT_BAIS)
-# define F32BIT_IMPL			(1ULL << F32BIT_MAN)
-
-# define GET_MAN(m, e, i)			(t_u128)(m + (e ? i : 0ULL))
-# define GET_EXP(e, b)				(t_s32)(e - b + (e ? 0 : 1))
+extern const t_u16 g_f32bit_man;
+extern const t_u32 g_f32bit_bais;
+extern const t_u64 g_f32bit_fullbais;
+extern const t_u64 g_f32bit_impl;
 
 union				u_ieee754_float
 {
@@ -117,5 +114,12 @@ void				ieee_extract_hex_parts(t_ieeefp *fp, t_u128 *man,
 												t_s32 *exp);
 bool				ieee_get_sign(t_ieeefp *fp);
 bool				ieee_is_zero(t_ieeefp *fp);
+
+/*
+** ************* added after marco removal *************
+*/
+
+bool				is_even(t_s64 num);
+bool				is_odd(t_s64 num);
 
 #endif

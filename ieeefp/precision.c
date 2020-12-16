@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:59:08 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 19:14:08 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 14:10:53 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void		round_nearest_even(char **fp_buff, t_ieee_fmt style,
 	bool	carry;
 
 	buff = *fp_buff;
-	i = MAX(style == IEEE_EXPONENT ? 0 : *exp, 0) + prec;
+	i = max(style == IEEE_EXPONENT ? 0 : *exp, 0) + prec;
 	if (!buff[i + 1] || buff[i + 1] < '5' || (buff[i + 1] == '5'
-		&& IS_EVEN(buff[i] - '0') && has_trailing_zeros(buff, i + 2)))
+		&& is_even(buff[i] - '0') && has_trailing_zeros(buff, i + 2)))
 		return ;
 	carry = true;
 	while (i && carry)
@@ -65,7 +65,7 @@ static void		round_nearest_even(char **fp_buff, t_ieee_fmt style,
 	if (buff[i] == '9')
 	{
 		buff[i] = '1';
-		buff[MAX((*exp)++, 0) + prec + 1] = '0';
+		buff[max((*exp)++, 0) + prec + 1] = '0';
 	}
 	else
 		buff[i] += 1;
@@ -81,9 +81,9 @@ static void		prepare_fp_buff(char **buff, t_ieee_fmt style,
 	if (*exp < 0 && style == IEEE_NORMAL)
 		ft_strpad(buff, '0', (size_t)-*exp, TOWARD_HEAD);
 	if (*exp <= 0)
-		npad = MAX(prec - (t_s32)buff_size, 0);
+		npad = max(prec - (t_s32)buff_size, 0);
 	else
-		npad = MAX(*exp - (t_s32)buff_size, 0) + prec
+		npad = max(*exp - (t_s32)buff_size, 0) + prec
 				- (*exp < (t_s32)buff_size ? 0 : ft_strlen(*buff + *exp + 1));
 	ft_strpad(buff, '0', (size_t)npad, TOWARD_TAIL);
 	round_nearest_even(buff, style, exp, prec);
@@ -100,7 +100,7 @@ void			dragon4_prec(char **fp_buff, t_s32 *exp, t_ieee_fmt style,
 
 	prepare_fp_buff(fp_buff, style, exp, prec);
 	int_part = *fp_buff;
-	exp2 = MAX(style == IEEE_EXPONENT ? 0 : *exp, 0);
+	exp2 = max(style == IEEE_EXPONENT ? 0 : *exp, 0);
 	fp = ft_strrdup(int_part, int_part + exp2);
 	frac_part = prec ? int_part + exp2 : NULL;
 	if (frac_part)

@@ -3,77 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:01:11 by archid-           #+#    #+#             */
-/*   Updated: 2019/11/27 10:53:49 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 12:31:12 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_state	extract_nl_line(char **cache, char **line)
+static int	read_status(t_cache *cache, char **line, ssize_t nbytes)
 {
-	char *nl;
-	char *old_cache;
+	bool ret;
 
-	if (!cache || !*cache || !line)
-		return (failure);
-	old_cache = *cache;
-	if (!(nl = ft_strchr(*cache, '\n')))
-		return (eof);
-	*nl = '\0';
-	if (!(*line = ft_strdup(*cache)))
-		return (failure);
-	if (!(*cache = ft_strdup(nl + 1)))
-		return (failure);
-	free(old_cache);
-	return (success);
+	if (nbytes < 0)
+		return (-1);
+	else if (has_line(cache, line))
+		return (true);
+	if ((ret = (cache->length != cache->index)))
+		*line = ft_strdup(cache->base + cache->index);
+	cache->index = cache->length;
+	return (ret);
 }
 
-static ssize_t	cached_read(const int fd, char **cache)
+int			read_cache(t_cache *cache, char **line)
 {
-	char	*buff;
-	char	*old_cache;
-	ssize_t	nbytes;
-
-	if (!(buff = ALLOC(char *, 1, BUFF_SIZE + 1)))
-		return (failure);
-	while ((nbytes = read(fd, buff, BUFF_SIZE)) > 0)
-	{
-		buff[nbytes] = '\0';
-		if (*cache == NULL)
-			*cache = ft_strdup(buff);
-		else
-		{
-			old_cache = *cache;
-			*cache = ft_strjoin(old_cache, buff);
-			free(old_cache);
-		}
-		if (ft_strchr(*cache, '\n'))
-			break ;
-	}
-	ft_strdel(&buff);
-	return (nbytes);
-}
-
-int				gnl(const int fd, char **line)
-{
-	static char	*cache[0xFF] = {NULL};
 	ssize_t		nbytes;
+	ssize_t		i;
+	bool		nl;
 
-	if (!line || fd < 0 || BUFF_SIZE <= 0 || read(fd, NULL, 0) < 0)
-		return (failure);
-	if (cache[fd] && extract_nl_line(&cache[fd], line) > 0)
-		return (success);
-	*line = NULL;
-	if ((nbytes = cached_read(fd, &cache[fd])) < 0)
-		return (failure);
-	if (nbytes == 0 && cache[fd])
+	nl = false;
+	while (!nl && (nbytes = read(cache->fd, g_buff, BUFF_SIZE)) > 0)
 	{
-		*line = ft_strdup(cache[fd]);
-		ft_strdel(&cache[fd]);
-		return ((*line && ft_strlen(*line)) ? success : eof);
+		i = 0;
+		if (cache->length + nbytes > cache->size)
+			cache_grow(cache);
+		while (i < nbytes)
+		{
+			if (g_buff[i] == '\n')
+				nl = true;
+			cache->base[cache->length++] = g_buff[i++];
+		}
 	}
-	return (extract_nl_line(&cache[fd], line) > 0);
+	cache->base[cache->length] = '\0';
+	return (read_status(cache, line, nbytes));
+}
+
+int			gnl(const int fd, char **line)
+{
+	t_cache *cache;
+
+	if (fd < 0 || !line || read(fd, NULL, 0) < 0)
+		return (-1);
+	if (!(cache = cache_alloc(fd)))
+		return (-1);
+	*line = NULL;
+	return (has_line(cache, line) ? 1 : read_cache(cache, line));
+}
+
+void		gnl_cleanup(void)
+{
+	size_t	i;
+	t_cache *cache;
+
+	if (g_buff)
+		ft_strdel(&g_buff);
+	i = 0;
+	while (i < CACHE_SIZE)
+	{
+		cache = &g_cache[i++];
+		if (cache->base)
+			ft_strdel(&cache->base);
+		cache->fd = -1;
+		cache->size = 0;
+		cache->index = 0;
+		cache->length = 0;
+	}
+}
+
+int			gnl_clean(const int fd)
+{
+	size_t	i;
+	t_cache *cache;
+	bool	flag;
+
+	if (fd < 0)
+		return (-1);
+	if (g_buff)
+		ft_strdel(&g_buff);
+	i = 0;
+	flag = false;
+	while (!flag && i < CACHE_SIZE)
+	{
+		cache = &g_cache[i++];
+		if (cache->fd != fd)
+			continue;
+		ft_strdel(&cache->base);
+		cache->fd = -1;
+		cache->size = 0;
+		cache->index = 0;
+		cache->length = 0;
+		flag = true;
+	}
+	return (flag);
 }

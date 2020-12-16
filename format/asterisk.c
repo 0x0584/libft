@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:13:24 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 19:08:50 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:45:18 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void			get_wild_args(t_frmt *frmt, va_list *alst)
 	if (frmt->width_as_arg)
 	{
 		if ((tmp = va_arg(*alst, int)) < 0)
-			frmt->flags |= FLAG(FL_MINUS);
-		frmt->width = ABS(tmp);
+			frmt->flags |= flag(FL_MINUS);
+		frmt->width = ft_abs(tmp);
 	}
 	if (frmt->prec_as_arg)
 	{

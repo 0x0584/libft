@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:59:08 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 19:31:51 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 13:36:09 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bigint	bigint_add(t_bigint u, t_bigint v)
 	i = 0;
 	sum = 0UL;
 	carry = 0UL;
-	biggest = MAX(u.size, v.size);
+	biggest = umax(u.size, v.size);
 	ft_bzero(&result, sizeof(t_bigint));
 	while (i < biggest)
 	{

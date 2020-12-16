@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:59:08 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 19:13:09 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 17:33:58 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,23 @@ void	ieee_extract_parts(t_ieeefp *fp, t_u128 *man, t_s32 *exp)
 {
 	if (fp->type == IEEE_FLOAT)
 	{
-		*man = GET_MAN(fp->as.f.ieee.m, fp->as.f.ieee.e, F32BIT_IMPL);
-		*exp = GET_EXP(fp->as.f.ieee.e, F32BIT_FULLBAIS);
+		*man = (fp->as.f.ieee.m + (fp->as.f.ieee.e ? g_f32bit_impl : 0ULL));
+		*exp = (fp->as.f.ieee.e - g_f32bit_fullbais + (fp->as.f.ieee.e ?
+														0 : 1));
 	}
 	else if (fp->type == IEEE_DOUBLE)
 	{
-		*man = GET_MAN(fp->as.d.ieee.m, fp->as.d.ieee.e, F64BIT_IMPL);
-		*exp = GET_EXP(fp->as.d.ieee.e, F64BIT_FULLBAIS);
+		*man = (fp->as.d.ieee.m + (fp->as.d.ieee.e ?
+									g_f64bit_impl : 0ULL));
+		*exp = (fp->as.d.ieee.e - g_f64bit_fullbais + (fp->as.d.ieee.e ?
+														0 : 1));
 	}
 	else
 	{
-		*man = GET_MAN(fp->as.ld.ieee.m1, fp->as.ld.ieee.e, F128BIT_IMPL);
-		*exp = GET_EXP(fp->as.ld.ieee.e, F128BIT_FULLBAIS);
+		*man = (fp->as.ld.ieee.m1 + (fp->as.ld.ieee.e ?
+										g_f128bit_impl : 0ULL));
+		*exp = (fp->as.ld.ieee.e - g_f128bit_fullbais + (fp->as.ld.ieee.e ?
+															0 : 1));
 	}
 }
 
@@ -36,18 +41,18 @@ void	ieee_extract_hex_parts(t_ieeefp *fp, t_u128 *man, t_s32 *exp)
 {
 	if (fp->type == IEEE_FLOAT)
 	{
-		*man = GET_MAN(fp->as.f.ieee.m, fp->as.f.ieee.e, F32BIT_IMPL);
-		*exp = fp->as.f.ieee.e - F32BIT_BAIS;
+		*man = (fp->as.f.ieee.m + (fp->as.f.ieee.e ? g_f32bit_impl : 0ULL));
+		*exp = (fp->as.f.ieee.e - g_f32bit_bais);
 	}
 	else if (fp->type == IEEE_DOUBLE)
 	{
-		*man = GET_MAN(fp->as.d.ieee.m, fp->as.d.ieee.e, F64BIT_IMPL);
-		*exp = fp->as.d.ieee.e - F64BIT_BAIS;
+		*man = (fp->as.d.ieee.m + (fp->as.d.ieee.e ? g_f64bit_impl : 0ULL));
+		*exp = (fp->as.d.ieee.e - g_f64bit_bais);
 	}
 	else
 	{
-		*man = GET_MAN(fp->as.ld.ieee.m1, fp->as.ld.ieee.e, F128BIT_IMPL);
-		*exp = fp->as.ld.ieee.e - F128BIT_BAIS;
+		*man = (fp->as.ld.ieee.m1 + (fp->as.ld.ieee.e ? g_f128bit_impl : 0ULL));
+		*exp = (fp->as.ld.ieee.e - g_f128bit_bais);
 	}
 }
 

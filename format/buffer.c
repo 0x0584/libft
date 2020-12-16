@@ -6,7 +6,7 @@
 /*   By: archid- <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 15:17:54 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/29 19:58:23 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/16 14:03:39 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_buff		*buff_alloc(size_t size)
 {
 	t_buff *foo;
 
-	if (!(foo = ALLOC(t_buff *, 1, sizeof(t_buff)))
-			|| !(foo->base = ALLOC(char *, size + 1, sizeof(char))))
+	if (!(foo = ft_calloc(1, sizeof(t_buff)))
+			|| !(foo->base = ft_calloc(size + 1, sizeof(char))))
 		return (NULL);
 	foo->len = 0;
 	foo->size = size;
@@ -45,7 +45,7 @@ size_t		buff_append(t_buff *buff, const char *str, size_t size)
 	{
 		foo = buff->base;
 		buff->size = size + buff->size * 2;
-		buff->base = ALLOC(char *, size + buff->size * 2, sizeof(char));
+		buff->base = ft_calloc(size + buff->size * 2, sizeof(char));
 		(void)ft_memcpy(buff->base, foo, buff->len);
 		free(foo);
 	}
@@ -80,7 +80,7 @@ int			format_to_buff(t_list *lstfrmt, t_buff *buff)
 			slen += ft_strlen(s_frmt + 1);
 		buff_append(buff, s_frmt, slen);
 		ft_strdel(&s_frmt);
-		LST_NEXT(lstfrmt);
+		lstfrmt = lstfrmt->next;
 	}
 	return (0);
 }
