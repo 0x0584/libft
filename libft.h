@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/18 13:32:15 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/18 13:38:13 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 
 # include "types.h"
-# include "lst.h"
 
 # define BUFF_SIZE						    16384
 # define CACHE_SIZE							32
