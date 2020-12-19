@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 12:55:15 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/18 12:57:11 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/19 20:02:46 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,41 @@ void	hash_iter(t_hash h, void (*callback)(const char *key, void *blob))
 	size_t		i;
 	t_hashnode	*tmp;
 	t_lstnode	walk;
-	t_lst		lst;
 
 	if (!h)
 		return ;
 	i = 0;
 	while (i < h->size)
 	{
-		if (!(lst = h->array[i++]))
+		if (!(walk = lst_front(h->array[i++])))
 			continue ;
-		walk = lst_front(lst);
 		while (walk)
 		{
 			tmp = walk->blob;
 			callback(tmp->key, tmp->blob);
+			lst_node_forward(&walk);
+		}
+	}
+}
+
+void	hash_iter_arg(t_hash h, void *arg,
+					  void (*callback)(const char *key, void *blob, void *arg))
+{
+	size_t		i;
+	t_hashnode	*tmp;
+	t_lstnode	walk;
+
+	if (!h)
+		return ;
+	i = 0;
+	while (i < h->size)
+	{
+		if (!(walk = lst_front(h->array[i++])))
+			continue ;
+		while (walk)
+		{
+			tmp = walk->blob;
+			callback(tmp->key, tmp->blob, arg);
 			lst_node_forward(&walk);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 23:45:23 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/18 12:57:08 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/19 20:01:19 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void			hash_default_del(void *ptr);
 size_t			hash_count(t_hash h);
 void			hash_iter(t_hash h,
 							void (*callback)(const char *key, void *blob));
+void			hash_iter_arg(t_hash h, void *arg,
+								void (*callback)(const char *key, void *blob,
+													void *arg));
 
 size_t			sfold(const char *s, size_t mod);
 
