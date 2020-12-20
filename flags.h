@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_node_blob.c                                    :+:      :+:    :+:   */
+/*   flags.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/18 11:46:42 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 00:29:32 by archid-          ###   ########.fr       */
+/*   Created: 2020/12/20 01:45:30 by archid-           #+#    #+#             */
+/*   Updated: 2020/12/20 01:59:55 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lst.h"
+#ifndef FLAGS_H
+# define FLAGS_H
 
-void		blob_free(void *blob)
-{
-	free(blob);
-}
+# include "types.h"
 
-void		blob_keep(void *blob)
-{
-	(void)blob;
-}
+# define FLAG_NIL							0U
 
-void		*blob_identity(const void *blob)
-{
-	return ((void *)blob);
-}
+typedef t_u16	t_flag;
+
+t_flag			flag(t_u8 shift);
+t_flag			flag_set(t_flag *flag, t_u8 shift);
+t_flag			flag_unset(t_flag *flag, t_u8 shift);
+
+bool			isflag(t_flag flag, t_u8 shift);
+
+#endif

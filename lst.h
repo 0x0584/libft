@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 16:34:27 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/18 13:37:55 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 00:29:51 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ struct		s_lst
 	void		(*del)(void *blob);
 };
 
-t_lstnode	lst_node(void *blob, size_t size, bool alloc);
+t_lstnode	lst_node(const void *blob, size_t size, bool alloc);
 void		lst_node_free(t_lst lst, t_lstnode anode);
 void		lst_node_del(t_lst lst, t_lstnode *anode);
 void		lst_node_del_with(t_lstnode *anode, void (*del)(void *blob));
@@ -75,33 +75,40 @@ t_lst		lst_insert_after(t_lst lst, t_lstnode before, t_lstnode node);
 t_lst		lst_insert_before(t_lst lst, t_lstnode after, t_lstnode node);
 t_lstnode	lst_extract(t_lst lst, t_lstnode node);
 
-t_lst		lst_insertion_sort(t_lst lst, int (*cmp)(void *, void *));
+t_lst		lst_insertion_sort(t_lst lst, int (*cmp)(const void *, const void *));
 
 void		blob_free(void *blob);
 void		blob_keep(void *blob);
 
-void		*blob_identity(void *blob);
+void		*blob_identity(const void *blob);
 
 void		*lst_front_blob(t_lst lst);
 void		*lst_rear_blob(t_lst lst);
 
-t_lst		lst_push_front_blob(t_lst lst, void *blob, size_t size, bool alloc);
-t_lst		lst_push_back_blob(t_lst lst, void *blob, size_t size, bool alloc);
+t_lst		lst_push_front_blob(t_lst lst, const void *blob, size_t size, bool alloc);
+t_lst		lst_push_back_blob(t_lst lst, const void *blob, size_t size, bool alloc);
 void		*lst_pop_back_blob(t_lst lst);
 void		*lst_pop_front_blob(t_lst lst);
 
 void		*lst_extract_blob(t_lst lst, t_lstnode *node);
 t_lst		lst_clear(t_lst lst);
 
-t_lst		lst_copy(t_lst lst, void *(*func_copy)(void *),
+t_lst		lst_copy(t_lst lst, void *(*func_copy)(const void *),
 						void (*del)(void *));
 t_lst		lst_copy_shallow(t_lst lst);
-t_lst		lst_copy_deep(t_lst lst, void *(copy)(void *));
+t_lst		lst_copy_deep(t_lst lst, void *(copy)(const void *));
 
 void		lst_remove(t_lst lst, t_lstnode *node);
 void		lst_remove_next(t_lst lst, t_lstnode node);
 void		lst_remove_previous(t_lst lst, t_lstnode node);
 
 t_lst		lst_shrink(t_lst lst, bool from_head, size_t size);
+
+bool		lst_any(t_lst lst, const void *ret,
+						bool (*func)(const void *, const void *));
+bool		lst_all(t_lst lst, const void *ret,
+						bool (*func)(const void *, const void *));
+bool		lst_none(t_lst lst, const void *ret,
+						bool (*func)(const void *, const void *));
 
 #endif

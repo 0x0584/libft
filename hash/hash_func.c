@@ -6,13 +6,13 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 12:55:15 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/19 20:02:46 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 00:26:59 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash.h"
 
-bool	hash_add(t_hash h, const char *key, void *blob)
+bool	hash_add(t_hash h, const char *key, const void *blob)
 {
 	size_t		hash;
 	t_lstnode	walk;
@@ -23,7 +23,7 @@ bool	hash_add(t_hash h, const char *key, void *blob)
 		return (false);
 	if (!h->array[hash = sfold(key, h->size)])
 	{
-		hnode = (t_hashnode){ft_strdup(key), blob};
+		hnode = (t_hashnode){ft_strdup(key), (void *)blob};
 		h->array[hash] = lst_alloc(h->del);
 		lst_push_back_blob(h->array[hash], &hnode, sizeof(t_hashnode), true);
 		return (true);
@@ -36,19 +36,19 @@ bool	hash_add(t_hash h, const char *key, void *blob)
 			return (false);
 		lst_node_forward(&walk);
 	}
-	hnode = (t_hashnode){ft_strdup(key), blob};
+	hnode = (t_hashnode){ft_strdup(key), (void *)blob};
 	lst_push_front_blob(h->array[hash], &hnode, sizeof(t_hashnode), true);
 	return (true);
 }
 
-void	*hash_get(t_hash h, const char *key, void *default_val)
+void	*hash_get(t_hash h, const char *key, const void *default_val)
 {
 	size_t		hash;
 	t_lstnode	walk;
 	t_hashnode	*tmp;
 
 	if (!h->array[hash = sfold(key, h->size)])
-		return (default_val);
+		return ((void *)default_val);
 	walk = lst_front(h->array[hash]);
 	while (walk)
 	{
@@ -57,7 +57,7 @@ void	*hash_get(t_hash h, const char *key, void *default_val)
 			return (tmp->blob);
 		lst_node_forward(&walk);
 	}
-	return (default_val);
+	return ((void *)default_val);
 }
 
 size_t	hash_count(t_hash h)

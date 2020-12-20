@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 11:49:25 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/18 11:50:04 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 00:31:10 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_lst		lst_push_front(t_lst lst, t_lstnode node)
 	return (lst);
 }
 
-t_lst		lst_push_front_blob(t_lst lst, void *blob, size_t size, bool alloc)
+t_lst		lst_push_front_blob(t_lst lst, const void *blob, size_t size, bool alloc)
 {
 	if (!lst)
 		return (NULL);
@@ -44,7 +44,7 @@ t_lst		lst_push_back(t_lst lst, t_lstnode node)
 	return (lst);
 }
 
-t_lst		lst_push_back_blob(t_lst lst, void *blob, size_t size, bool alloc)
+t_lst		lst_push_back_blob(t_lst lst, const void *blob, size_t size, bool alloc)
 {
 	if (!lst)
 		return (NULL);

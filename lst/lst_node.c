@@ -6,13 +6,13 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 11:45:07 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/18 11:58:17 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 00:30:23 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
 
-t_lstnode	lst_node(void *blob, size_t size, bool alloc)
+t_lstnode	lst_node(const void *blob, size_t size, bool alloc)
 {
 	t_lstnode node;
 
@@ -21,7 +21,7 @@ t_lstnode	lst_node(void *blob, size_t size, bool alloc)
 	if (alloc)
 		node->blob = blob ? ft_memcpy(malloc(size), blob, size) : NULL;
 	else
-		node->blob = blob;
+		node->blob = (void *)blob;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
