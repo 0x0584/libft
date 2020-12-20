@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 23:39:38 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 00:23:36 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 12:27:09 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,20 @@ bool			key_cmp(const t_hashnode *node, const char *key1)
 bool			hash_remove(t_hash h, const char *key)
 {
 	t_lstnode	walk;
-	size_t		i;
+	size_t		hash;
 
 	if (!h)
 		return false;
-	i = 0;
-	while (i < h->size)
+	hash = sfold(key, h->size);
+	walk = lst_front(h->array[hash]);
+	while (walk)
 	{
-		walk = lst_front(h->array[i]);
-		while (walk)
+		if (key_cmp(walk->blob, key))
 		{
-			if (key_cmp(walk->blob, key))
-			{
-				lst_remove(h->array[i], &walk);
-				return (true);
-			}
-			lst_node_forward(&walk);
+			lst_remove(h->array[hash], &walk);
+			return (true);
 		}
-		i++;
+		lst_node_forward(&walk);
 	}
 	return (false);
 }
