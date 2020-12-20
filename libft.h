@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/19 20:05:19 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 17:28:45 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ void			ft_memdel(void **mem);
 void			ft_free(void (*del)(void *o), void *ptr, ...);
 void			ft_bzero(void *s, size_t n);
 
-void			ft_strchange(char **astr, char *s);
-void			ft_strinsert_at(char **str, char const *src, size_t index);
-void			ft_strreplace(char **str, char const *base, char const *to);
-void			ft_strpad(char **astr, char c, size_t n, bool left);
-void			ft_strsubswap(char **astr, const char *s1, const char *s2);
-void			ft_strctrim(char **str, char c, bool left);
-void			ft_strtoupper(char **str);
+char			*ft_strchange(char **astr, char *s);
+char			*ft_strinsert_at(char **str, char const *src, size_t index);
+char			*ft_strreplace(char **str, char const *base, char const *to);
+char			*ft_strpad(char **astr, char c, size_t n, bool left);
+char			*ft_strsubswap(char **astr, const char *s1, const char *s2);
+char			*ft_strctrim(char **str, char c, bool left);
+char			*ft_strtoupper(char **str);
 char			*ft_strnew(size_t size);
 char			*ft_strdup(const char *str);
 char			*ft_strrev(const char *str);

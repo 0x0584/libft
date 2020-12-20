@@ -6,23 +6,23 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 07:09:30 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:53:02 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 17:30:01 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strpad(char **astr, char c, size_t n, bool left)
+char 	*ft_strpad(char **astr, char c, size_t n, bool left)
 {
 	char	*tmp;
 	size_t	i;
 	size_t	size;
 
 	if (!astr || !*astr || !n)
-		return ;
+		return (NULL);
 	size = ft_strlen(*astr) + n;
 	if (!(tmp = ft_strnew(size)))
-		return ;
+		return (NULL);
 	i = 0;
 	if (left)
 		while (i < n)
@@ -32,5 +32,5 @@ void	ft_strpad(char **astr, char c, size_t n, bool left)
 		while (i < n)
 			tmp[size - n + i++] = c;
 	ft_strdel(astr);
-	*astr = tmp;
+	return (*astr = tmp);
 }

@@ -6,18 +6,18 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 14:34:48 by archid-           #+#    #+#             */
-/*   Updated: 2019/08/06 14:38:58 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 17:31:50 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strtoupper(char **str)
+char	*ft_strtoupper(char **str)
 {
 	char *tmp;
 
 	if (!str || !*str)
-		return ;
+		return NULL;
 	tmp = *str;
 	while (tmp)
 	{
@@ -25,4 +25,5 @@ void	ft_strtoupper(char **str)
 			*tmp -= 0x20;
 		tmp++;
 	}
+	return *str;
 }

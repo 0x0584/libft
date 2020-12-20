@@ -6,14 +6,14 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 14:26:19 by archid-           #+#    #+#             */
-/*   Updated: 2019/09/28 17:55:26 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/20 17:33:14 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strchange(char **astr, char *s)
+char	*ft_strchange(char **astr, char *s)
 {
 	ft_strdel(astr);
-	*astr = s;
+	return (*astr = s);
 }
