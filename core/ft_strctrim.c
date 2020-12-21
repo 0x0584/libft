@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 05:58:08 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 17:30:46 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:44:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strctrim(char **str, char c, bool left)
 	char *tmp;
 
 	if (!str || !*str || !c)
-		return NULL;
+		return (NULL);
 	head = *str;
 	tail = head + ft_strlen(*str) - 1;
 	while (*head && tail > *str && (left ? *head : *tail) == c)

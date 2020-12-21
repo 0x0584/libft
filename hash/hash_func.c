@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 12:55:15 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 00:26:59 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:54:46 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	hash_iter(t_hash h, void (*callback)(const char *key, void *blob))
 }
 
 void	hash_iter_arg(t_hash h, void *arg,
-					  void (*callback)(const char *key, void *blob, void *arg))
+						void (*callback)(const char *key,
+											void *blob, void *arg))
 {
 	size_t		i;
 	t_hashnode	*tmp;

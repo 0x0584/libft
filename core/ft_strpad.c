@@ -6,13 +6,13 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 07:09:30 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 17:30:01 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:45:12 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char 	*ft_strpad(char **astr, char c, size_t n, bool left)
+char	*ft_strpad(char **astr, char c, size_t n, bool left)
 {
 	char	*tmp;
 	size_t	i;

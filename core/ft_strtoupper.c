@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 14:34:48 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 17:31:50 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:45:39 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strtoupper(char **str)
 	char *tmp;
 
 	if (!str || !*str)
-		return NULL;
+		return (NULL);
 	tmp = *str;
 	while (tmp)
 	{
@@ -25,5 +25,5 @@ char	*ft_strtoupper(char **str)
 			*tmp -= 0x20;
 		tmp++;
 	}
-	return *str;
+	return (*str);
 }

@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 16:34:27 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 00:29:51 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:49:11 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_lst		lst_insert_after(t_lst lst, t_lstnode before, t_lstnode node);
 t_lst		lst_insert_before(t_lst lst, t_lstnode after, t_lstnode node);
 t_lstnode	lst_extract(t_lst lst, t_lstnode node);
 
-t_lst		lst_insertion_sort(t_lst lst, int (*cmp)(const void *, const void *));
+t_lst		lst_insertion_sort(t_lst lst,
+								int (*cmp)(const void *, const void *));
 
 void		blob_free(void *blob);
 void		blob_keep(void *blob);
@@ -85,8 +86,10 @@ void		*blob_identity(const void *blob);
 void		*lst_front_blob(t_lst lst);
 void		*lst_rear_blob(t_lst lst);
 
-t_lst		lst_push_front_blob(t_lst lst, const void *blob, size_t size, bool alloc);
-t_lst		lst_push_back_blob(t_lst lst, const void *blob, size_t size, bool alloc);
+t_lst		lst_push_front_blob(t_lst lst, const void *blob,
+									size_t size, bool alloc);
+t_lst		lst_push_back_blob(t_lst lst, const void *blob,
+									size_t size, bool alloc);
 void		*lst_pop_back_blob(t_lst lst);
 void		*lst_pop_front_blob(t_lst lst);
 

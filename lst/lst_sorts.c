@@ -6,13 +6,14 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 11:52:59 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 00:30:40 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:48:49 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
 
-t_lst		lst_insertion_sort(t_lst lst, int (*cmp)(const void *, const void *))
+t_lst		lst_insertion_sort(t_lst lst,
+								int (*cmp)(const void *, const void *))
 {
 	t_lstnode walk;
 	t_lstnode front;

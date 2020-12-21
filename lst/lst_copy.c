@@ -6,13 +6,14 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 11:53:29 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 00:29:59 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:47:42 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
 
-t_lst		lst_copy(t_lst lst, void *(*func_copy)(const void *), void (*del)(void *))
+t_lst		lst_copy(t_lst lst, void *(*func_copy)(const void *),
+						void (*del)(void *))
 {
 	t_lst		copy;
 	t_lstnode	walk;

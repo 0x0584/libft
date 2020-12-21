@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2020/11/25 04:00:44 by archid-          ###   ########.fr        #
+#    Updated: 2020/12/21 09:59:25 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -24,12 +24,12 @@ CC		= gcc
 
 YLW		= \033[0;33m[o]\033[0m
 
-ifeq ($(DEBUG), 1)
-	CFLAGS += -g
-else
-	CFLAGS += -Werror
-endif
 
+ifeq ($(DEBUG), 1)
+	CFLAGS = -g
+else
+	CFLAGS = -Werror
+endif
 CFLAGS	+= -Wall -Wextra -I.
 
 all: $(NAME)
