@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 13:53:22 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 14:04:19 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:38:44 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ int				check_flags(char **fmt, t_frmt *frmt)
 	while (*bar)
 	{
 		if (*bar == '#')
-			frmt->flags |= flag(FL_HASH);
+			frmt->flags |= ft_flag(FL_HASH);
 		else if (*bar == '+')
-			frmt->flags |= flag(FL_PLUS);
+			frmt->flags |= ft_flag(FL_PLUS);
 		else if (*bar == ' ')
-			frmt->flags |= flag(FL_SPACE);
+			frmt->flags |= ft_flag(FL_SPACE);
 		else if (*bar == '-')
-			frmt->flags |= flag(FL_MINUS);
+			frmt->flags |= ft_flag(FL_MINUS);
 		else if (*bar == '0')
-			frmt->flags |= flag(FL_ZERO);
+			frmt->flags |= ft_flag(FL_ZERO);
 		else
 			break ;
 		bar++;

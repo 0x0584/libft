@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:40:49 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 17:15:12 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:38:00 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool		adjust_int_precision(t_frmt *frmt, char **astr, size_t *pad)
 	has_base_prefix = adjust_base_prefix(astr, frmt, true, false);
 	tmp_c = (*astr)[0];
 	if (!ft_strcmp(*astr + (is_prefix_sign(tmp_c)), "0") && frmt->has_radix &&
-		!frmt->prec && !(has_flag(frmt, FL_HASH) && frmt->conv == CONV_UOCT))
+		!frmt->prec && !(ft_has_flag(frmt, FL_HASH) && frmt->conv == CONV_UOCT))
 	{
 		ft_strchange(astr, ft_strdup(tmp_c == '0' ? ""
 										: (char[]){tmp_c, '\0'}));
@@ -73,11 +73,11 @@ void			adjust_prefix(t_frmt *frmt, char **astr, size_t *pad)
 {
 	if (flag_alterform(frmt, astr, pad))
 		return ;
-	if ((has_flag(frmt, FL_PLUS) || has_flag(frmt, FL_SPACE))
+	if ((ft_has_flag(frmt, FL_PLUS) || ft_has_flag(frmt, FL_SPACE))
 			&& (frmt->conv == CONV_INT || format_isfloat(frmt)))
 	{
 		if (format_getsign(frmt) != '-')
-			ft_strpad(astr, has_flag(frmt, FL_PLUS) ? '+' : ' ', 1,
+			ft_strpad(astr, ft_has_flag(frmt, FL_PLUS) ? '+' : ' ', 1,
 						TOWARD_HEAD);
 		*pad -= (*pad ? ft_strchr("+ ", (*astr)[0]) != NULL : 0);
 	}
@@ -86,23 +86,23 @@ void			adjust_prefix(t_frmt *frmt, char **astr, size_t *pad)
 void			adjust_padding(t_frmt *frmt, char **astr, size_t *pad)
 {
 	if (frmt->has_radix && !format_isfloat(frmt))
-		frmt->flags &= ~flag(FL_ZERO);
+		frmt->flags &= ~ft_flag(FL_ZERO);
 	if (frmt->width && *pad)
 	{
-		if (has_flag(frmt, FL_MINUS))
+		if (ft_has_flag(frmt, FL_MINUS))
 		{
 			ft_strpad(astr, ' ', *pad, TOWARD_TAIL);
 			if (frmt->is_nulchr)
 				ft_strpad(astr, '\0', 1, TOWARD_HEAD);
 		}
-		else if (!has_flag(frmt, FL_ZERO))
+		else if (!ft_has_flag(frmt, FL_ZERO))
 		{
 			ft_strpad(astr, ' ', *pad, TOWARD_HEAD);
 			if (frmt->is_nulchr)
 				ft_strpad(astr, '\0', 1, TOWARD_TAIL);
 		}
 	}
-	if (has_flag(frmt, FL_ZERO) && !has_flag(frmt, FL_MINUS)
+	if (ft_has_flag(frmt, FL_ZERO) && !ft_has_flag(frmt, FL_MINUS)
 			&& frmt->width && *pad)
 		flag_zero_padding(frmt, astr, pad);
 }

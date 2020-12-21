@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 17:59:08 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 14:11:41 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:41:00 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char				*ieee_sp_as_str(t_ieeefp *fp, t_frmt *frmt)
 	if (is_sp)
 	{
 		if (sp == IEEE_NOT_A_NUMBER)
-			frmt->flags &= ~(flag(FL_SPACE) | flag(FL_PLUS));
-		frmt->flags &= ~flag(FL_ZERO);
+			frmt->flags &= ~(ft_flag(FL_SPACE) | ft_flag(FL_PLUS));
+		frmt->flags &= ~ft_flag(FL_ZERO);
 	}
 	return (s);
 }
@@ -78,7 +78,7 @@ char				*ieee_tostr(t_ieeefp *fp, t_ieee_fmt style, t_frmt *frmt)
 	dragon4_prec(&buff, &exp2, style, frmt->prec);
 	if (ieee_get_sign(fp))
 		ft_strinsert_at(&buff, "-", 0);
-	if (has_flag(frmt, FL_HASH) && !ft_strchr(buff, '.'))
+	if (ft_has_flag(frmt, FL_HASH) && !ft_strchr(buff, '.'))
 		ft_strappend(&buff, ".");
 	if (style == IEEE_EXPONENT)
 		ieee_sci_style(&buff, exp2, frmt->is_upcase);

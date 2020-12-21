@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:16:27 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/16 17:13:26 by archid-          ###   ########.fr       */
+/*   Updated: 2020/12/21 09:36:21 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,11 @@ size_t			format_init_padding(t_frmt *frmt, char const *str);
 ********* extra after fixing norm ***********
 */
 
-int				flag(int fl);
-bool			is_flag(int val, int fl);
-bool			has_flag(t_frmt *frmt, int fl);
-bool			is_hash(t_frmt *frmt);
-bool			is_hex(t_frmt *frmt, t_conv c);
+int				ft_flag(int fl);
+bool			ft_is_flag(int val, int fl);
+bool			ft_has_flag(t_frmt *frmt, int fl);
+bool			ft_is_hash(t_frmt *frmt);
+bool			ft_is_hex(t_frmt *frmt, t_conv c);
 bool			good_adjust_args(char **astr, t_frmt *frmt, size_t *pad);
 bool			is_prefix_sign(char c);
 size_t			str_len_diff(const char *s1, const char *s2);
