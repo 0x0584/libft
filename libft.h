@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/20 17:28:45 by archid-          ###   ########.fr       */
+/*   Updated: 2021/01/18 11:18:03 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,7 @@ t_u64			ft_abs(t_s64 x);
 
 void			*ft_calloc(size_t n, size_t sz);
 void			strsplit_free(char **ptr);
+
+void			print_memory(const void *addr, size_t size);
 
 #endif
