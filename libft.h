@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2021/01/18 11:18:03 by archid-          ###   ########.fr       */
+/*   Updated: 2021/01/22 15:57:40 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,8 @@ void			*ft_calloc(size_t n, size_t sz);
 void			strsplit_free(char **ptr);
 
 void			print_memory(const void *addr, size_t size);
+
+bool			ft_strprefix(const char *s, const char *pre);
+bool			ft_strsuffix(const char *s, const char *suff);
 
 #endif
