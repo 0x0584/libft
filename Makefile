@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2020/12/21 09:59:25 by archid-          ###   ########.fr        #
+#    Updated: 2021/01/25 15:40:35 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -30,7 +30,7 @@ ifeq ($(DEBUG), 1)
 else
 	CFLAGS = -Werror
 endif
-CFLAGS	+= -Wall -Wextra -I.
+CFLAGS	+= -Wall -Wextra -Wpedantic -I.
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 18:38:13 by archid-           #+#    #+#             */
-/*   Updated: 2020/02/06 15:06:13 by archid-          ###   ########.fr       */
+/*   Updated: 2021/01/25 15:53:01 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static t_color	read_color(char **fmt)
 	char		buff[COLORS_BUFF_SIZE];
 	size_t		size;
 	t_color		col;
+	char		*str;
 
 	col = (t_color){NULL, (*fmt)[0] == '$'};
 	size = 0;
@@ -85,10 +86,12 @@ static t_color	read_color(char **fmt)
 	}
 	if ((*fmt)[size] != '}')
 		return (col);
-	col.base = ft_strdup(get_color(buff));
+	str = get_color(buff);
+	col.base = ft_strdup(str ? str : COL_RESET);
 	*fmt += size + 1;
 	return (col);
 }
+
 
 bool			format_apply_color(char **fmt, t_list **alstfrmt, int *index)
 {
