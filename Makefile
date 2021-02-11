@@ -6,7 +6,7 @@
 #	 By: archid- <marvin@42.fr>						+#+	 +:+	   +#+		   #
 #												  +#+#+#+#+#+	+#+			   #
 #	 Created: 2019/03/30 17:28:04 by archid-		   #+#	  #+#			   #
-#    Updated: 2021/01/25 15:40:35 by archid-          ###   ########.fr        #
+#    Updated: 2021/02/11 15:24:00 by archid-          ###   ########.fr        #
 #																			   #
 #******************************************************************************#
 
@@ -32,7 +32,6 @@ endif
 CFLAGS	+= -Wall -Wextra -Wpedantic -I.
 
 all: flags $(NAME)
-	@printf "$(YLW) archived $(NAME)..\n"
 
 flags:
 	@echo
@@ -43,6 +42,7 @@ flags:
 $(NAME): $(OBJS)
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
+	@printf "$(YLW) archived $(NAME)..\n"
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
