@@ -24,25 +24,30 @@ CC		= gcc
 
 YLW		= \033[0;33m[o]\033[0m
 
-
 ifeq ($(DEBUG), 1)
-	CFLAGS = -g
+	CFLAGS = -g -Og
 else
-	CFLAGS = -Werror
+	CFLAGS = -O3 -Werror
 endif
 CFLAGS	+= -Wall -Wextra -Wpedantic -I.
 
-all: $(NAME)
+all: flags $(NAME)
+	@printf "$(YLW) archived $(NAME)..\n"
+
+flags:
+	@echo
+	@printf "\033[0;35mCC\033[0m=$(CC)\n"
+	@printf "\033[0;35mCFLAGS\033[0m=$(CFLAGS)\n"
+	@echo
 
 $(NAME): $(OBJS)
-#	@printf "$(YLW) archiving $(NAME)..\n"
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
-#	@printf "compiling $<\n"
-	$(CC) $(CFLAGS) -c $< -o $@
+	@printf "compiling $<\n"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJS)
