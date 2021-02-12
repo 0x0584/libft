@@ -35,14 +35,14 @@ all: flags $(NAME)
 
 flags:
 	@echo
-	@printf "\033[0;35mCC\033[0m=$(CC)\n"
-	@printf "\033[0;35mCFLAGS\033[0m=$(CFLAGS)\n"
+	@printf "\033[0;35mCC\033[0m     = $(CC)\n"
+	@printf "\033[0;35mCFLAGS\033[0m = $(CFLAGS)\n"
 	@echo
 
 $(NAME): $(OBJS)
 	@rm -rf $(NAME)
 	@ar rc $(NAME) $^
-	@printf "$(YLW) archived $(NAME)..\n"
+	@printf "\n$(YLW) archived $(NAME).\n"
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
