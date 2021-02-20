@@ -11,6 +11,7 @@
 #******************************************************************************#
 
 DEBUG	?= 0
+COLORED	?= 0
 
 NAME	= libft.a
 RM		= rm -rf
@@ -22,21 +23,26 @@ OBJS	:= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
 CC		= gcc
 
-YLW		= \033[0;33m[o]\033[0m
+ifeq ($(COLORED), 1)
+    YLW		= \033[0;33m[o]\033[0m
+    MGNT    = \033[0;35m
+    RESET   = \033[0m
+endif
 
 ifeq ($(DEBUG), 1)
 	CFLAGS = -g -Og
 else
 	CFLAGS = -O3 -Werror
 endif
+
 CFLAGS	+= -Wall -Wextra -Wpedantic -I.
 
 all: flags $(NAME)
 
 flags:
 	@echo
-	@printf "\033[0;35mCC\033[0m     = $(CC)\n"
-	@printf "\033[0;35mCFLAGS\033[0m = $(CFLAGS)\n"
+	@printf "$(MGNT)CC$(RESET)     = $(CC)\n"
+	@printf "$(MGNT)CFLAGS$(RESET) = $(CFLAGS)\n"
 	@echo
 
 $(NAME): $(OBJS)
