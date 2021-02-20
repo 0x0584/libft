@@ -52,7 +52,7 @@ $(NAME): $(OBJS)
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
-	@printf "compiling $<\n"
+	@printf " compiling $<\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
