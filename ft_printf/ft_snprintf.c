@@ -18,6 +18,7 @@ int		ft_snprintf(char *astr, size_t n, const char *fmt, ...)
 	t_buff	*buff;
 	t_list	*lstfrmt;
 	int		n_chars;
+	size_t	ret;
 
 	lstfrmt = NULL;
 	n_chars = 0;
@@ -30,7 +31,8 @@ int		ft_snprintf(char *astr, size_t n, const char *fmt, ...)
 	ft_lstdel(&lstfrmt, format_free);
 	va_end(args);
 	if (n_chars >= 0)
-		ft_strncpy(astr, buff->base, buff->len);
+		ft_strncpy(astr, buff->base, n);
+	ret = umin(buff->len, n);
 	buff_free(&buff);
-	return (n);
+	return (ret);
 }
