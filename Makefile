@@ -47,13 +47,13 @@ flags:
 
 $(NAME): $(OBJS)
 	@rm -rf $(NAME)
-	@ar rc $(NAME) $^
-	@printf "\n$(YLW) archived $(NAME).\n"
+	ar rc $(NAME) $^
+#	@printf "\n$(YLW) archived $(NAME).\n"
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	@mkdir -p  $(@D)
-	@printf " compiling $<\n"
-	@$(CC) $(CFLAGS) -c $< -o $@
+#	@printf " compiling $<\n"
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJS)

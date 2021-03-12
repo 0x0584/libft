@@ -74,6 +74,7 @@ bool			has_line(t_cache *cache, char **line);
 void			gnl_cleanup(void);
 int				gnl_clean(const int fd);
 
+int				ft_vadprintf(const int fd, const char *fmt, va_list args_base);
 int				ft_printf(const char *fmt, ...);
 int				ft_dprintf(const int fd, const char *fmt, ...);
 int				ft_asprintf(char **ret, const char *fmt, ...);
