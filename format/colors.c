@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 18:38:13 by archid-           #+#    #+#             */
-/*   Updated: 2021/01/25 15:53:01 by archid-          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:58:34 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ static t_color	read_color(char **fmt)
 	*fmt += size + 1;
 	return (col);
 }
-
 
 bool			format_apply_color(char **fmt, t_list **alstfrmt, int *index)
 {

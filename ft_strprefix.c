@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 15:57:56 by archid-           #+#    #+#             */
-/*   Updated: 2021/01/22 16:06:36 by archid-          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:57:28 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool			ft_strsuffix(const char *s, const char *suff)
 		if (s[istr] != suff[isuff])
 			return (false);
 		else if (s + istr == s || suff + isuff == suff)
-			break;
+			break ;
 		istr--;
 		isuff--;
 	}
