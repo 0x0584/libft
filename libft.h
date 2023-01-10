@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:32:57 by archid-           #+#    #+#             */
-/*   Updated: 2021/01/22 15:57:40 by archid-          ###   ########.fr       */
+/*   Updated: 2023/01/12 21:10:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			*ft_memalloc(size_t size);
 void			*ft_dumb_realloc(void **ptr, size_t old, size_t new);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			ft_memdel(void **mem);
-void			ft_free(void (*del)(void *o), void *ptr, ...);
+//void			ft_free(void (*del)(void *o), void *ptr, ...);
 void			ft_bzero(void *s, size_t n);
 
 char			*ft_strchange(char **astr, char *s);

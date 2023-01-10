@@ -6,29 +6,26 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 23:39:38 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/21 09:46:05 by archid-          ###   ########.fr       */
+/*   Updated: 2023/01/13 00:48:28 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hash.h"
+#include "hashtable.h"
 
-bool			key_cmp(const t_hashnode *node, const char *key1)
-{
-	return (!ft_strcmp(key1, node->key));
-}
-
-bool			hash_remove(t_hash h, const char *key)
+bool			hash_remove(t_hashtable h, void *key)
 {
 	t_lstnode	walk;
 	size_t		hash;
+	t_hashtable_node	*tmp;
 
 	if (!h)
 		return (false);
-	hash = sfold(key, h->size);
+	hash = sfold(key, h->size, h->literal);
 	walk = lst_front(h->array[hash]);
 	while (walk)
 	{
-		if (key_cmp(walk->blob, key))
+		tmp = walk->blob;
+		if (!h->cmp(tmp->key, key))
 		{
 			lst_remove(h->array[hash], &walk);
 			return (true);

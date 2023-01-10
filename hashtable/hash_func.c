@@ -6,61 +6,61 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 12:55:15 by archid-           #+#    #+#             */
-/*   Updated: 2020/12/21 09:54:46 by archid-          ###   ########.fr       */
+/*   Updated: 2023/01/13 00:50:45 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hash.h"
+#include "hashtable.h"
 
-bool	hash_add(t_hash h, const char *key, const void *blob)
+bool	hashtable_add(t_hashtable h, void *key, void *blob)
 {
 	size_t		hash;
 	t_lstnode	walk;
-	t_hashnode	hnode;
-	t_hashnode	*tmp;
+	t_hashtable_node	hnode;
+	t_hashtable_node	*tmp;
 
 	if (!h || !blob || !key)
 		return (false);
-	if (!h->array[hash = sfold(key, h->size)])
+	if (!h->array[hash = sfold(key, h->size, h->literal)])
 	{
-		hnode = (t_hashnode){ft_strdup(key), (void *)blob};
+		hnode = (t_hashtable_node){key, (void *)blob};
 		h->array[hash] = lst_alloc(h->del);
-		lst_push_back_blob(h->array[hash], &hnode, sizeof(t_hashnode), true);
+		lst_push_back_blob(h->array[hash], &hnode, sizeof(t_hashtable_node), true);
 		return (true);
 	}
 	walk = lst_front(h->array[hash]);
 	while (walk)
 	{
 		tmp = walk->blob;
-		if (!ft_strcmp(tmp->key, key))
+		if (!h->cmp(tmp->key, key))
 			return (false);
 		lst_node_forward(&walk);
 	}
-	hnode = (t_hashnode){ft_strdup(key), (void *)blob};
-	lst_push_front_blob(h->array[hash], &hnode, sizeof(t_hashnode), true);
+	hnode = (t_hashtable_node){key, (void *)blob};
+	lst_push_front_blob(h->array[hash], &hnode, sizeof(t_hashtable_node), true);
 	return (true);
 }
 
-void	*hash_get(t_hash h, const char *key, const void *default_val)
+void	*hashtable_get(t_hashtable h, void *key, void *default_val)
 {
-	size_t		hash;
-	t_lstnode	walk;
-	t_hashnode	*tmp;
+	size_t				hash;
+	t_lstnode			walk;
+	t_hashtable_node	*tmp;
 
-	if (!h->array[hash = sfold(key, h->size)])
+	if (!h->array[hash = sfold(key, h->size, h->literal)])
 		return ((void *)default_val);
 	walk = lst_front(h->array[hash]);
 	while (walk)
 	{
 		tmp = walk->blob;
-		if (!ft_strcmp(tmp->key, key))
+		if (!h->cmp(tmp->key, key))
 			return (tmp->blob);
 		lst_node_forward(&walk);
 	}
 	return ((void *)default_val);
 }
 
-size_t	hash_count(t_hash h)
+size_t	hashtable_count(t_hashtable h)
 {
 	size_t size;
 	size_t i;
@@ -74,11 +74,11 @@ size_t	hash_count(t_hash h)
 	return (size);
 }
 
-void	hash_iter(t_hash h, void (*callback)(const char *key, void *blob))
+void	hashtable_iter(t_hashtable h, void (*callback)(void *key, void *blob))
 {
-	size_t		i;
-	t_hashnode	*tmp;
-	t_lstnode	walk;
+	size_t				i;
+	t_hashtable_node	*tmp;
+	t_lstnode			walk;
 
 	if (!h)
 		return ;
@@ -96,12 +96,11 @@ void	hash_iter(t_hash h, void (*callback)(const char *key, void *blob))
 	}
 }
 
-void	hash_iter_arg(t_hash h, void *arg,
-						void (*callback)(const char *key,
-											void *blob, void *arg))
+void	hashtable_iter_arg(t_hashtable h, void *arg,
+						void (*callback)(void *key, void *blob, void *arg))
 {
 	size_t		i;
-	t_hashnode	*tmp;
+	t_hashtable_node	*tmp;
 	t_lstnode	walk;
 
 	if (!h)
