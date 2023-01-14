@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 12:55:15 by archid-           #+#    #+#             */
-/*   Updated: 2023/01/13 00:50:45 by archid-          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:11:08 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 bool	hashtable_add(t_hashtable h, void *key, void *blob)
 {
-	size_t		hash;
-	t_lstnode	walk;
+	size_t				hash;
+	t_lstnode			walk;
 	t_hashtable_node	hnode;
 	t_hashtable_node	*tmp;
 
 	if (!h || !blob || !key)
 		return (false);
-	if (!h->array[hash = sfold(key, h->size, h->literal)])
+	if (!h->array[hash = h->hasher(key, h->size)])
 	{
 		hnode = (t_hashtable_node){key, (void *)blob};
 		h->array[hash] = lst_alloc(h->del);
@@ -47,7 +47,7 @@ void	*hashtable_get(t_hashtable h, void *key, void *default_val)
 	t_lstnode			walk;
 	t_hashtable_node	*tmp;
 
-	if (!h->array[hash = sfold(key, h->size, h->literal)])
+	if (!h->array[hash = h->hasher(key, h->size)])
 		return ((void *)default_val);
 	walk = lst_front(h->array[hash]);
 	while (walk)

@@ -6,13 +6,17 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 23:44:57 by archid-           #+#    #+#             */
-/*   Updated: 2023/01/12 23:46:40 by archid-          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:14:15 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
 
-size_t	compute_hash(const char *s, size_t size, size_t sum, size_t mod)
+
+#define SFOLD_BUFF_SIZE 32
+typedef char t_buffer[SFOLD_BUFF_SIZE];
+
+size_t						compute_hash(t_buffer s, size_t size, size_t sum, size_t mod)
 {
 	size_t i;
 	size_t j;
@@ -36,34 +40,33 @@ size_t	compute_hash(const char *s, size_t size, size_t sum, size_t mod)
 	return (sum);
 }
 
-#define SFOLD_BUFF_SIZE 32
-size_t	sfold(const void *ptr, size_t mod, bool literal)
+size_t						sfold_str(void *key, size_t mod_size)
 {
-	size_t		size;
-	char		*hash_str;
+	size_t						size;
+	t_buffer					hash_str;
 
-	if (literal)
-	{
-		size = ft_strlen(ptr);
-		hash_str = (char *)ptr;
-	}
-	else
-	{
-		char buffer[SFOLD_BUFF_SIZE];
-		ft_snprintf(buffer, BUFF_SIZE, "%xld", ptr);
-		size = ft_strlen(buffer);
-		hash_str = buffer;
-	}
+	size = ft_strlen((char *)key);
 	return (compute_hash(
-				hash_str, size / 4, compute_hash(
-					hash_str, size, 0, mod),
-				mod) % mod);
+						hash_str, size / 4, compute_hash(
+							hash_str, size, 0, mod_size),
+						mod_size) % mod_size);
 }
 
-t_hashtable	hashtable_alloc(size_t size, t_del del, t_cmp cmp, bool literal)
+size_t						hash_int(void *data, size_t mod_size)
 {
-	t_hashtable hash;
-	size_t i;
+	int		x;
+
+	x = (int)data;
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = (x >> 16) ^ x;
+    return (x % mod_size);
+}
+
+t_hashtable					hashtable_alloc(size_t size, t_del del, t_cmp cmp, t_hashalgo hasher)
+{
+	t_hashtable		hash;
+	size_t			i;
 
 	hash = malloc(sizeof(struct s_hashtable));
 	size = ft_sqrt(size) + 1;
@@ -71,14 +74,14 @@ t_hashtable	hashtable_alloc(size_t size, t_del del, t_cmp cmp, bool literal)
 	hash->array = malloc(size * sizeof(t_lst));
 	hash->del = del;
 	hash->cmp = cmp;
-	hash->literal = literal;
+	hash->hasher = hasher;
 	i = 0;
 	while (i < size)
 		hash->array[i++] = NULL;
 	return (hash);
 }
 
-void	hashtable_del(t_hashtable *h)
+void						hashtable_del(t_hashtable *h)
 {
 	size_t		i;
 	t_hashtable		hash;
@@ -102,3 +105,5 @@ void	hashtable_del(t_hashtable *h)
 	free(hash);
 	*h = NULL;
 }
+
+ t_hashalgo					g_default_algo = sfold_str;

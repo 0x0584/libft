@@ -6,7 +6,7 @@
 /*   By: archid- <archid-@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 12:31:11 by archid-           #+#    #+#             */
-/*   Updated: 2023/01/13 01:14:02 by archid-          ###   ########.fr       */
+/*   Updated: 2023/01/14 16:35:43 by archid-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			hashtable_update(t_hashtable h, void *key, void *blob)
 
 	if (!h || !blob || !key)
 		return ;
-	if (!h->array[hash = sfold(key, h->size, h->literal)])
+	if (!h->array[hash = h->hasher(key, h->size)])
 		insert(h, hash, key, blob);
 	else
 	{
